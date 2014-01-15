@@ -96,6 +96,7 @@ Descripción
 - Esto puede sonar muy raro, pero... 
 - *We collect data continuously from a global network of physical random number generators located in up to 70 host sites around the world at any given time. The data are transmitted to a central archive which now contains more than 15 years of random data in parallel sequences of synchronized 200-bit trials every second.* 
 - `http://noosphere.princeton.edu/`
+- Usar GDELT  `http://gdelt.utdallas.edu/`
 
 Objetivos
 ========================================================
@@ -159,6 +160,7 @@ crecimiento, pobreza,impactos ambientales, etc.
 - Y la NASA tiene además las bases de datos relacionadas con luminosidad del mundo a nivel nocturno.
 - Existen muchas teorías sobre si estas luces son un *proxy* para pobreza o subdesarrollo.
 ¿Será cierto?
+- ¿Se podrá relacionar con otros estudios de Pobreza?
 
 Objetivo
 ========================================================
@@ -177,6 +179,64 @@ Tópicos
 - Impacto Ambiental
 - Minería de datos
 
+
+Pimpeame el Zeitgeist
+==========================================================
+type: sub-section
+
+Proponente: Adolfo De Unánue
+
+Descripción
+============================================================
+
+- Tengo curiosidad de saber si en realidad Twitter y Google se quitan "visibilidad" de la web
+- ¿Es posible correlacionar lo más buscado en Google con los *trending topics* de Twitter?
+- ¿Podrías mostrar contexto de estas búsquedas, por ejemplo, una imagen, obtenida de Google Image?
+
+Objetivo
+==============================================================
+
+- Obtener el *trending topic* (o los *trending topics*) de Twitter de manera diaria
+- Buscar automático en Google por contexto
+- Obtener imagenes de Google
+- Presentarlo en web
+- ¿Qué tan efectivo es?
+
+Tópicos
+===============================================================
+
+- *Scrapping*
+- *Machine Learning*
+- Contextualización
+
+Mapa de Riesgos ¿Naturaleza o Gobierno?
+================================================================
+type:sub-section
+
+Descripción
+==================================================================
+
+- La política de compartir datos del gobierno ha permitido que haya muchos datos al alcance.
+- Estos datos deben de ser convertidos en información.
+- Las recientes tragedias naturales en Acapulco o las que ocurren todos los años en Tabasco, nos indican ciertas cosas.
+
+Objetivo
+==================================================================
+
+- Minar CENAPRED para construir mapas de riesgo 
+- ¿Es posible volverlos históricos?
+- ¿Relacionarlos con los gobernantes? ¿Hay relaciones? ¿Presupuesto?
+- ¿Es posible rankear a lo mejor y lo peor?
+- ¿Recomendar dónde no vivir?
+
+Tópicos
+===================================================================
+
+- *Scrapping*
+- Análisis Geoespacial
+- Política pública
+- Transparencia
+- *Open data*
 
 
 Q & A
