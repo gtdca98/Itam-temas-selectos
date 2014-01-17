@@ -1,24 +1,12 @@
-Proyectos 
+Enchúlame el Zeitgeist 
 ========================================================
-author: Adolfo De Unánue T.
-date: 15 de Enero, 2014
-font-import: http://fonts.googleapis.com/css?family=Risque
-font-family: 'Risque'
+- **Equipo:** Kael Huerta | Marcos Chávez | David Lampón
+- **Objetivo:** Determinar la relación entre los *trending topics* de Twitter y las búsquedas de Google contextualizadas con gráficos en una aplicación web.
+- **Hipótesis:** Las búsquedas de Google complementan los *trending topics* dada una relación lineal de ocurrencia de eventos desfasada en el tiempo.
 
-Presentación
-=======================================================
-type: sub-section
- 
+Descripción de las fuentes de datos
+--------------------------------------------------------
+- **Twitter**
+- **Google Zeitgeist**
+- **Google Images**
 
-¿Quién?
-========================================================
-
-![hola](images/hello.png)
-
-
-¿Quién?
-========================================================
-
-- Chief Data Scientist @ OPI - Open Intelligence
-- Trabajo anterior: Data Scientist @ Sm4rt Predictive Systems
-- Doctorado, MC^2
