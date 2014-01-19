@@ -61,6 +61,7 @@ El histórico tiene 10005676791734 bytes de información. Es decir, 10 Tb's!!!
 
 Referencias
 ========================================================
+- http://dumps.wikimedia.org/enwiki/
 - http://en.wikipedia.org/wiki/Wikipedia:Database_download#Help_parsing_dumps_for_use_in_scripts
 - http://meta.wikimedia.org/wiki/Data_dumps
 - http://meta.wikimedia.org/wiki/Data_dumps/Download_tools.
