@@ -3,13 +3,10 @@ Espionaje histórico
 - Proponente: Adolfo De Unánue
 - Author: Gabriel del Campo, Alfredo Garbuno, JI García
 - Date: 22 de Enero, 2014
-font-import: http://fonts.googleapis.com/css?family=Risque
-font-family: 'Risque'
 
 
 Descripción
 ========================================================
-
 - Palantir tiene filosofías interesantes y muchos productos, en particular analizan datos de muchas fuentes y luego presentan grafos con los cuales infieren cosas. 
   - Debido a su filosofía de *Data Mining/Machine Learning*.
 - Haremos lo mismo con Wikipedia. Esa es nuestra base de datos de inteligencia.
@@ -59,10 +56,29 @@ Es decir 40.1 Gb y 87.3 Gb respectivamente.
 
 El histórico tiene 10005676791734 bytes de información. Es decir, 10 Tb's!!!
 
+Áreas de investigación relacionadas
+========================================================
+* El proyecto se relaciona con conceptos en Adquisición del Conocimiento:
+  * Bases de conocimiento (KB): hechos estructurados de la forma _(sujeto, predicado, objeto)_
+  * Redes semánticas: definir cosas a partir de sus nexos con otras cosas ![Ejemplo red semántica](http://www.mhhe.com/socscience/intro/ibank/ibank/0086.jpg)
+  * Ontologías: definición de cosas por sus atributos; garantiza consistencia, no completitud
+* Es importante entender lo siguiente dado que influirá en definir qué información hay que procesar:
+  * ¿Qué se ha hecho ya?
+  * ¿Qué se puede hacer original (si la intención es publicar)?
+  * ¿Cómo puede servir lo que ya se hizo?
+
+Algunos proyectos relacionados
+========================================================
+* [Wikipedia Miner toolkit](http://www.cs.waikato.ac.nz/~ihw/papers/12-DM-IHW-OStoolkit-wikimining.pdf): conjunto de herramientas Java para consultar dumps arbitrarios de WP: relacionar conceptos, eliminar ambiguedades, etc. 
+* [DBpedia](http://wiki.dbpedia.org/Datasets39?v=z2l) Ontologías y KBs derivadas de WP. No es WP puro sino una versión estructurada, basada en buena medida en los infoboxes de WP. No siempre está al día. Algunas ontologias que trae predefinidas: personas, lugares, obras creativas, organizaciones, especies, enfermedades, etc.
+* [Yago](http://www.mpi-inf.mpg.de/yago-naga/yago/) KB semántica derivada de Wikipedia, WordNet y GeoNames. Se usa en Watson. 
+* [Freebase](https://developers.google.com/freebase/) Ontologias y KB's derivadas de WP estructuradas como grafos. Proyecto patrocinado por Google.
+
+
 Referencias
 ========================================================
 - http://dumps.wikimedia.org/enwiki/
 - http://en.wikipedia.org/wiki/Wikipedia:Database_download#Help_parsing_dumps_for_use_in_scripts
 - http://meta.wikimedia.org/wiki/Data_dumps
-- http://meta.wikimedia.org/wiki/Data_dumps/Download_tools.
+- http://meta.wikimedia.org/wiki/Data_dumps/Download_tools
 - http://meta.wikimedia.org/wiki/Data_dumps/FAQ#How_big_are_the_en_wikipedia_dumps_uncompressed.3F
