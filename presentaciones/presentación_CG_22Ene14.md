@@ -58,7 +58,7 @@ Cuando ocurre un evento con influencia mundial (registrado en GDELT) los número
 Avances
 ===============
 * Creación de script para bajar los archivos de GDELT en Python (cuando reviva!, por ahora un mock que baja un archivo de ftp)
-* Creación de script para bajar los archivos de Noosphere en Python (por el momento con los datos que resumen la actividad de todos los REG cada 15 min de algunas fechas de prueba -5 agosto 1998, 6 agosto 1998 solo para corroborar que se bajan)
+* Creación de script para bajar los archivos de Noosphere en Python (los datos de registros por segundo de acuerdo a una fecha especificada, trabajando en los archivos de resúmen de todos los REG que solo muestran los conteos cada 15 min)
 * Estimación del tamaño de datos a ocupar en Noosphere: Ocupando los datos que registran el conteo de 1s en todos los REC por segundo se obtuvo: por 1 min se tienen 13Kb (approximadamente); queremos recolectar 24 horas de los registros de todos los REG desde el momento en el que ocurrió el evento (1440 min por día), para 100 eventos diferentes --> 2 Gb aproximadamente + 2 Gb de 100 días en donde no haya existido un evento mundial 'relevante' por 24 horas para tener la normalidad.
 * Estimación del tamaño de datos de GDEL: Desconocido, el sitio ha estado caído desde el sábado :S
 
