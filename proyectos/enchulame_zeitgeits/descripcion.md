@@ -4,6 +4,11 @@ Enchúlame el Zeitgeist
 - **Objetivo:** Determinar la relación entre los *trending topics* de Twitter y las búsquedas de Google contextualizadas con gráficos en una aplicación web.
 - **Hipótesis:** Las búsquedas de Google complementan los *trending topics* dada una relación lineal de ocurrencia de eventos desfasada en el tiempo.
 
+
+Maqueta de visualización
+-------------------------------------------------------
+![hola](images/hello.png)
+
 Descripción de las fuentes de datos
 --------------------------------------------------------
 - **Twitter**
