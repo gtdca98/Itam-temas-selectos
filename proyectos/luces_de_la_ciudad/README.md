@@ -32,7 +32,10 @@ Tópicos
 Estructura de las bases de datos
 ================================================================================
 
-## [Bases de luminosidad de NOAA: National geophysical data center](http://ngdc.noaa.gov/eog/download.html "NOAA Data Download")
+## Bases de luminosidad de NOAA
+
+[National geophysical data center](http://ngdc.noaa.gov/eog/download.html "NOAA Data Download")
+
 ###VIIRS
 1. [VIIRS Luces nocturnas-2012 (dos meses, global)](http://ngdc.noaa.gov/eog/viirs/download_viirs_ntl.html)
 ..* Este es el primer compilado que existe para la serie de datos nueva y con mayor resolucion. El compuesto se genera utilizando la banda de dia y noche de VIIRS (DNB) para datos recolectados en noches sin luz de luna. 
@@ -41,7 +44,9 @@ Estructura de las bases de datos
 2. [VIIRS Luces nocturnas-2012 (dos meses, global)](http://ngdc.noaa.gov/eog/viirs/download_viirs_monthly.html)
 ..* Compuestos con mas o menos las mismas caracteristicas que (1) pero para abril y octubre de 2012 y enero de 2013.
 ..* Descomprimidas por mes ~ 8 GB, comprimidas ~500 MB
-###[DMPS/OLS: Version 4 de la serie de luces nocturnas](http://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html "DMPS-OLS nighttime lights time series")
+
+###DMPS/OLS
+[Version 4 de la serie de luces nocturnas](http://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html "DMPS-OLS nighttime lights time series")
 
 1. Promedios de luz visible, luces estables y coberturas sin nubes (1992-2012).[Mas informacion](http://ngdc.noaa.gov/eog/gcv4_readme.txt)
 ..*33 datasets, ~300 MB comprimidos y ~3 GB descomprimidos
