@@ -7,7 +7,7 @@ Enchúlame el Zeitgeist
 
 Maqueta de visualización
 -------------------------------------------------------
-![hola](images/hello.png)
+![maqueta](https://www.dropbox.com/s/j2bw8zessmcfvv0/maqueta.pdf)
 
 Descripción de las fuentes de datos
 --------------------------------------------------------
