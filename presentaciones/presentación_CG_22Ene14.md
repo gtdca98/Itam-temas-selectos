@@ -17,6 +17,12 @@ Descripción general del proyecto
 
 Refutar o corroborar la afirmación del proyecto Noosphere (Princeton) "El comportamiento de nuestra red de fuentes de aleatoriedad está correlacionada con la interconexión de la conciencia humana en una escala global" utilizando la base de eventos mundiales GDELT y la base de datos de números aleatorios que genera y proporciona Noosphere.
 
+Otras preguntas interesantes
+---------------------------
+* ¿Cuánto dura la anormalidad en la generación de números aleatorios una vez sucedido un evento de influencia mundial?
+* ¿Se puede saber si el evento generó una interconexión positiva o negativa de acuerdo a la cuantificación de la anormalidad? (¿hay forma de saber si estamos conectados con pensamientos/emociones positivas o negativas?)
+
+
 
 Suposiciones
 ================
@@ -42,13 +48,17 @@ Proyecto que recolecta los eventos mundiales (no incluye eventos deportivos, de 
 
 Metodología
 ============
-Cuando ocurre un evento con influencia mundial (registrado en GDELT) los números aleatorios generados en los dispositivos REG de Noosphere -desde el momento en el que ocurrió el evento hasta **3 horas** después del evento- debe tener una **anormalidad** que es cuantificable.
+Cuando ocurre un evento con influencia mundial (registrado en GDELT) los números aleatorios generados en los dispositivos REG de Noosphere -desde el momento en el que ocurrió el evento hasta **24 horas??** después del evento- debe tener una *anormalidad* que es cuantificable.
 
 * Se escogerán **100??** eventos con trascendencia mundial en los ultimos 10 años (2003 - 2013)
-* Se cuantificará la normalidad en la generación de los números aleatorios utilizando momentos en el tiempo en donde no haya eventos de influencia mundial. ¿Cuántos?
+* Se cuantificará la normalidad en la generación de los números aleatorios utilizando momentos en el tiempo en donde no haya eventos de influencia mundial **100??**
+* Se cuantificará la anormalidad en la generación de los números aleatorios correspondientes a los 100 eventos seleccionados con trascendencia mundial
 
 
 Avances
 ===============
-* Creación de script para bajar los archivos de GDELT en Python (cuando reviva!)
-* Creación de script para bajar los archivos de Noosphere en Python
+* Creación de script para bajar los archivos de GDELT en Python (cuando reviva!, por ahora un mock que baja un archivo de ftp)
+* Creación de script para bajar los archivos de Noosphere en Python (los datos de registros por segundo de acuerdo a una fecha especificada, trabajando en los archivos de resúmen de todos los REG que solo muestran los conteos cada 15 min)
+* Estimación del tamaño de datos a ocupar en Noosphere: Ocupando los datos que registran el conteo de 1s en todos los REC por segundo se obtuvo: por 1 min se tienen 13Kb (approximadamente); queremos recolectar 24 horas de los registros de todos los REG desde el momento en el que ocurrió el evento (1440 min por día), para 100 eventos diferentes --> 2 Gb aproximadamente + 2 Gb de 100 días en donde no haya existido un evento mundial 'relevante' por 24 horas para tener la normalidad.
+* Estimación del tamaño de datos de GDEL: Desconocido, el sitio ha estado caído desde el sábado :S
+
