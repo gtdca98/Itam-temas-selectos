@@ -42,6 +42,7 @@ Proyecto que recolecta 'números aleatorios' generados cada segundo por máquina
 GDELT
 -------
 Proyecto que recolecta los eventos mundiales (no incluye eventos deportivos, de entretenimiento ni noticias puramente económicas). Genera un archivo al final de cada día (04:00 CST) con un concentrado de los eventos ocurridos en el mundo. Sus fuentes de datos son obtenidos de periódicos y de Google news. 
+Problema: La base de datos se bajó del servidor y ya no es accesible, por lo que se requiere otro enfoque. Esto podría requerir buscar dentro de los datos por momentos donde se rompe el 'ruido blanco' y hacer una búsqueda sobre algún evento de trascendencia. 
 
 
 
