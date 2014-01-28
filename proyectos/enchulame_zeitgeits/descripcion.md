@@ -33,3 +33,41 @@ The API consists of JavaScript and associated service protocols that enable You 
 
 The Google Image Search JavaScript API is a JavaScript library that allows you to embed Google Image Search in your web pages and other web applications. For Flash, and other non-JavaScript environments, the API exposes a raw interface that returns JSON-encoded results that are easily processed by most languages and runtimes.
 
+Prototipo de arquitectura
+-------------------------------------------------------
+![maqueta] (https://www.dropbox.com/s/j2bw8zessmcfvv0/maqueta.pdf)
+
+Base de datos orientada a documentos (MongoDB)
+-------------------------------------------------------
+Instalación:
+
+- Importar llave pública de MongoDB
+~~~~~
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+~~~~~
+
+- Crear el archivo descargable
+~~~~
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+~~~~
+
+- Actualizar el repositorio de paquetes
+~~~~
+sudo apt-get update
+~~~~
+
+- Instalar el paquete
+~~~~
+sudo apt-get install mongodb-10gen
+~~~~
+
+- Iniciar o parar
+~~~~
+sudo service mongodb start
+sudo service mongodb stop
+~~~~
+
+- Conectar con MongoDB 
+~~~~
+mongo
+~~~~
