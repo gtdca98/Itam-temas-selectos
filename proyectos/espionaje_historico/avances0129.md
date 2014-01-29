@@ -32,13 +32,19 @@ Consulta MQL (ejemplo)
   "type": "/music/artist"
 }`
 
-[Resultados]()
+[Resultados](http://tinyurl.com/bg7xclc)
 
 Precios
 ========================================================
 
 
+IaaS    | Consumo mínimo | Modalidad de cobro | Tipo de sistema | Precio (US$ x hr) 
+--------| -------------- | ------------------ | --------------- |------------------
+**AWS** | ninguno        | x hora (rha)       | (4 núcleos, 15 GB) - (16 núcleos, 122 GB) | $0.480 - $3.410
+**GCE** | 10 minutos     | x minuto (rha)     | (2 núcleos, 13 GB) - (16 núcleos, 104 GB) | $0.244 - $1.951
+rha=fracciones redondean hacia arriba
 
-* En ambos casos aplican cobros adicionales. 
+* En ambos casos aplican cobros adicionales.
+* AWS ofrece una variedad de configuraciones más amplia que va desde máquinas virtuales de un solo núcleo con menos de 1GB de RAM ($0.02 x hr) hasta máquinas con 32 núcleos y 224GB ($6.820 x hr). Los rangos de arriba ofrecen una comparación más informativa con GCE. 
 
 
