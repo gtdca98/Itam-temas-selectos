@@ -1,13 +1,14 @@
 Enchúlame el Zeitgeist 
 ========================================================
-- **Equipo:** Kael Huerta | Marcos Chávez | David Lampón
+- **Equipo:** Antonio Fragoso | Kael Huerta | Marcos Chávez | David Lampón
 - **Objetivo:** Determinar la relación entre los *trending topics* de Twitter y las búsquedas de Google contextualizadas con gráficos en una aplicación web.
 - **Hipótesis:** Las búsquedas de Google complementan los *trending topics* dada una relación lineal de ocurrencia de eventos desfasada en el tiempo.
 
 
 Maqueta de visualización
 -------------------------------------------------------
-![maqueta] (https://www.dropbox.com/s/j2bw8zessmcfvv0/maqueta.pdf)
+https://www.dropbox.com/s/70jdzb351nrav5x/maqueta.pdf
+
 
 Descripción de las fuentes de datos
 --------------------------------------------------------
@@ -35,7 +36,7 @@ The Google Image Search JavaScript API is a JavaScript library that allows you t
 
 Prototipo de arquitectura
 -------------------------------------------------------
-![maqueta] (https://www.dropbox.com/s/j2bw8zessmcfvv0/maqueta.pdf)
+https://www.dropbox.com/s/e1jef00hynxsz6o/prototipo_arquitectura.png
 
 Base de datos orientada a documentos (MongoDB)
 -------------------------------------------------------
