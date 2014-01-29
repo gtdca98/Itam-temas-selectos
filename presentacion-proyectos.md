@@ -148,7 +148,7 @@ Luces de la ciudad
 =========================================================
 type:sub-section
 
-Proponentes: Adolfo De Unánue
+Proponentes: Andrea Fernández y Adolfo De Unánue
 
 
 Descripción
