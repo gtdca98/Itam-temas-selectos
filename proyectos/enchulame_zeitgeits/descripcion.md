@@ -7,6 +7,8 @@ Enchúlame el Zeitgeist
 
 Maqueta de visualización
 -------------------------------------------------------
+![arq](figuras/maqueta.pdf)
+
 https://www.dropbox.com/s/70jdzb351nrav5x/maqueta.pdf
 
 
@@ -36,6 +38,8 @@ The Google Image Search JavaScript API is a JavaScript library that allows you t
 
 Prototipo de arquitectura
 -------------------------------------------------------
+![arq](figuras/prototipo_arquitectura.png)
+
 https://www.dropbox.com/s/e1jef00hynxsz6o/prototipo_arquitectura.png
 
 Base de datos orientada a documentos (MongoDB)
