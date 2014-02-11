@@ -23,4 +23,14 @@ Dentro de cada registro (del renglón 10 en adelante) cada variable es:
 * n variable: número de 1s generado por el enésimo EGG (cuyo ID corresponde al enésimo registro que se encuentra en el renglón 10) **(int)**
 
 
+Diccionario de datos para POSTGRES
+===================================
+
+Todos los archivos tienen 3 variables por registro: 
+
+* id del renglón **varchar**
+* fecha y hora correspondiene a los números aleatorios que se reportan en ese registro **timesamp**
+* promedio de los 1s generados aleatoreamente de los EGG que reportan en ese archivo **float**
+
+
 
