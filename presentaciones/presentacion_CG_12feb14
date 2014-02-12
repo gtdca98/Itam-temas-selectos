@@ -1,0 +1,21 @@
+Conciencia Global
+=================
+
+Avances: 
+
+* Ya tenemos los 100 eventos mundiales 
+* Ya tenemos los archivos de noosphere relacionados a estos eventos
+* Ya tenemos los archivos de noosphere de otros 100 eventos aleatorios que consideraremos normales
+* Ya tenemos acceso a la máquina en amazon donde está el postgres
+* Estamos configurando postgres 
+* Generamos scripts que nos permiten obtener el promedio de 1s por renglón por archivo (cada archivo tiene un
+número diferente de EGGs que reportan los 1s que generaron aleatoreamente) 
+* Ya tenemos el diccionario de datos
+
+Lo que sigue
+============
+
+* Subir los datos a postgres
+* Iniciar el análisis de estadística descriptiva 
+* Iniciar el análisis de series de tiempo
+* Iniciar el script que bajara en automático los eventos que consideramos mundiales
