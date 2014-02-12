@@ -2,6 +2,7 @@ Conciencia Global
 =================
 
 Avances: 
+--------
 
 * Ya tenemos los 100 eventos mundiales 
 * Ya tenemos los archivos de noosphere relacionados a estos eventos
@@ -12,8 +13,8 @@ Avances:
 número diferente de EGGs que reportan los 1s que generaron aleatoreamente) 
 * Ya tenemos el diccionario de datos
 
-Lo que sigue
-============
+Lo que sigue:
+------------
 
 * Subir los datos a postgres
 * Iniciar el análisis de estadística descriptiva 
@@ -21,8 +22,14 @@ Lo que sigue
 * Iniciar el script que bajara en automático los eventos que consideramos mundiales con RSS y el módulo
 de python para leer rss de los periódicos correspondientes a los 5 países miembros 'fijos' del consejo de 
 seguridad de la ONU: China, Francia, Rusia, Reino Unido y Estados Unidos. 
-   The China Times [http://feeds.feedburner.com/thechinatimes]
-   The Local [http://www.thelocal.fr/feeds/rss.php]
-   The Moscu Times [http://www.themoscowtimes.com/rss/]
-   BBC news [http://feeds.bbci.co.uk/news/rss.xml]
-   The New York Times [http://www.nytimes.com/services/xml/rss/index.html]
+
+
+The China Times [http://feeds.feedburner.com/thechinatimes]
+
+The Local [http://www.thelocal.fr/feeds/rss.php]
+
+The Moscu Times [http://www.themoscowtimes.com/rss/]
+
+BBC news [http://feeds.bbci.co.uk/news/rss.xml]
+
+The New York Times [http://www.nytimes.com/services/xml/rss/index.html]
