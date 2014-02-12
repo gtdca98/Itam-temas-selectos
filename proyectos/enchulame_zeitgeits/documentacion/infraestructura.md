@@ -7,11 +7,11 @@ Conexión R - Mongo [Ubuntu]
 Ejemplo de juguete en Mongo
 -----------------------------------------------
 Ejecutar este script en Python para empezar a jugar con Mongo
-~~~
-if name == "main":
-con = Connection()
+~~~{python}
+if __name__ == "__main__":
+  con = Connection()
 else:
-print "Conexión no exitosa"
+  print "Conexión no exitosa"
 db = con.db_pba
 coleccion = db.coleccion
 coleccion.insert({"nombre":"David","color":"rojo"})
