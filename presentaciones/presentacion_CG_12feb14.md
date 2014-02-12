@@ -49,6 +49,4 @@ Plan de Trabajo para el 19 de febrero.
 * Tener PostgreSQL up and running.
 * Conjuntar los scripts de bajada y de carga.
 * Meter a un CRON los scripts para que se bajen en automático.
-* 
-
 
