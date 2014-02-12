@@ -1,6 +1,26 @@
 Conciencia Global
 =================
 
+Equipo: Pablo Bosch, Miguel Escalante, Liliana Millán
+
+Objetivo:
+---------
+
+Noosphere afirma que existe una 'conciencia global' que se 'sincroniza' cada que existe un evento de influencia 'mundial' y que modifica la generación de 1s aleatorios, queremos comprobar que la afirmación de noosphere es correcta o incorrecta analizando los datos de noosphere. 
+
+
+Fuente de datos:
+-----------------
+
+* Noosphere: noosphere.princeton.edu
+* The China Times [http://feeds.feedburner.com/thechinatimes]
+* The Local [http://www.thelocal.fr/feeds/rss.php]
+* The Moscu Times [http://www.themoscowtimes.com/rss/]
+* BBC news [http://feeds.bbci.co.uk/news/rss.xml]
+* The New York Times [http://www.nytimes.com/services/xml/rss/index.html]
+
+
+
 Avances: 
 --------
 
@@ -24,12 +44,4 @@ de python para leer rss de los periódicos correspondientes a los 5 países miem
 seguridad de la ONU: China, Francia, Rusia, Reino Unido y Estados Unidos. 
 
 
-The China Times [http://feeds.feedburner.com/thechinatimes]
 
-The Local [http://www.thelocal.fr/feeds/rss.php]
-
-The Moscu Times [http://www.themoscowtimes.com/rss/]
-
-BBC news [http://feeds.bbci.co.uk/news/rss.xml]
-
-The New York Times [http://www.nytimes.com/services/xml/rss/index.html]
