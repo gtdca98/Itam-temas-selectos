@@ -40,7 +40,7 @@ Lo que sigue:
 * Iniciar el análisis de estadística descriptiva 
 * Iniciar el análisis de series de tiempo
 * Iniciar el script que bajara en automático los eventos que consideramos mundiales con RSS y el módulo
-de python para leer rss de los periódicos correspondientes a los 5 países miembros 'fijos' del consejo de 
+de python para leer rss de los periódicos correspondientes a los 5 miembros permanentes del consejo de 
 seguridad de la ONU: China, Francia, Rusia, Reino Unido y Estados Unidos. 
 
 Plan de Trabajo para el 19 de febrero.
