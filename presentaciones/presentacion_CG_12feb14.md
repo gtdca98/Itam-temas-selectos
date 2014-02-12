@@ -43,5 +43,12 @@ Lo que sigue:
 de python para leer rss de los periódicos correspondientes a los 5 países miembros 'fijos' del consejo de 
 seguridad de la ONU: China, Francia, Rusia, Reino Unido y Estados Unidos. 
 
+Plan de Trabajo para el 19 de febrero.
+============================
+
+* Tener PostgreSQL up and running.
+* Conjuntar los scripts de bajada y de carga.
+* Meter a un CRON los scripts para que se bajen en automático.
+* 
 
 
