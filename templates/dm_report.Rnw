@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\title{Plantilla de Reporte de Proyecto de Minería de Datos}
+\title{Reporte de Proyecto de Minería de Datos}
 
 \author{Adolfo De Unánue Tiscareño}
 
