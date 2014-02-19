@@ -42,6 +42,17 @@ por grupos, etc.
 
 ¿Se generaron nuevas variables? ¿Se seleccionaon variables?
 
+  - Tamaño del ds
+  - Número de variables categóricas y numéricas
+  - Lista de variables en formato (para copy/paste)
+  - Porcentaje de NAs por variable
+  - Diagrama de cada variable ¿Cuál es su forma?
+  - ¿Cósas inesperadas (por variable)?
+  - ¿Hay codificación (NAs, blancos, 9999) ?¿Qué significan?
+  - Determinar cuáles son decimales, enteros, fechas (repetir para estas variables)
+  - ¿Outliners?
+
+
 \section{Construcción del Modelo}
 
 Modelos que se intentaron, racional detrás de la selección de estos modelos predictivos. Incluir las evaluaciones

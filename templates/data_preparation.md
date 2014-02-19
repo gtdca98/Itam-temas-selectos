@@ -6,7 +6,7 @@ El proceso de preparación de la fuente de datos debería de ser:
 1. Carga del archivo original.
 2. Normalización de los nombres de columnas.
 3. Identificación de los registros.
-4. Estructura, dimensión, resumen estadístico.
+4. Estructura, dimensión, resúmen estadístico.
 5. Remover columnas inservibles.
 6. Análisis de faltantes.
 7. Imputar (opcional).
@@ -14,6 +14,7 @@ El proceso de preparación de la fuente de datos debería de ser:
 9. Extraer metadata de la fuente de datos.
 10. Guardar el archivo limpio, con  sufijo  `_clean`.*timestamp*`.rds`
 11. Guardar la metadata (terminación `.RData`)
+12. Presentarlo (ver el `dm_report`)
 
 Las siguientes líneas de código son sugerencias sobre como implementar los pasos
 recién descritos. Este código debería de ir en un archivo llamado `clean.r`.

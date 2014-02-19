@@ -34,6 +34,17 @@ Debemos de entender los datos y esto se realiza explorando los datos y reportand
 estructura, análisis categórico, análisis numérico univariado, rangos, mínimos, faltantes (`missing analysis`), gráficas. Análisis estadístico
 por grupos, etc.
 
+  - Tamaño del ds
+  - Número de variables categóricas y numéricas
+  - Lista de variables en formato (para copy/paste)
+  - Porcentaje de NAs por variable
+  - Diagrama de cada variable ¿Cuál es su forma?
+  - ¿Cósas inesperadas (por variable)?
+  - ¿Hay codificación (NAs, blancos, 9999) ?¿Qué significan?
+  - Determinar cuáles son decimales, enteros, fechas (repetir para estas variables)
+  - ¿Outliners?
+
+
 ¿Se generaron nuevas variables? ¿Se seleccionaon variables?
 
 ## Construcción del Modelo
