@@ -2,7 +2,19 @@ Preparación de un proyecto
 ========================================================
 author: Adolfo De Unánue Tiscareño
 date: 19 de Febrero, 2014
+font-import: http://fonts.googleapis.com/css?family=Risque
+font-family: 'Risque'
+css: css/itam_big_data.css
 
+
+¿Qué se espera de un proyecto de Analítica?
+=======================================================
+
+* Insights -> En tiempo real, *near real time*
+* Impacto en 1 o 2 Qs
+* Agile Big Data
+  - Infraestructura
+  - Modelado
 
 Define tu caso de negocio
 ========================================================
@@ -172,3 +184,11 @@ Por último, agreguen:
   - ** Dependencias ** (Incluyan diagrama de impactos)
   - ** Suposiciones ** (Súper claras!)
   - ** Restricciones ** (*Idem*)
+  
+  
+ 
+=======================================================
+type: exclaim
+
+# Arquitecturas
+# de Ejemplo
