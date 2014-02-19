@@ -19,6 +19,9 @@ Una descripción breve del proyecto (uno o dos párrafos)
 Describir las discusiones con el cliente (\textit{business owner}), sobre todo \textbf{registra} las decisiones tomadas
 y el entendimiento \textit{acordado} del problema de negocio.
 
+Incluye aquí también un diccionario de términos, descripción del proceso, etc.
+
+
 \section{Fuentes de Datos}
 Los datos a utilizar provendrán de varias fuentes, es necesario identificarlas y discutir los accesos 
 con los dueños de las mismas (\textit{data owners}). 
