@@ -15,6 +15,22 @@ Una vez con los datos descargados podemos efectuar el siguiente código para des
 ls *.bz2 | parallel -j +0 --eta 'bzcat {}  > {.}'
 ```
 
+### Descargar `Neo4j`
+
+Basta con ir al sitio de [Neo4j](http://www.neo4j.org/) y descargar el zip con los archivos del servidor. Para ponerlo a funcionar basta con hacer la liga simbólica al ejectuble. 
+
+```bash
+sudo ln -sf ~/source/neo4j-community-2.0.1/ bin/neo4j /usr/bin/neo4j
+```
+
+Con el siguiente par de comandos es suficienta para iniciar y terminar el servidor de `Neo4j` en la ruta `localhost:7474`.
+
+```bash
+neo4j start
+neo4j stop
+```
+
+
 ### Preparar el ambiente para `Neo4j`
 
 Para cargar la base `Neo4j` hay que primero preparar el ambiente `Java` para hacerlo. `Neo4j` y ejecutable de carga no son compatibles con la versión 1.6. Para esto hay que descargar la versión más reciente de `Java` de la página de Oracle. No interesa la version 1.7 jdk. Una vez instalada hay que checar en qué directorio se encuentra. Para esto ejecutamos el siguiente comenado en terminal
