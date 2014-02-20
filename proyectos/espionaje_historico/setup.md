@@ -7,7 +7,7 @@ Se crea primero un directorio donde se van a recibir los datos. También se crea
 ```{bash}
 mkdir -p ~/Dbpedia/Esp
 cd ~/Dbpedia/Esp
-cat urls | curl -O
+cat urls | parallel curl -O
 ```
 
 Una vez con los datos descargados podemos efectuar el siguiente código para descomprimir cada uno de los archivos
@@ -39,7 +39,7 @@ Dentro de la carpeta de `dbpedia4neo` hay que actualizar el `pom.xml`. Para esto
 </repository>
 ```
 
-Una vez listo el `pom` hay que actualizarlo vía `Maven`. (Recordemos que seguimos en la carpeta de `dbpedia4neo`. 
+Una vez listo el `pom` hay que actualizarlo vía `Maven`. (Recordemos que seguimos en la carpeta de `dbpedia4neo`). 
 
 ```bash
 mvn clean install
