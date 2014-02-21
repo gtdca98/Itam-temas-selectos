@@ -58,7 +58,7 @@ Dentro de la carpeta de `dbpedia4neo` hay que actualizar el `pom.xml`. Para esto
 Una vez listo el `pom` hay que actualizarlo vía `Maven`. (Recordemos que seguimos en la carpeta de `dbpedia4neo`). 
 
 ```bash
-mvn clean install
+mvn --update-snapshots clean install
 ```
 
 
