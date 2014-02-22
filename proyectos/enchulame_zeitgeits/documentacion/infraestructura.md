@@ -1,3 +1,17 @@
+Servidor
+===============================
+
+- Se montó un servidor Linux con las siguientes características
+  - 8 GB RAM
+  - 1 TB en disco
+  - 1 procesador AMD
+  - 6 cores
+- Se accede via IP pública, para lo cual se redireccionaron los puertos del *router*  
+
+
+
+
+
 Conexión R - Mongo [Ubuntu]
 =================================================
 
