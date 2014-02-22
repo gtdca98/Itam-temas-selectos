@@ -1,4 +1,3 @@
-
 Carga de informacion.
 =======================
 
@@ -21,10 +20,22 @@ Liga:  http://downloads.dbpedia.org/3.9/es/instance_types_es.nt.bz2
 
 2) Descompresion *bz2 .dc ....*
 
-3) Ajuste de informacion para script de carga en BASH
+3) Ajuste de informacion para script de carga en BASH (Terminal)
 
 
-cut -d" " -f1,3 instance_types_es.nt | sed 's/\///g' | sed 's/<http:es.dbpedia.orgresource//g' | sed 's/<http:dbpedia.orgontology//g' | grep -v "<http:" | sed 's/>//g'|grep "Person" |  awk -F" " '{ printf "%s%s%s%s%s%s%s\n",  "create ( NDD”, NR,”(,name:'"'"'", $1 , "'"'"',type:'"'"'", $2 , "'"'”'});" }' > nodos_book.txt
+echo BEGIN > nodos_book.txt
+
+cut -d" " -f1,3 instance_types_es.nt | sed 's/\///g' | sed 's/<http:es.dbpedia.orgresource//g' | sed 's/<http:dbpedia.orgontology//g' | grep -v "<http:" | sed 's/>//g'|grep "Person" |  awk -F" " '{ printf "%s%s%s%s%s%s%s\n",  "create (NDD", NR,"{ name: '"'"'", $1 , "'"'"' , type:'"'"'", $2 , "'"'"' });" }' >> nodos_book.txt
+
+echo COMMIT >> nodos_book.txt
+
+
+4) Carga de informaciòn con neo4j-shell  (Terminal)   NEO4J debe estar apagado
+
+cat   nodos_book.txt  | /usr/local/Cellar/neo4j/2.0.1/bin/neo4j-shell -config /usr/local/Cellar/neo4j/2.0.1/libexec/conf/neo4j.properties -path /usr/local/Cellar/neo4j/2.0.1/libexec/data/graph.db
+
+
+
 
 
 
