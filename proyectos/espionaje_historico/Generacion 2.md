@@ -1,5 +1,5 @@
-Carga resuelta
---------------
+Carga resuelta  Marzo 3 3014
+======================
 
 Respecto de la carga de relaciones tengo buenas noticias:
 
@@ -13,10 +13,14 @@ b) Contenido de BD borrado  --  shell DELDBNEO4J.sh
 c) Carga por medio de neo4j-shell  que recibe un archivo con secuencia de instrucciones  -- shell CARGANEO4J.sh
 
 
+
+_________________________________________________________________
+
 Sintaxis probada:
-=================
+--------------------
 
 **Generación de nodos**
+
 
 La sintaxis para creación de NODOS es la siguiente
 
@@ -36,11 +40,16 @@ En la creación de Nodos se debe evitar nombrar las propiedades con palabras res
 Ejemplo:  ID ~ id ~ Id ~ iD  es un valor incremental que automáticamente genera Neo4j para cada nodo generado, en su lugar se puede usar CVE ~ clave.
 El mismo caso se presenta con palabras como: create, delete, merge, start son  comandos de neo4j se sugiere usar verbos con preposiciones “create_by”, "deleted_on"
 
+La creacion debe inidcar que el nodo y sus propiedades se han creado. 
+
+___________________________________________________________________________________
+
+**Generacion de EDGES - Relaciones:**
 
 
-EDGES - Relaciones:
+Se tieien dos posibilidades:
 
-Cuando los nodos se crean al mismo tiempo que las propiedades estos deben estar en la misma instrucción CREATE, ejemplo:
+*a) Cuando los nodos se crean al mismo tiempo que las propiedades estos deben estar en la misma instrucción CREATE, ejemplo:*
 
 CREATE (shakespeare { firstname: 'William', lastname: 'Shakespeare' }), 
 		(juliusCaesar { title: 'Julius Caesar' }), 
@@ -50,23 +59,26 @@ CREATE (shakespeare { firstname: 'William', lastname: 'Shakespeare' }),
 
 
 
-Cuando ya existen nodos las relaciones se generan por medio de queries
+*b) Cuando ya existen nodos las relaciones se generan por medio de queries*
 
-START n=node(*), m=node(*)  
-where has(n.ID) and has(m.ID) and n.ID='gtdca' and m.ID='gamdlc'
+START n=node( * ), m=node( * ) 
+where has(n.cve) and has(m.cve) and n.cve='ABgsg' and m.cve='gamdlc'
 create (n)-[:FRIENDSHIP {desde:1984}]->(m)
 
-En este caso se indica que n y m son nodos,
-que ambos poseen la propiedad ID
-que los ID en particular son
-y que se crea la relación indicada
+En este caso se indica que n y m son nodos, que ambos poseen la propiedad cve 
+y por ello que se crea la relación indicada
 
 
-Eliminar Nodos y sus relaciones.
+La salida del proceso debe indicar que el la relacion se ha creado.
+y también que se agregaron propiedades (en su caso)
+
+_______________________________________________________
+
+*Eliminar Nodos y sus relaciones.*
 
 La instrucción es la siguiente:
 
-MATCH (n{Prop_x :’Valor_prop_x'})-[r]-()
+MATCH (n {Prop_ x : 'Valor_ prop_x' })-[r]-()
 DELETE n,r
 
 Busca los nodos (n) cuyos Propiedad X tenga un valor definido y que cuente con cualquier relación con otros nodos. 
@@ -74,3 +86,36 @@ Identificados borra los nodos que cumplan la condición y sus relaciones
 
 Ejemplo:
 MATCH (n{nombre :'Instituto Universitario'})-[r]-()
+DELETE n,r
+
+________________________________________________________
+
++Visualizar un nodo+
+
+MATCH (n1:Etiqueta {Prop_1:’Valor propiedad x}) RETURN n1
+
+n1 es una variable de referencia donde se deposita la salida donde para la Etiqueta especifica se busca que la propiedad 1 tenga un valor dado.
+RETURN n1 visualiza el resultado.
+
+_______________________________________________________
+
+Importante
+----------
+
+Se deben dejar espacios adecuados en los comandos. El interprete de Neo4j tiene probelmas cuando las secciones de las instrucciones no están separadas por espacios. 
+
+Ejemplo:   
+
+create(N12387:ensayos{clave:'RT54637',año:1993,nombre:"Marginalidad y sociedad"})
+
+no funciona hay qye espaciarlo y terminar con punto y coma
+
+create ( N12387:ensayos { clave: 'RT54637' , año: 1993 , nombre: "Marginalidad y sociedad" });
+
+Todos los lotes de carga comienzan con BEGIN <enter> y terminan con COMMIT <enter> si al final de cada insruccion no hay enter el interprete no ejecuta. 
+
+Si el COMMIT final no se ejecuta el esttus de la base de datos indicara que existen los nodos  pero éstos no se visualizan.  
+
+
+
+
