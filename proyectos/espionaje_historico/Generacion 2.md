@@ -4,12 +4,15 @@ Carga resuelta  Marzo 3 2014
 Respecto de la carga de nodos y relaciones tengo buenas noticias:
 
 1) Se logran generar nodos con buena calidad y rapidez 
+
 2) Se logran cargar relaciones a partir de propiedades generadas a los nodos. La velocidad depende de la cantidad de nodos existentes en BD y sus índices
 
 Para ello se tienen las siguientes consideraciones
 
 a) Neo4j apagado  Las operaciones de carga se realizan con el servicio de la base apagada ---   neo4j stop
+
 b) Contenido de BD borrado  Para evitar la colision con datos preexistentes se recomienda limpiar el área de trabajo antes de cargas --  shell DELDBNEO4J.sh 
+
 c) La carga por medio de neo4j-shell  que recibe un archivo con secuencia de instrucciones  -- shell CARGANEO4J.sh
 
 
@@ -51,10 +54,14 @@ Se tieien dos posibilidades:
 
 *a) Cuando los nodos se crean al mismo tiempo que las propiedades estos deben estar en la misma instrucción CREATE, ejemplo:*
 
-CREATE (shakespeare { firstname: 'William', lastname: 'Shakespeare' }), 
+	CREATE (shakespeare { firstname: 'William', lastname: 'Shakespeare' }), 
+
 		(juliusCaesar { title: 'Julius Caesar' }), 
+		
 		(shakespeare)-[:WROTE_PLAY { year: 1599 }]->(juliusCaesar), 
-		(theTempest { title: 'The Tempest' }), 
+		
+		(theTempest { title: 'The Tempest' }),
+		
 		(shakespeare)-[:WROTE_PLAY { year: 1610}]->(theTempest)...
 
 
@@ -62,15 +69,15 @@ CREATE (shakespeare { firstname: 'William', lastname: 'Shakespeare' }),
 *b) Cuando ya existen nodos las relaciones se generan por medio de queries*
 
 START n=node( * ), m=node( * ) 
+
 where has(n.cve) and has(m.cve) and n.cve='ABgsg' and m.cve='gamdlc'
+
 create (n)-[:FRIENDSHIP {desde:1984}]->(m)
 
-En este caso se indica que n y m son nodos, que ambos poseen la propiedad cve 
-y por ello que se crea la relación indicada
+En este caso se indica que n y m son nodos, que ambos poseen la propiedad cve y por ello que se crea la relación indicada
 
 
-La salida del proceso debe indicar que el la relacion se ha creado.
-y también que se agregaron propiedades (en su caso)
+La salida del proceso debe indicar que el la relacion se ha creado y también que se agregaron propiedades (en su caso)
 
 _______________________________________________________
 
@@ -79,13 +86,17 @@ _______________________________________________________
 La instrucción es la siguiente:
 
 MATCH (n {Prop_ x : 'Valor_ prop_x' })-[r]-()
+
 DELETE n,r
 
 Busca los nodos (n) cuyos Propiedad X tenga un valor definido y que cuente con cualquier relación con otros nodos. 
+
 Identificados borra los nodos que cumplan la condición y sus relaciones
 
 Ejemplo:
+
 MATCH (n{nombre :'Instituto Universitario'})-[r]-()
+
 DELETE n,r
 
 ________________________________________________________
@@ -119,7 +130,9 @@ create ( N12387:ensayos { clave: 'RT54637' , año: 1993 , nombre: "Marginalidad 
 _______________________________________
 
 Falta:  Revisar como se hace el manejo de excepciones ante cargas erróneas (ROLLBACK).
+        
         Revisar el desepeño teniendo activos indices.
+        
         Verificar el impacto en volumen en la base
         
         
