@@ -129,7 +129,9 @@ create ( N12387:ensayos { clave: 'RT54637' , año: 1993 , nombre: "Marginalidad 
 
 _______________________________________
 
-Falta:  Revisar como se hace el manejo de excepciones ante cargas erróneas (ROLLBACK).
+Falta:  
+	
+	Revisar como se hace el manejo de excepciones ante cargas erróneas (ROLLBACK).
         
         Revisar el desepeño teniendo activos indices.
         
