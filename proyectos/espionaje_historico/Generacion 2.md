@@ -1,16 +1,16 @@
 Carga resuelta  Marzo 3 2014
 ======================
 
-Respecto de la carga de relaciones tengo buenas noticias:
+Respecto de la carga de nodos y relaciones tengo buenas noticias:
 
 1) Se logran generar nodos con buena calidad y rapidez 
-2) Se logran cargar relaciones a partir de propiedades generadas a los nodos.
+2) Se logran cargar relaciones a partir de propiedades generadas a los nodos. La velocidad depende de la cantidad de nodos existentes en BD y sus índices
 
 Para ello se tienen las siguientes consideraciones
 
-a) Neo4j apagado  ---   neo4j stop
-b) Contenido de BD borrado  --  shell DELDBNEO4J.sh 
-c) Carga por medio de neo4j-shell  que recibe un archivo con secuencia de instrucciones  -- shell CARGANEO4J.sh
+a) Neo4j apagado  Las operaciones de carga se realizan con el servicio de la base apagada ---   neo4j stop
+b) Contenido de BD borrado  Para evitar la colision con datos preexistentes se recomienda limpiar el área de trabajo antes de cargas --  shell DELDBNEO4J.sh 
+c) La carga por medio de neo4j-shell  que recibe un archivo con secuencia de instrucciones  -- shell CARGANEO4J.sh
 
 
 
@@ -102,20 +102,27 @@ _______________________________________________________
 Importante
 ----------
 
-Se deben dejar espacios adecuados en los comandos. El interprete de Neo4j tiene probelmas cuando las secciones de las instrucciones no están separadas por espacios. 
+* Se deben dejar espacios adecuados en los comandos. El interprete de Neo4j tiene probelmas cuando las secciones de las instrucciones no están separadas por espacios. 
 
-Ejemplo:   
+Ejemplo:   create(N12387:ensayos{clave:'RT54637',año:1993,nombre:"Marginalidad y sociedad"})
 
-create(N12387:ensayos{clave:'RT54637',año:1993,nombre:"Marginalidad y sociedad"})
-
-no funciona hay qye espaciarlo y terminar con punto y coma
+no funciona hay que integrar espacios y terminar la instruccion  con punto y coma (;)
 
 create ( N12387:ensayos { clave: 'RT54637' , año: 1993 , nombre: "Marginalidad y sociedad" });
 
-Todos los lotes de carga comienzan con BEGIN <enter> y terminan con COMMIT <enter> si al final de cada insruccion no hay enter el interprete no ejecuta. 
+* Todos los lotes de carga comienzan con BEGIN <enter> y terminan con COMMIT <enter> si al final de cada insruccion no hay enter el interprete no ejecuta. 
 
-Si el COMMIT final no se ejecuta el esttus de la base de datos indicara que existen los nodos  pero éstos no se visualizan.  
+* Si el COMMIT final NO se ejecuta el estatus de la base de datos indicara que existen los nodos  pero éstos no se visualizan.  
 
+* Si la carga es muy larga se recomienda partirla en varios archivos conservando bitacora del avance.
+
+_______________________________________
+
+Falta:  Revisar como se hace el manejo de excepciones ante cargas erróneas (ROLLBACK).
+        Revisar el desepeño teniendo activos indices.
+        Verificar el impacto en volumen en la base
+        
+        
 
 
 
