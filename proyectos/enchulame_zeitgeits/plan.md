@@ -29,7 +29,7 @@ Miércoles 12 a 19 de febrero
 - [X] Primeras pruebas de minería de texto para contextualizar las búsquedas
 - [X] Plan de trabajo
 - [ ] Definir entregables
-- [ ] Definir caso de uso
+- [ ] Definir caso de uso [Google Zeitgeist](http://www.google.com/trends/topcharts?zg=full)
 ~~~
 
 
