@@ -1,13 +1,16 @@
 Enchúlame el Zeitgeist 
 ========================================================
-- **Equipo:** Kael Huerta | Marcos Chávez | David Lampón
+- **Equipo:** Antonio Fragoso | Kael Huerta | Marcos Chávez | David Lampón
 - **Objetivo:** Determinar la relación entre los *trending topics* de Twitter y las búsquedas de Google contextualizadas con gráficos en una aplicación web.
 - **Hipótesis:** Las búsquedas de Google complementan los *trending topics* dada una relación lineal de ocurrencia de eventos desfasada en el tiempo.
 
 
 Maqueta de visualización
 -------------------------------------------------------
-![maqueta] (https://www.dropbox.com/s/j2bw8zessmcfvv0/maqueta.pdf)
+![arq](figuras/maqueta.pdf)
+
+https://www.dropbox.com/s/70jdzb351nrav5x/maqueta.pdf
+
 
 Descripción de las fuentes de datos
 --------------------------------------------------------
@@ -32,4 +35,61 @@ The API consists of JavaScript and associated service protocols that enable You 
 - **Google Image Search API** https://developers.google.com/image-search/
 
 The Google Image Search JavaScript API is a JavaScript library that allows you to embed Google Image Search in your web pages and other web applications. For Flash, and other non-JavaScript environments, the API exposes a raw interface that returns JSON-encoded results that are easily processed by most languages and runtimes.
+
+Prototipo de arquitectura
+-------------------------------------------------------
+![arq](figuras/prototipo_arquitectura.png)
+
+https://www.dropbox.com/s/e1jef00hynxsz6o/prototipo_arquitectura.png
+
+Base de datos orientada a documentos (MongoDB)
+-------------------------------------------------------
+Instalación:
+
+- Importar llave pública de MongoDB
+~~~~~
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+~~~~~
+
+- Crear el archivo descargable
+~~~~
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+~~~~
+
+- Actualizar el repositorio de paquetes
+~~~~
+sudo apt-get update
+~~~~
+
+- Instalar el paquete
+~~~~
+sudo apt-get install mongodb-10gen
+~~~~
+
+- Iniciar o parar
+~~~~
+sudo service mongodb start
+sudo service mongodb stop
+~~~~
+
+- Conectar con MongoDB 
+~~~~
+mongo
+~~~~
+
+
+Objetivo
+============================================
+
+Fuente de datos
+============================================
+
+Arquitectura
+============================================
+
+Plan de trabajo
+============================================
+
+Entregables
+============================================
 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Enchúlame el Zeitgeist </title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Enchúlame el Zeitgeist </h1>
+
+<ul>
+<li><strong>Equipo:</strong> Kael Huerta | Marcos Chávez | David Lampón</li>
+<li><strong>Objetivo:</strong> Determinar la relación entre los <em>trending topics</em> de Twitter y las búsquedas de Google contextualizadas con gráficos en una aplicación web.</li>
+<li><strong>Hipótesis:</strong> Las búsquedas de Google complementan los <em>trending topics</em> dada una relación lineal de ocurrencia de eventos desfasada en el tiempo.</li>
+</ul>
+
+<h2>Maqueta de visualización</h2>
+
+<p><img src="https://www.dropbox.com/s/j2bw8zessmcfvv0/maqueta.pdf" alt="maqueta"/></p>
+
+<h2>Descripción de las fuentes de datos</h2>
+
+<ul>
+<li><strong>Twitter</strong> <a href="https://dev.twitter.com/docs/api/1.1">https://dev.twitter.com/docs/api/1.1</a>
+<em>Trends</em>
+With so many tweets from so many users, themes are bound to arise from the zeitgeist. The Trends methods allow you to explore what&#39;s trending on Twitter.</li>
+</ul>
+
+<p><strong>Resource:</strong> GET trends/place<br/>
+<strong>Description:</strong> Returns the top 10 trending topics for a specific WOEID, if trending information is available for it. The response is an array of &ldquo;trend&rdquo; objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Twitter Search, and the Twitter Search URL&hellip;.</p>
+
+<p><strong>Resource:</strong> GET trends/available<br/>
+<strong>Description:</strong> Returns the locations that Twitter has trending topic information for. The response is an array of &ldquo;locations&rdquo; that encode the location&#39;s WOEID and some other human-readable information such as a canonical name and country the location belongs in. A WOEID is a Yahoo! Where On Earth ID.</p>
+
+<p><strong>Resource:</strong> GET trends/closest<br/>
+<strong>Description:</strong> Returns the locations that Twitter has trending topic information for, closest to a specified location. The response is an array of &ldquo;locations&rdquo; that encode the location&#39;s WOEID and some other human-readable information such as a canonical name and country the location belongs in. A WOEID is a Yahoo&hellip; </p>
+
+<ul>
+<li><strong>Google Web Search</strong> <a href="https://developers.google.com/web-search/">https://developers.google.com/web-search/</a></li>
+</ul>
+
+<p>The API consists of JavaScript and associated service protocols that enable You to display results from Google searches, including text and URL results from Google Web Search and results from searches on other Google services (&ldquo;Google Search Results&rdquo;) on your website, in your application, or in your other product expressly authorized in writing by Google (each, a &ldquo;Property&rdquo;), subject to the limitations and conditions described below. You are allowed to use the API only to display, and to make such uses as are necessary for You to display, Google Search Results on your Property. The API does not provide You with the ability to access, and You are not allowed to access, other underlying Google Services or data. Subject to the limitations and conditions described below, You may use the API to enable end users of your Property to designate Google Search Results for You to display in conjunction with other information that they upload or post to your Property. </p>
+
+<ul>
+<li><strong>Google Image Search API</strong> <a href="https://developers.google.com/image-search/">https://developers.google.com/image-search/</a></li>
+</ul>
+
+<p>The Google Image Search JavaScript API is a JavaScript library that allows you to embed Google Image Search in your web pages and other web applications. For Flash, and other non-JavaScript environments, the API exposes a raw interface that returns JSON-encoded results that are easily processed by most languages and runtimes.</p>
+
+</body>
+
+</html>
+

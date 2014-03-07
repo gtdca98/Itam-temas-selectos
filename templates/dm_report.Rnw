@@ -1,0 +1,67 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+
+\begin{document}
+
+\title{Reporte de Proyecto de Minería de Datos}
+
+\author{Adolfo De Unánue Tiscareño}
+
+\maketitle\thispagestyle{empty}
+
+\section{Introducción}
+Una descripción breve del proyecto (uno o dos párrafos)
+
+\section{Problema de Negocio}
+Describir las discusiones con el cliente (\textit{business owner}), sobre todo \textbf{registra} las decisiones tomadas
+y el entendimiento \textit{acordado} del problema de negocio.
+
+Incluye aquí también un diccionario de términos, descripción del proceso, etc.
+
+
+\section{Fuentes de Datos}
+Los datos a utilizar provendrán de varias fuentes, es necesario identificarlas y discutir los accesos 
+con los dueños de las mismas (\textit{data owners}). 
+
+Documentar en esta sección las fuentes de datos, su integridad, tamaño, fechas de vigencia, etc.
+
+\section{Preparación de los Datos}
+Subir los datos a \texttt{R} u otro ambiente equivalente, realizar las operaciones necesarias para preparar
+los datos (\textit{data munging}) para poder generar modelos. 
+
+Describir los pasos realizados, hacer referencia a los distintos \textit{scripts} utilizados. 
+
+
+\section{Exploración de datos}
+Debemos de entender los datos y esto se realiza explorando los datos y reportando sus características: dimensiones, 
+estructura, análisis categórico, análisis numérico univariado, rangos, mínimos, faltantes (\textit{missing analysis}), gráficas. Análisis estadístico
+por grupos, etc.
+
+¿Se generaron nuevas variables? ¿Se seleccionaon variables?
+
+  - Tamaño del ds
+  - Número de variables categóricas y numéricas
+  - Lista de variables en formato (para copy/paste)
+  - Porcentaje de NAs por variable
+  - Diagrama de cada variable ¿Cuál es su forma?
+  - ¿Cósas inesperadas (por variable)?
+  - ¿Hay codificación (NAs, blancos, 9999) ?¿Qué significan?
+  - Determinar cuáles son decimales, enteros, fechas (repetir para estas variables)
+  - ¿Outliners?
+
+
+\section{Construcción del Modelo}
+
+Modelos que se intentaron, racional detrás de la selección de estos modelos predictivos. Incluir las evaluaciones
+y codigo \texttt{R} (o similar).
+
+\section{Despliegue del modelo}
+Se elige un modelo, se exporta a \texttt{PMML} o se definen sus parámetros para que sean agregado al \textit{pipe} de 
+manipulación de datos. Si requiere cambios arquitectónicos, hacer referencia al documento técnico donde se describan.
+
+Hacer referencia a la presentación ejecutiva.
+
+\end{document}
