@@ -1,4 +1,3 @@
-
 Generacion de Base de datos. Aceleracion de carga por indices.  de 125 ms a 5 ms
 ============
 
@@ -16,7 +15,7 @@ create (n)-[:VERBO { concepto: 'Descripcion' , valor: 34584 }]->(m);
 
 *MATCH*
 
-MATCH ( n:comprador { cve:'UC020V3A999' } ) ,  ( m:proveedor { cve:'PRO000001' } )  
+MATCH ( n:etiq01 { cve:'UC020V3A999' } ) ,  ( m:etiq02 { cve:'PRO000001' } )  
 
 create (n)-[:VERBO { concepto: 'Descripcion' , valor: 34584 }]->(m);
 
