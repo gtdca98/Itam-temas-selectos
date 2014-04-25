@@ -1,4 +1,4 @@
-Generación BD Neo4j  Migracion Montaje de Base de datos (c / backup)
+Generacion BD Neo4j  Migracion Montaje de Base de datos (c / backup)
 =======================================================
 
 La migracion - montaje de una base de datos de Neo4j que originalmente reside en una computadora distinta se resuelve 
