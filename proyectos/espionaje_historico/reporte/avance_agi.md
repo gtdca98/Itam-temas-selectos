@@ -47,7 +47,7 @@ Donde de manera análoga se pueden establecer las relaciones entre los artículo
 Añadir desarrollo de los infoboxes y el OWL de DBpedia.
 ```
 
-Sin embargo como el análisis se realizará de manera local, en lugar de solicitar información al desarrollador o a terceros.
+Sin embargo como el análisis se realizará de manera local, en lugar de solicitar información al desarrollador o a terceros. Es importante la consideración de una base de datos capaz de lidiar con datos con estructura de Grafos. Dentro de las posibles soluciones al problema se encuentran Neo4j, Titan, OrientDB o ElasticSearch. Dentro de estas opciones, la base de datos mayor utilizada es [Neo4j](http://db-engines.com/en/ranking/graph+dbms). Seguida de Titan u OrientDB. Por otro lado ElasticSearch parece ser una base de datos que no parece haber sido desarrollada para tratar con datos de esta naturaleza. Dentro de las fortalezas de Neo4j sobre las demas es que su versión individual es de acceso libre, por otro lado es fácilmente escalable a través de la versión corporativa. Es una base de datos fácilmente manejable a través de Java. Se pueden crear índices tanto en nodos y propiedades como en los arcos mismos de la gráfica. De igual forma incluye un dashboard que puede ser consultado de manera local o vía remota en un explorador dónde se pueden realizar tareas de mantenimiento y/o consulta. 
 
 
 
