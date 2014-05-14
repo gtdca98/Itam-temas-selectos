@@ -36,9 +36,13 @@ Sin embargo existen ya varios proyectos que han trabajado con la información de
 Particularmente `DBpedia` construye su información a través de los metadatos de los archivos de *Wikipedia* como son ciertas propiedades o etiquetas. Incluso hereda de *Wikipedia* la estructura de ligas entre artículos de la enciclopedia lo cual genera de manera natural los nodos y arcos que se necesitan definir en grafo. En la manera en que se guarda la información en los repositorios de `DBpedia` es a través de tripletas. Donde la primera entrada define el sujeto, la segunda el verbo y por último el predicado. De tal forma que podemos observar diversos patrones como por ejemplo
 
 ```
-sujeto_1 tiene_propiedad_tipo valor_propiedad
+sujeto_1  tipo_propiedad_j  valor_propiedad_k
 ```
-
+Donde se lee que el individuo *i* tiene la propiedad *j* con el valor *k*. Sin embargo dicha construcción también sirve para hablar de las ligas entre los nodos. Como son 
+```
+sujeto_1 ligado_a sujeto_2
+```
+Donde de manera análoga se pueden establecer las relaciones entre los artículos de la enciclopedia. 
 
 
 
