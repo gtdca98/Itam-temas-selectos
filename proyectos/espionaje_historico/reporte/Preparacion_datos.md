@@ -91,14 +91,14 @@ Abordemos ahora la estructura de los archivos, reconociendo en ellos los concept
 
 Conservemos en mente dos ideas básicas 
 
-    A)  En cada archivo se tienen  4 encabezados para cada campo. 
+    1. En cada archivo se tienen  4 encabezados para cada campo. 
 
             Etiqueta de propiedad que equivale a nombre de campo
             Expresión URI del primer encabezado
             Tipo de variable
             Expresion URI del tercer encabezado
 
-    B)  Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.
+    2. Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.
 
 
 **Identificación de contenidos.**  
@@ -147,7 +147,8 @@ Del mismo modo se asignan categorías ‘person’ a los nodos Philip_Hall y Ral
 
 ----
 
-*Sujeto – Propiedad – Valor*
+*Sujeto – Propiedad – Valor*   
+
 Por otro lado, las expresiones ontológicas Sujeto – Propiedad – Valor se indican en campos únicos donde el primer encabezado determina el nombre del campo. Ejemplos.
 
 Campo 1 (Sujeto)
