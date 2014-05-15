@@ -49,6 +49,78 @@ Añadir desarrollo de los infoboxes y el OWL de DBpedia.
 
 Sin embargo como el análisis se realizará de manera local, en lugar de solicitar información al desarrollador o a tercero es importante la consideración de una base de datos capaz de lidiar con datos con estructura de Grafos. Dentro de las posibles soluciones al problema se encuentran Neo4j, Titan, OrientDB o ElasticSearch. Dentro de estas opciones, la base de datos más utilizada es [Neo4j](http://db-engines.com/en/ranking/graph+dbms). Seguida de Titan u OrientDB. Por otro lado ElasticSearch parece ser una base de datos que no parece haber sido desarrollada para tratar con datos de esta naturaleza. Dentro de las fortalezas de Neo4j sobre las demás es que su versión individual es de acceso libre, por otro lado es fácilmente escalable a través de la versión corporativa. Es una base de datos fácilmente manejable a través de Java. Se pueden crear índices tanto en nodos y propiedades como en los arcos mismos de la gráfica. De igual forma incluye un dashboard que puede ser consultado de manera local o vía remota en un explorador dónde se pueden realizar tareas de mantenimiento y/o consulta. Por último, `cypher` el lenguaje con el que se realizan consultas a la base es muy similar al SQL sin embargo es muy sencillo de aprender y hay tutoriales sobre éste en la página oficial. 
 
+## Preparación de los Datos
+
+La tarea de cargar información a Neo4j demandó en su momento la atención de todo el equipo, dando origen a líneas de investigación paralelas. Una de las opciones consideradas fue realizar la carga a través de `py2neo`, una interfaz de escritura y lectura de Python para Neo4j. Actualmente este paquete atraviesa por un período de desarrollo activo. 
+
+A principios de Abril se logró poblar una base de datos de Neo4j por medio de `py2neo`. Se elaboró un proceso de carga con la siguiente lógica:
+
+* Trabajar con los archivos _Mapping Based Types (MBT)_ y _Mapping Based Properties (MBP)_ del proyecto **DBpedia**. Estos archivos permiten reproducir la estructura de red de Wikipedia. Sin embargo, pasan por alto un aspecto clave de esta fuente de datos ya que no están dotados de contenido en lenguaje natural (texto en formato libre). 
+
+* Poblar los nodos de una base de datos de Neo4j a partir de una lista de artículos identificados como relevantes a partir de su categorización (obtenida de _MBT_). Esto se logra a través del código:
+
+`
+from py2neo import neo4j, node, rel
+
+gdb = neo4j.GraphDatabaseService()
+
+N = gdb_nodes.count()[0]
+b = 5000
+n = 0
+
+while n < N:
+    n = min(n + b, N)
+    batch = neo4j.WriteBatch(gdb)
+    for node in list(gdb_nodes[n-b:n].itertuples()):
+        batch.create({'item' : node[1]})
+    results = batch.submit()
+`
+Donde `gdb_nodes` es una tabla plana de `pandas`. Se crea un nodo por cada renglon. 
+
+* Agregar las relaciones entre nodos con las tripletas _sujeto-objeto-predicado_ que registra la tabla de _MBP_. Se logra por medio del código:
+
+`
+N = gdb_edges.count()[0]
+b = 5000
+n = 0
+
+while n < N:
+    n = min(n + b, N)
+    batch = neo4j.WriteBatch(gdb)
+    for index, edge in gdb_edges[n-b:n].iterrows():
+        batch.create((gdb.node(edge['item_id_x']), edge['prop'], gdb.node(edge['item_id_y'])))
+    results = batch.submit()
+`
+
+También a principios de Abril la opción de cargar información via shell empezaba a demostrar un gran alcance. Eventualmente dicha opción se convirtió la alternativa que mejor representaba los objetivos del proyecto y se puso en producción en un servidor de Amazon. La carga con `py2neo` fue un ambiente de prueba en efecto y un respaldo para trabajar de manera local en métodos de minería de gráficas y visualización.
+
+Una vez cargada la información a Neo4j, se planteó desarrollar una aplicación de predicción de ligas entre individuos. La forma más inmediata de plantear esto depende de extraer vecinos a _n_ grados de determinado nodo (cierto tópico de interés en este caso). Sobre este subgrafo uno es sujeto a inferir ligas ordenando parejas de nodos desconectados según una función binaria de similitud como se plantea en _Practical Graph Mining with R_. Se trataba de un uso parecido a la predicción de ligas que encuentra uno cotidianamente en los motores de sugerencias en redes sociales. 
+
+La aplicación originalmente planteada depende de poder ejecutar la extracción de vecinos a _n_ grados con facilidad. En el lenguaje de consulta `cypher`, si uno quisiera extraer la subred de nodos que distan a los más en 3 grados del nodo del ITAM ejecutaría la siguiente consulta:
+
+`
+MATCH (i)-[*1..3]-(j) where i.item='ITAM' RETURN i, j
+`
+
+Sin embargo, bajo ninguna de las configuraciones de Neo4j probadas se logró que esta consulta terminara. Esto obligó a reconsiderar la funcionalidad de la aplicación en función a una consulta que sí terminara en un tiempo razonable. Las consultas de vecinos a un grado cumplen con esta importante especificación. Estas toman la siguiente forma:
+
+`
+MATCH (i)--(j) where i.item='ITAM' RETURN j
+`
+
+El uso que se identificó para esta consulta fue para relacionar temas arbitrarios a partir de sus vecinos en común. Enfrentando una red compleja, un uso atractivo es identificar una subred o una agrupación de nodos que simplifique la red principal. La red simplificada puede ser un auxiliar valioso para encontrar una narrativa subyacente. Se pueden tomar dos enfoques para resolver esto: 
+
+- **podado de aristas**: La lógica de donde proviene este uso se resume en que una liga entre temas históricamente importantes por si mismos puede ser de mayor o menor relevancia. El problema que plantea esta situación es uno de descartar ligas.
+Se puede recurrir a identificar subgrafos (como árboles) que conserven las aristas más importantes. Los algoritmos disponibles incluyen la búsqueda del árbol abarcante de pesos máximos y grafos aleatorios jerárquicos. 
+- **detección de comunidades**: para ello existen algoritmos como maximización de modularidad o caminatas aleatorias.  
+
+Medidas de similaridad como las siguientes son sujetas a señalar comunidades dentro de una red:
+
+- Vecinos en común: $$SIM_{CommonNB}(V_1, V_2) = ||V_1 \cap V_2 ||$$
+- Jaccard: $$SIM_{Jaccard}(V_1, V_2) = \frac{||V_1 \cap V_2 ||}{||V_1 \cup V_2||}$$
+- Adamic-Adar: $$SIM_{Adamic-Adar}(V_1, V_2) = \sum_{z\in N(V_1)\cap N(V_{2})} \frac{1}{log(|N(z)|)}$$
+
+La implementación de estos métodos se encuentra todavía en desarrollo, pero el código remitido a la fecha implementa una detección del árbol de pesos máximos entre los temas ingresados por el usuario en un campo de búsqueda. 
 
 
 
