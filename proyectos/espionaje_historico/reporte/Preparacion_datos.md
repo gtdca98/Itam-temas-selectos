@@ -3,7 +3,8 @@ Proceso de preparación de datos
 
 Generalidades. Resulta necesario repasar brevemente algunos fundamentos tanto de la organización de la  información de DBpedia como de los requerimientos de la base de datos Neo4j.  Esto  favorece la comprensión de los procesos que se enunciarán más adelante.
 
-DBpedia.
+**DBpedia.**   
+
 Las bases ontológicas de DBpedia están construidas en unidades de información construidas  en conceptos simples:
 
 1. Cada elemento (Sujeto)  es diferenciable a través de su URI, y por él se puede identificar su fuente. El URI (Uniform Resource Identifier) está formado por la integración de dos elementos URL (Uniform Resource Locator) y URN (Uniform Resource Name)
@@ -28,28 +29,28 @@ Las bases ontológicas de DBpedia están construidas en unidades de información
       P= <http://dbpedia.org/ontology/influencedBy>     
       O= <http://dbpedia.org/resource/Heraclitus>   
 
-Neo4j.
-Los requerimientos de información para la integración de datos en Neo4j que se repasan son:
+**Neo4j.**   
+Los requerimientos de información para la integración de datos en Neo4j que se repasan son:  
 
-a)	Los nodos deben estar asociados a una clave única diferenciadora. Durante el proceso de carga Neo4j asigna un número de nodo (consecutivo irrepetible) a cada elemento que se integra con independencia que el valor asociado ya se encuentre registrado previamente. A partir de la versión 2.0 es posible asignar llaves propias de indización.
+1.	Los nodos deben estar asociados a una clave única diferenciadora. Durante el proceso de carga Neo4j asigna un número de nodo (consecutivo irrepetible) a cada elemento que se integra con independencia que el valor asociado ya se encuentre registrado previamente. A partir de la versión 2.0 es posible asignar llaves propias de indización.
 
-b)	Adicionalmente,  los nodos reciben la asignación de propiedades que a su vez son base  en la definición de consultas.
+2.	Adicionalmente,  los nodos reciben la asignación de propiedades que a su vez son base  en la definición de consultas.
 
-c)	Un conjunto de nodos previamente constituidos pueden asociarse a categorías que segmentan la información por tipo. Estas categorías también llegan a integrar  índices de consulta.
+3.	Un conjunto de nodos previamente constituidos pueden asociarse a categorías que segmentan la información por tipo. Estas categorías también llegan a integrar  índices de consulta.
 
-d)	Los arcos (dirigidos o no)– denominados relaciones en Neo4j – poseen: un identificador numérico, dado por el sistema, una etiqueta asociada que ‘verbaliza’ la relación  y de forma opcional reciben la asignación de propiedades del mismo modo que los nodos. 
+4.	Los arcos (dirigidos o no)– denominados relaciones en Neo4j – poseen: un identificador numérico, dado por el sistema, una etiqueta asociada que ‘verbaliza’ la relación  y de forma opcional reciben la asignación de propiedades del mismo modo que los nodos. 
 
-e)	Todo elemento de carga debe efectuarse indicando inequívocamente el nodo al cual se asigna la propiedad, etiqueta o relación.
+5.	Todo elemento de carga debe efectuarse indicando inequívocamente el nodo al cual se asigna la propiedad, etiqueta o relación.
 
 
-Formato de datos . 
+**Formato de datos.**    
 La información de DBpedia es producto de un proyecto de extracción de contenido de Wikipedia. Su fuentes se encuentra disponible en dos formatos generales: Listado y Bases Ontologicas.
 
-Listados.  Reflejan la relación ontológica (S- Pr -V o S-P-O). Constituidos por tripletas en diversos idiomas y segmentados por formatos de contenido (imágenes, textos, enlace..) 
+*Listados.*   Reflejan la relación ontológica (S- Pr -V o S-P-O). Constituidos por tripletas en diversos idiomas y segmentados por formatos de contenido (imágenes, textos, enlace..) 
 
-Bases ontológicas. Conjuntos de información donde la relación muestra los Sujetos por renglones, los Predicados/Propiedades  en los encabezados de las columnas y los Objetos/Valores en la intersección de ambos.  Los formatos disponibles están en inglés en  CSV y JSON .
+*Bases ontológicas.*  Conjuntos de información donde la relación muestra los Sujetos por renglones, los Predicados/Propiedades  en los encabezados de las columnas y los Objetos/Valores en la intersección de ambos.  Los formatos disponibles están en inglés en  CSV y JSON .
 
-Para la consulta de información, estos formatos están disponibles a diversos niveles de agregación. Las opciones de descarga van desde la versión completa de la ontología hasta la consulta de una subclase especifica como es luchadores de sumo.  Para información detallada consúltese http://mappings.dbpedia.org/server/ontology/classes/ .
+Para la consulta de información, estos formatos están disponibles a diversos niveles de agregación. Las opciones de descarga van desde la versión ontología completa  hasta la consulta de una subclase especifica como es luchadores de sumo.  Para información detallada consúltese http://mappings.dbpedia.org/server/ontology/classes/ .
 
 Este estudio utilizó la versión ontológica de DBpedia en Base CVS ya que, en comparación con las otras fuentes DBpedia, permite la generación de nodos y arcos en forma independiente conservando la integridad relacional sin altos requerimientos de procesamiento 
 
