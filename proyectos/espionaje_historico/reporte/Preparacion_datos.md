@@ -63,15 +63,15 @@ En cuanto al uso de base JSON se consideró inviable dado que la construcción d
 
 Como se señaló, existen segmentos de la base ontológica de DBpedia a diversos niveles (clases) dependiendo del interés del usuario. 
 
-La clase general de la base ontológica es `Thing` y a ella pertenecen  clases  como `Activity`, `Agent`, `Event`, `Biomolecula`, `Anatomical Structure`, `Award`, `Device`, `Place`, `Polyhedron`, `Tropical Concept` etc. A su vez, cada una de estas puede estar subdividida en clases que permiten mayor detalle en el análisis. En total la base Thing  cuenta con 656 ramificaciones ontológicas.
+La clase general de la base ontológica es `Thing` y a ella pertenecen  clases  como `Activity`, `Agent`, `Event`, `Biomolecula`, `Anatomical Structure`, `Award`, `Device`, `Place`, `Polyhedron`, `Tropical Concept` etc. A su vez, cada una de estas puede estar subdividida en clases que permiten mayor detalle en el análisis. En total la base `Thing`  cuenta con 656 ramificaciones ontológicas.
 
 No todas las ramas fueron consideradas objeto de estudio del presente. Esto obedece tanto a criterios de relevancia como razones viabilidad del proyecto. 
 
-Por un lado se reconoce que DBpedia refleja el contenido de Wikipedia y ésta otorga peso a temáticas no propias del estudio tales como Activity cuyos contenidos se refieren exclusivamente a deportes y redundan en la información que se localiza en la clase Agent subclase SportLeague.
+Por un lado se reconoce que DBpedia refleja el contenido de Wikipedia y ésta otorga peso a temáticas no propias del estudio tales como `Activity` cuyos contenidos se refieren exclusivamente a deportes y es redundante con la información que se localiza en la clase `Agent` subclase `SportLeague`.
 
 Por otro lado, el volumen de información es tal que supera las capacidades de procesamiento viable en un proyecto de medio año.
 
-Para los fines del presente se consideraron únicamente tres clases: Agent, Event y Place que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. La descarga de información es http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm 
+Para los fines del presente se consideraron únicamente tres clases: `**Agent**`, `**Event**` y `**Place**` que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. La descarga de información es http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm 
 
 
 Fuentes  utilizadas 
