@@ -73,17 +73,15 @@ Por otro lado, el volumen de información es tal que supera las capacidades de p
 
 Para los fines del presente se consideraron únicamente tres clases: **Agent**, **Event** y **Place** que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. 
 
-
 Las fuentes de informacion se localizan en es http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm   
-
 
 **Fuentes  utilizadas **  
 
-Archivo           Tamaño     Registros   Campos *1*
------------:---------------:-----------:-----------:
-Agent.csv    7,100,209,857  1,041,033 X   836
-Event.csv      886,661,600     38,469 X 2,969
-Place.csv    3,409,549,881    639,454 X   621
+Archivo     |      Tamaño    | Registros   | Campos *1*
+-----------|:---------------|:-----------|:-----------|
+Agent.csv  |  7,100,209,857 | 1,041,033  |  836 |   
+Event.csv  |    886,661,600 |    38,469  | 2,969  |   
+Place.csv  |  3,409,549,881 |   639,454  |  621   |
  
 *1 Los campos no muestran valor para la totalidad de los registros. * 
  
