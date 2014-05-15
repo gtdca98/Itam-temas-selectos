@@ -71,18 +71,22 @@ Por un lado se reconoce que DBpedia refleja el contenido de Wikipedia y ésta ot
 
 Por otro lado, el volumen de información es tal que supera las capacidades de procesamiento viable en un proyecto de medio año.
 
-Para los fines del presente se consideraron únicamente tres clases: `**Agent**`, `**Event**` y `**Place**` que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. La descarga de información es http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm 
+Para los fines del presente se consideraron únicamente tres clases: **Agent**, **Event** y **Place** que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. 
 
 
-Fuentes  utilizadas 
+Las fuentes de informacion se localizan en es http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm   
 
-Archivo                    Tamaño                Registros       Campos-1-
-Agent.csv 7,100,209,857  1,041,033 X   836
-Event.csv   886,661,600     38,469 X 2,969
-Place.csv 3,409,549,881    639,454 X   621
 
-1- Los campos no muestran valor para la totalidad de los registros. 
+**Fuentes  utilizadas **  
 
+Archivo           Tamaño     Registros   Campos *1*
+-----------:---------------:-----------:-----------:
+Agent.csv    7,100,209,857  1,041,033 X   836
+Event.csv      886,661,600     38,469 X 2,969
+Place.csv    3,409,549,881    639,454 X   621
+ 
+*1 Los campos no muestran valor para la totalidad de los registros. * 
+ 
 Estructura de archivos.
 
 Abordemos ahora la estructura de los archivos, reconociendo en ellos los conceptos que repasamos anteriormente. Se acompaña un ejemplo de la clase ontológica Agent.
