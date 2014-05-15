@@ -183,22 +183,3 @@ La información de los archivos ontologicos descargados desde los servidores de 
   
 * Carga de Base de datos.
 
-
-
-
-# Es mucho sabio tener una función de imputación especial No se recomienda
-# imputar sin saber el comportamiento de los missings
-
-
-# Normalizar los factores
-factores <- which(sapply(ds[vars], is.factor))
-for (f in factores) levels(ds[[f]]) <- c()
-
-
-# Eliminar los registros que no tienen valor a predecir
-ds <- ds[!is.na(ds[target]), ]
-
-# Si la tarea es clasificar, la variable target debe de ser categórica
-ds[target] <- as.factor(ds[target])
-inputs <- setdiff(vars, target)
-nobs <- nrow(ds)
