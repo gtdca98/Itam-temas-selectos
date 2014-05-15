@@ -59,7 +59,7 @@ A principios de Abril se logró poblar una base de datos de Neo4j por medio de `
 
 * Poblar los nodos de una base de datos de Neo4j a partir de una lista de artículos identificados como relevantes a partir de su categorización (obtenida de _MBT_). Esto se logra a través del código:
 
-`
+```
 from py2neo import neo4j, node, rel
 
 gdb = neo4j.GraphDatabaseService()
@@ -74,12 +74,13 @@ while n < N:
     for node in list(gdb_nodes[n-b:n].itertuples()):
         batch.create({'item' : node[1]})
     results = batch.submit()
-`
+```
+
 Donde `gdb_nodes` es una tabla plana de `pandas`. Se crea un nodo por cada renglon. 
 
 * Agregar las relaciones entre nodos con las tripletas _sujeto-objeto-predicado_ que registra la tabla de _MBP_. Se logra por medio del código:
 
-`
+```
 N = gdb_edges.count()[0]
 b = 5000
 n = 0
@@ -90,9 +91,11 @@ while n < N:
     for index, edge in gdb_edges[n-b:n].iterrows():
         batch.create((gdb.node(edge['item_id_x']), edge['prop'], gdb.node(edge['item_id_y'])))
     results = batch.submit()
-`
+```
 
 También a principios de Abril la opción de cargar información via shell empezaba a demostrar un gran alcance. Eventualmente dicha opción se convirtió la alternativa que mejor representaba los objetivos del proyecto y se puso en producción en un servidor de Amazon. La carga con `py2neo` fue un ambiente de prueba en efecto y un respaldo para trabajar de manera local en métodos de minería de gráficas y visualización.
+
+## Construcción del Modelo
 
 Una vez cargada la información a Neo4j, se planteó desarrollar una aplicación de predicción de ligas entre individuos. La forma más inmediata de plantear esto depende de extraer vecinos a _n_ grados de determinado nodo (cierto tópico de interés en este caso). Sobre este subgrafo uno es sujeto a inferir ligas ordenando parejas de nodos desconectados según una función binaria de similitud como se plantea en _Practical Graph Mining with R_. Se trataba de un uso parecido a la predicción de ligas que encuentra uno cotidianamente en los motores de sugerencias en redes sociales. 
 
@@ -122,6 +125,6 @@ Medidas de similaridad como las siguientes son sujetas a señalar comunidades de
 
 La implementación de estos métodos se encuentra todavía en desarrollo, pero el código remitido a la fecha implementa una detección del árbol de pesos máximos entre los temas ingresados por el usuario en un campo de búsqueda. 
 
-
+## Despliegue del modelo
 
 
