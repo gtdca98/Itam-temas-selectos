@@ -91,14 +91,14 @@ Abordemos ahora la estructura de los archivos, reconociendo en ellos los concept
 
 Conservemos en mente dos ideas básicas 
 
-    1. En cada archivo se tienen  4 encabezados para cada campo. 
+1. En cada archivo se tienen  4 encabezados para cada campo.  
 
-            Etiqueta de propiedad que equivale a nombre de campo
-            Expresión URI del primer encabezado
-            Tipo de variable
-            Expresion URI del tercer encabezado
+    Etiqueta de propiedad que equivale a nombre de campo  
+    Expresión URI del primer encabezado  
+    Tipo de variable 
+    Expresion URI del tercer encabezado 
 
-    2. Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.
+2. Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.  
 
 
 **Identificación de contenidos.**  
