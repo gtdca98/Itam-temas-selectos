@@ -8,7 +8,7 @@ Reporte de Proyecto de Minería de Datos
 **Gabriel Tadeo del Campo Aceves**
 
 ## Introducción
-La motivación de este proyecto se deriva de [Palantir](http://www.palantir.com/) una organización que se especializa en el análisis de información recolectada de distintas fuentes y presentada de manera relacional. Esto con el fin de poder mejorar la capacidad tanto predictiva como analítica de sus especialistas.  
+La motivación de este proyecto se deriva de [Palantir](http://www.palantir.com/) una organización que se especializa en el análisis de información recolectada de distintas fuentes y presentada con grafos. Esto con el fin de poder mejorar la capacidad tanto predictiva como analítica de sus especialistas.  
 
 En este contexto surge la idea tanto de analizar información de manera gráfica como de estructurarla en forma de grafo. La fuente de información será la enciclopedia en línea Wikipedia y buscaremos patrones muy particulares para cada tema de interés para el usuario. 
 
@@ -26,7 +26,7 @@ Por simplicidad y dado el trabajo y esfuerzo que se ha recibido el proyecto de *
 
 En un siguiente paso se ha determinado que la base de datos mas adecuada para poder albergar la información de dicha fuente será `Neo4j`. Dicha base de datos orientada a gráficas la cual posee tanto una estructura como un lenguaje de consultas que resultan ser mas adecuados a los propósitos de este proyecto.
 
-Por último para la exploración y visualización se consideraron diversas herramientas que en un principio prometían ser capaces de conectarse a la base de datos. Al final utilizamos como motor de análisis el paquete estadístico `R`, en particular la biblioteca `igraph` diseñada para el análisis de redes. Su conexión a los visualizadores nativos de javascript de `d3.js`. Y por último la herramienta `shiny` para generar un visualizador interactivo con el cual se pueda realizar una manipulación dinámica junto con un conjunto de datos y resultados del análisis de los subgrafos.
+Para la exploración y visualización se consideraron diversas herramientas que en un principio prometían ser capaces de conectarse a la base de datos. Al final utilizamos como motor de análisis el paquete estadístico `R`, en particular la biblioteca `igraph` diseñada para el análisis de redes. Para el despliegue de gráfos resultó atractiva su conectividad con la librería de javascript `d3.js`. Otro factor que afectó la decisión por optar por `R` fue la librería  `shiny` que permite desplegar una interfaz web interactiva con la cual se pueden manipular los datos y desplegar reportes.
 
 ## Fuentes de Datos
 Como se ha mencionado previamente la información originalmente se pretendía descargar de los repositorios de *Wikipedia*. Los cuales se distribuyen en *dumps*. Estos archivos previamente se encontraban en formato sql. Sin embargo a partir del 2005 fueron reestructarados para manejarse en XML's. En términos globales la información vigente contenida en los *dumps* de *Wikipedia* febrero de 2013 consistía en alrededor de 40 GBs de memoria, sin incluir información de usuarios e histórico de charlas. La historia completa pesaba alrededor de 10 Tb de información. Dichos archivos están disponibles en formato .bz2 debido a que es el formato mas estable y fácil de verificar su integridad en las transacciones. 
@@ -119,12 +119,37 @@ Se puede recurrir a identificar subgrafos (como árboles) que conserven las aris
 
 Medidas de similaridad como las siguientes son sujetas a señalar comunidades dentro de una red:
 
-- Vecinos en común: $$SIM_{CommonNB}(V_1, V_2) = ||V_1 \cap V_2 ||$$
-- Jaccard: $$SIM_{Jaccard}(V_1, V_2) = \frac{||V_1 \cap V_2 ||}{||V_1 \cup V_2||}$$
-- Adamic-Adar: $$SIM_{Adamic-Adar}(V_1, V_2) = \sum_{z\in N(V_1)\cap N(V_{2})} \frac{1}{log(|N(z)|)}$$
+- Vecinos en común: $SIM_{CommonNB}(V_1, V_2) = ||V_1 \cap V_2 ||$
+- Jaccard: $SIM_{Jaccard}(V_1, V_2) = \frac{||V_1 \cap V_2 ||}{||V_1 \cup V_2||}$
+- Adamic-Adar: $SIM_{Adamic-Adar}(V_1, V_2) = \sum_{z\in N(V_1)\cap N(V_{2})} \frac{1}{log(|N(z)|)}$
 
 La implementación de estos métodos se encuentra todavía en desarrollo, pero el código remitido a la fecha implementa una detección del árbol de pesos máximos entre los temas ingresados por el usuario en un campo de búsqueda. 
 
 ## Despliegue del modelo
 
+En la etapa de despliegue del modelo resultó evidente que dentro de `R` se podian integrar distintas librerias que logran exactamente las funcionalidades que estaba resultando dificil replicar e integrar con diversas librerias de `java` y `python`. La combinación de las siguientes librerías permite llegar a una interfaz web capaz de consultar la base de datos gráfica en línea y devolver reportes con gráficos de alta calidad:
 
+- `bitops`, `RCurl`, `RJSONIO`: permiten enviar consultas en `cypher` a un servidor de EC2 donde están cargados los datos de DBpedia en una base de datos de Neo4j
+- `plyr`, `doMC`: permiten implementar en paralelo procesos como la emisión de consultas y manipulaciones de datos.
+- `igraph`: repertorio de algoritmos para analizar redes 
+- `d3Network`: cuenta con cinco métodos para hacer gráficas de redes en D3 sin código javascript. 
+- `shiny`: crea una interfaz web interactiva para hacer consultas y visualizar resultados.
+ 
+
+La aplicación de `shiny` determina la organización del código. Esta se divide en dos programas: 
+
+- `ui.r` es el que ejecuta la interfaz gráfica 
+- `server.r` escucha a la interfaz y ejecuta los pasos de procesamiento y análisis de datos. 
+
+Para lanzar la aplicación es necesario que la instancia EC2 con Neo4j esté prendida. Una vez prendida, se obtiene su dirección IP de alguno de los integrantes del equipo y se modifica la línea 12 de `server.r`, ingresando dicho dato: 
+
+```
+neo_remote <- 'http://X.X.X.X:7474/db/data/cypher'
+```
+
+Una vez completado el paso anterior se puede ejecutar la aplicación dentro de `R` estando uno posicionado afuera del directorio `EspHistApp`:
+
+```
+library(shiny)
+runApp(EspHistApp)
+```
