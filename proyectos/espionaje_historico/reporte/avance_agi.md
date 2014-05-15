@@ -1,3 +1,4 @@
+
 Reporte de Proyecto de Minería de Datos
 =====================================================
 
@@ -101,15 +102,15 @@ Una vez cargada la información a Neo4j, se planteó desarrollar una aplicación
 
 La aplicación originalmente planteada depende de poder ejecutar la extracción de vecinos a _n_ grados con facilidad. En el lenguaje de consulta `cypher`, si uno quisiera extraer la subred de nodos que distan a los más en 3 grados del nodo del ITAM ejecutaría la siguiente consulta:
 
-`
+```
 MATCH (i)-[*1..3]-(j) where i.item='ITAM' RETURN i, j
-`
+```
 
 Sin embargo, bajo ninguna de las configuraciones de Neo4j probadas se logró que esta consulta terminara. Esto obligó a reconsiderar la funcionalidad de la aplicación en función a una consulta que sí terminara en un tiempo razonable. Las consultas de vecinos a un grado cumplen con esta importante especificación. Estas toman la siguiente forma:
 
-`
+```
 MATCH (i)--(j) where i.item='ITAM' RETURN j
-`
+```
 
 El uso que se identificó para esta consulta fue para relacionar temas arbitrarios a partir de sus vecinos en común. Enfrentando una red compleja, un uso atractivo es identificar una subred o una agrupación de nodos que simplifique la red principal. La red simplificada puede ser un auxiliar valioso para encontrar una narrativa subyacente. Se pueden tomar dos enfoques para resolver esto: 
 
@@ -119,9 +120,9 @@ Se puede recurrir a identificar subgrafos (como árboles) que conserven las aris
 
 Medidas de similaridad como las siguientes son sujetas a señalar comunidades dentro de una red:
 
-- Vecinos en común: $SIM_{CommonNB}(V_1, V_2) = ||V_1 \cap V_2 ||$
-- Jaccard: $SIM_{Jaccard}(V_1, V_2) = \frac{||V_1 \cap V_2 ||}{||V_1 \cup V_2||}$
-- Adamic-Adar: $SIM_{Adamic-Adar}(V_1, V_2) = \sum_{z\in N(V_1)\cap N(V_{2})} \frac{1}{log(|N(z)|)}$
+- Vecinos en común: ![equation](http://www.sciweavers.org/tex2img.php?eq=SIM_%7BCommonNB%7D%28V_1%2C%20V_2%29%20%3D%20%7C%7CV_1%20%5Ccap%20V_2%20%7C%7C&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+- Jaccard: ![equation](http://www.sciweavers.org/tex2img.php?eq=SIM_%7BJaccard%7D%28V_1%2C%20V_2%29%20%3D%20%5Cfrac%7B%7C%7CV_1%20%5Ccap%20V_2%20%7C%7C%7D%7B%7C%7CV_1%20%5Ccup%20V_2%7C%7C%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+- Adamic-Adar: ![equation](http://www.sciweavers.org/tex2img.php?eq=SIM_%7BAdamic-Adar%7D%28V_1%2C%20V_2%29%20%3D%20%5Csum_%7Bz%5Cin%20N%28V_1%29%5Ccap%20N%28V_%7B2%7D%29%7D%20%5Cfrac%7B1%7D%7Blog%28%7CN%28z%29%7C%29%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
 
 La implementación de estos métodos se encuentra todavía en desarrollo, pero el código remitido a la fecha implementa una detección del árbol de pesos máximos entre los temas ingresados por el usuario en un campo de búsqueda. 
 
