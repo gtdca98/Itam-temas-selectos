@@ -75,7 +75,7 @@ Para los fines del presente se consideraron únicamente tres clases: **Agent**, 
 
 Las fuentes de informacion se localizan en es http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm   
 
-**Fuentes  utilizadas **  
+**Fuentes  utilizadas**  
 
 Archivo     |      Tamaño    | Registros   | Campos *1*
 -----------|:---------------|:-----------|:-----------|
@@ -85,64 +85,69 @@ Place.csv  |  3,409,549,881 |   639,454  |  621   |
  
 *1 Los campos no muestran valor para la totalidad de los registros. * 
  
-Estructura de archivos.
+**Estructura de archivos.**  
 
 Abordemos ahora la estructura de los archivos, reconociendo en ellos los conceptos que repasamos anteriormente. Se acompaña un ejemplo de la clase ontológica Agent.
 
 Conservemos en mente dos ideas básicas 
 
-A)  En cada archivo se tienen  4 encabezados para cada campo. 
+    A)  En cada archivo se tienen  4 encabezados para cada campo. 
 
-Etiqueta de propiedad que equivale a nombre de campo
-Expresión URI del primer encabezado
-Tipo de variable
-Expresion URI del tercer encabezado
+            Etiqueta de propiedad que equivale a nombre de campo
+            Expresión URI del primer encabezado
+            Tipo de variable
+            Expresion URI del tercer encabezado
 
-B)  Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.
+    B)  Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.
 
 
-Identificación de contenidos.
-Veamos como se muestran en los archivos planos CVS las expresiones S-P-O y S-Pr-V .
+**Identificación de contenidos.**  
 
-Sujeto – Predicado – Objeto
+Veamos como se muestran en los archivos planos CVS las expresiones **S-P-O** y **S-Pr-V** .
+
+---
+
+*Sujeto – Predicado – Objeto*  
+
 Cada  expresión ontológica  Sujeto – Predicado – Objeto se define en campos contiguos que se refieren al mismo campo.  La primera columna define la tipología del dato, la segunda el valor. Ejemplo:
 
 Archivo Agent.csv  - 
 
-Campos 5 (Encabezados)
-(1) "academicAdvisor_label"
-(2) "http://dbpedia.org/ontology/academicAdvisor"
-(3) "XMLSchema#string"
-(4) "http://www.w3.org/2001/XMLSchema#string"
+Campos 5 (Encabezados)  
+(1) "academicAdvisor_label"  
+(2) "http://dbpedia.org/ontology/academicAdvisor"  
+(3) "XMLSchema#string"  
+(4) "http://www.w3.org/2001/XMLSchema#string"  
 
-Campo 6 (Encabezados)
-(1) "academicAdvisor"
-(2) "http://dbpedia.org/ontology/academicAdvisor"
-(3) "Person"
-(4) "http://dbpedia.org/ontology/Person"
+Campo 6 (Encabezados)  
+(1) "academicAdvisor"  
+(2) "http://dbpedia.org/ontology/academicAdvisor"  
+(3) "Person"  
+(4) "http://dbpedia.org/ontology/Person"  
+  
+El campo 5 indica que los valores asociados representan cadenas de texto –string-. Estos contenidos en el esquema se identifican con una clase de dato especifica: academicAdvisor. El campo 6 indica que los objetos referidos en la columna corresponden a la clase ontológica Person.  
 
-El campo 5 indica que los valores asociados representan cadenas de texto –string-. Estos contenidos en el esquema se identifican con una clase de dato especifica: academicAdvisor. El campo 6 indica que los objetos referidos en la columna corresponden a la clase ontológica Person.
+A nivel de registro se obtienen dos expresiones del mismo objeto: Valor y expresión URI.  
 
-A nivel de registro se obtienen dos expresiones del mismo objeto: Valor y expresión URI.
+Campo 1 Sujeto   
+http://dbpedia.org/resource/Garrett_Birkhoff,  
 
-Campo 1 Sujeto 
-http://dbpedia.org/resource/Garrett_Birkhoff,
+Campo 5 (Objeto)   
+{Philip Hall|Ralph H. Fowler},  
 
-Campo 5 (Objeto)
-{Philip Hall|Ralph H. Fowler},
+Campo 6 (Objeto URI)   
+{http://dbpedia.org/resource/Philip_Hall|http://dbpedia.org/resource/Ralph_H._Fowler}   
+   
+A partir de esto se genera dos expresiones en el grafo   
+   
+Garrett_Birkhoff –[academicAdvisor] - Philip_Hall   
+Garrett_Birkhoff –[academicAdvisor] - Ralph_H._Fowler   
+   
+Del mismo modo se asignan categorías ‘person’ a los nodos Philip_Hall y Ralph_H._Fowler   
 
-Campo 6 (Objeto URI)
-{http://dbpedia.org/resource/Philip_Hall|http://dbpedia.org/resource/Ralph_H._Fowler}
+----
 
-A partir de esto se genera dos expresiones en el grafo
-
-Garrett_Birkhoff –[academicAdvisor] - Philip_Hall
-Garrett_Birkhoff –[academicAdvisor] - Ralph_H._Fowler
-
-Del mismo modo se asignan categorías ‘person’ a los nodos Philip_Hall y Ralph_H._Fowler
-
-
-Sujeto – Propiedad – Valor
+*Sujeto – Propiedad – Valor*
 Por otro lado, las expresiones ontológicas Sujeto – Propiedad – Valor se indican en campos únicos donde el primer encabezado determina el nombre del campo. Ejemplos.
 
 Campo 1 (Sujeto)
