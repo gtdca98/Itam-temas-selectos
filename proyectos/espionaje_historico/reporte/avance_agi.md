@@ -120,9 +120,9 @@ Se puede recurrir a identificar subgrafos (como árboles) que conserven las aris
 
 Medidas de similaridad como las siguientes son sujetas a señalar comunidades dentro de una red:
 
-- Vecinos en común: ![equation](http://www.sciweavers.org/tex2img.php?eq=SIM_%7BCommonNB%7D%28V_1%2C%20V_2%29%20%3D%20%7C%7CV_1%20%5Ccap%20V_2%20%7C%7C&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
-- Jaccard: ![equation](http://www.sciweavers.org/tex2img.php?eq=SIM_%7BJaccard%7D%28V_1%2C%20V_2%29%20%3D%20%5Cfrac%7B%7C%7CV_1%20%5Ccap%20V_2%20%7C%7C%7D%7B%7C%7CV_1%20%5Ccup%20V_2%7C%7C%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
-- Adamic-Adar: ![equation](http://www.sciweavers.org/tex2img.php?eq=SIM_%7BAdamic-Adar%7D%28V_1%2C%20V_2%29%20%3D%20%5Csum_%7Bz%5Cin%20N%28V_1%29%5Ccap%20N%28V_%7B2%7D%29%7D%20%5Cfrac%7B1%7D%7Blog%28%7CN%28z%29%7C%29%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+- Vecinos en común
+- Jaccard
+- Adamic-Adar
 
 La implementación de estos métodos se encuentra todavía en desarrollo, pero el código remitido a la fecha implementa una detección del árbol de pesos máximos entre los temas ingresados por el usuario en un campo de búsqueda. 
 
