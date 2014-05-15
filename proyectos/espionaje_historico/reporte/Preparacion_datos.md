@@ -54,15 +54,16 @@ Para la consulta de información, estos formatos están disponibles a diversos n
 
 Este estudio utilizó la versión ontológica de DBpedia en Base CVS ya que, en comparación con las otras fuentes DBpedia, permite la generación de nodos y arcos en forma independiente conservando la integridad relacional sin altos requerimientos de procesamiento 
 
-(las Listas se consideraron inviables dado que la construcción de relaciones en NEO4J requiere la identificación de las claves de identidad tanto de los Sujetos como Objetos. Estas llaves están formadas por URIs las cuales por su construcción generan índices pesados)
+El uso de Listas se considero débil para la construcción de relaciones en NEO4J. La asociaion de tripletas pertenecientes a fuentes diversas se traduce en la identificación de claves de identidad homogéneas en Sujetos y Objetos.
 
-(JSON se consideró inviable dado que la construcción de bases de datos en NEO4J basados en JSON se degrada en proporción directa al volumen de procesamiento y las limitaciones técnicas de los equipos de cómputo)
+En cuanto al uso de base JSON se consideró inviable dado que la construcción de bases de datos en NEO4J presenta problemas de desemeño en proporción directa al volumen de procesamiento debido a limitaciones técnicas de los equipos de cómputo. Con regularidad se reconocen probelmas memoria en el procesaiento de datos en aplicaciones basadas en java.   
 
-Clases Ontológicas
 
-Como se señaló, existen   Bases ontológicas DBpedia a diversos niveles dependiendo del interés del usuario.
+**Clases Ontológicas**
 
-La clase general de la base ontológica es Thing y a ella pertenecen  clases  como Activity, Agent, Event, Biomolecula, Anatomical Structure, Award, Device, Place, Polyhedron, Tropical Concept etc. A su vez, cada una de estas puede estar subdividida en clases que permiten mayor detalle en el análisis. En total la base Thing  cuenta con 656 ramificaciones ontológicas.
+Como se señaló, existen segmentos de la base ontológica de DBpedia a diversos niveles (clases) dependiendo del interés del usuario. 
+
+La clase general de la base ontológica es `Thing` y a ella pertenecen  clases  como `Activity`, `Agent`, `Event`, `Biomolecula`, `Anatomical Structure`, `Award`, `Device`, `Place`, `Polyhedron`, `Tropical Concept` etc. A su vez, cada una de estas puede estar subdividida en clases que permiten mayor detalle en el análisis. En total la base Thing  cuenta con 656 ramificaciones ontológicas.
 
 No todas las ramas fueron consideradas objeto de estudio del presente. Esto obedece tanto a criterios de relevancia como razones viabilidad del proyecto. 
 
