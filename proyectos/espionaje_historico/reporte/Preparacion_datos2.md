@@ -40,14 +40,14 @@ Se reconoce, que el listado de nodos base no agota la totalidad de los nodos ext
 
 Asi mismo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de 200 mil operaciones. De carga
 
-###fase 2 Preparacion de nodos base para localizacion de faltantes.
+###fase 2 Preparacion de nodos base para localizacion de faltantes.  
 Los listados de nodos base generados en la fase anterios se recodificaron para permitir su insersion en una tabla postgresql. Estos datos se utilzaran en la sexta fase.
 
-###Fase 3 identificacion de arcos.
+###Fase 3 identificacion de arcos.  
 Como senalamos al inicio de la seccion, las relaciones ontologicas o arcos se encuentran expresadas en los archivos dbpedia por medio de dos columnas donde una indica el tipo y la otra el valor. Dos columnas contiguas se consideran asociadas si su primer encabezado indica que se refieren al mismo elemento. 
 En esta fase se analizan los encabezados de cada archivo y se determina cuales  pares de columnas que corresponden a arcos. Como resultado se obtienen listas de extraccion de informacion.
 
-###Fase 4 extraccion de arcos.
+###Fase 4 extraccion de arcos.  
 Con las listas generadas en la fase anterior,  se extraen las columas del archivo dbpedia que se refieren a cada arco en archivos individuale que contienen:
 
  sujeto, clase del sujeto , predicado, clase del objeto y objeto
@@ -56,20 +56,23 @@ Resulta importante senalar que durante el proceso se descartan registros de arco
 
 Por su naturaleza este proceso se ejecuto en parallel.
 
-###Fase 5 codificacion de arcos.
+###Fase 5 codificacion de arcos.   
 Una vez que la informacion de los arcos se extrajo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de maximo 200 mil operaciones.
 
 Asi mismo se genero informaciin para lam localizacion de los nodos (objeto) faltantes.
 
-###Fase 6. Identificaciin de nodos objeto faltantes. Utilizando postgresql se realizó un cruce de informacion Entre los de los nodos base (fase 2)  y los arcos  (fase 5). 
+###Fase 6. Identificaciin de nodos objeto faltantes. 
+
+Utilizando postgresql se realizó un cruce de informacion Entre los de los nodos base (fase 2)  y los arcos  (fase 5). 
 Este proceso arrojo dos tipos de nodos faltantes: 
 A) nodos base no codificados (fase1) por carecer de valor en el campo label
 B) nodos que no pertenecen a clases ontologicas Agent, Place y Event.
 
-###Fase 7. Codificacion de nodos faltantes. Se realizó la codificaciin de la informaciin en cypher .
+###Fase 7. Codificacion de nodos faltantes. 
+
+Se realizó la codificaciin de la informaciin en cypher .
 
 ###Fase 8. Integracion de nodos a cypher. 
-
 
 El procesamiento de informacion se ajusto a las reglas de Neo4j para la integracion de informacion.
 
