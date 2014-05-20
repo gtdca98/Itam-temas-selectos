@@ -1,5 +1,35 @@
 ##Fases de procesamiento  
 
+El procesameinto de información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó apegandose al modelo de carga via neo4j-shell que se simplifica en la siguiente:
+
+cat insert.cql | neo4j-shell -path /path/to/db  > file.log
+
+Generar archivos de comandos en lenguaje cypher que instruyan la creacion de elementos en la base de datos. Estas instrucciones se vuelcan en neo4j-shell y su resultado es colectado en archivos log. 
+
+Este modelo unicamente integra lotes cuando la totalidad de las instruciones se cumple exitosamente. En su defecto aplica roll-back dejando sin efecto cualquier cambio.
+
+Asi mismo el proceso puede realizarse sin la activacion del servicio de base de datos y reservandose la instancia en forma exclusiva.
+
+En contra se tiene que no se permite la ejecución paralela de procesos de insersion. Esto se encuentra conpensado con velocidad - siempre y cuando se adopte el uso de indices -.
+
+(http://www.neo4j.org/develop/import) 
+
+* Preparación de información. 
+ Los datos deben organizarse para facilitar su procesamiento. Dada la cantidad de campos involucrados y el tamaño de los archivos se consideró pertinente dejar las fuentes de información sin modificaciones sustantivas y  a partir de ellas extraer en archivos diversos conforme se necesite. 
+  
+* Codificación en Cypher (lenguaje base de Neo4j).  
+  En orden de integración en Neo4j, la información debe consistir en:
+  Nodes. Formados por una clave y una etiqueta o nombre.
+  Labels. Clases que permiten la agriupacion de la informacion para análsiis tematico.
+  Relations. Son los arcos que enlazan a los nodos.
+  Properties. Caracteristicas que pueden integrarse tanto a los Nodos como a las propiedades   
+
+* Carga de Base de datos. 
+  Para el presente se utiliza el proceso de inetgracion via Neo4j-shell via el volcado de instruccioes cypher en el interprete. Las opciones de integración a través de python con py2neo o neo4j-rest-client no se utilizaron ya que: 
+  a) su operación carece de controles tipo roll-back ante fallas de integración. Es decir se corre el riesgo de integrar lotes parciales de información obligando a la revision de los log de proceso para determinar el avance de las cargas.  
+  b) requiere que los servicios de la base de datos se encuentren activos en la carga lo cual puede resultar costoso en terminos de competencia por recursos disponibles y en consecuencia tiempo. Adicionalmente Py2neo y neo4j-rest-client son se efectuan en memoria dado que conceptualmente estan diseñados para la explotacion de información mas que para la carga de volumen. 
+
+  
 ###Fase 0 homologación  
 Los caracteres  delimitadores de campo en los archivos de las clases ontologicas se homologaron. La secuencia "," se tranformo en coma simple previa sustitucion de comas internas de los campos.   Asi mismo se suprimieron las terminaciones __[1-9] en todos los campos por referirse a la mismo nodo.
 
