@@ -172,14 +172,3 @@ Este resultado es verificable contra la página de Wikipedia (fuente original).
 
   http://en.wikipedia.org/wiki/Garrett_Birkhoff
 
-
-**Fases de Procesamiento.**   
-
-La información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó en 3 grandes fases de procesamiento.
-
-* Preparación de información
-  
-* Codificación en Cypher (lenguaje base de Neo4j)
-  
-* Carga de Base de datos.
-
