@@ -30,15 +30,15 @@ Se integran arcos  en nodos previamente generados.
 
 MATCH (n:base {cve:'Garrett_Birkhoff'}), (m:base {cve:'Philip_Hall'}) create(n)-[:academicAdvisor]->(m);
 
-Se integran etiquetas y propiedades.
+Se integran etiquetas y propiedades.   
 
-match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
-match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;   
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;   
 
-MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.birthDate='19110119';
-MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.deathDate='19961122';
-MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.rdfschemacomment='Garrett Birkhoff January 19 1911 – November 22 1996 was an American mathematician. He is best known for his work in lattice theory. The mathematician George Birkhoff 1884–1944 was his father.';
-
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.birthDate='19110119';   
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.deathDate='19961122';   
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.rdfschemacomment='Garrett Birkhoff January 19 1911 – November 22 1996 was an American mathematician. He is best known for his work in lattice theory. The mathematician George Birkhoff 1884–1944 was his father.';   
+    
 
 Es importante presentar dos acotaciones:
 
@@ -135,7 +135,7 @@ El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell rev
 
 ###Fase 17. Codificacion de Propiedades en Cypher.
 
-###Fase 18. Integracion de propiedades en base de datos.
+###Fase 18. Integracion de propiedades en base de datos. [codigo] (reporte/Proceso_datos / 18_Proceso_batch_props.sh)
 
 
 
