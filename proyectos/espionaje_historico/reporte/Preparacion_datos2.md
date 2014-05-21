@@ -135,7 +135,7 @@ El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell rev
 
 ###Fase 17. Codificacion de Propiedades en Cypher.
 
-###Fase 18. Integracion de propiedades en base de datos. [codigo] (/Proceso_datos/18_Proceso_batch_props.sh)
+###Fase 18. Integracion de propiedades en base de datos. [codigo] (itam-temas-selectos / proyectos / espionaje_historico / reporte / Proceso_datos / 18_Proceso_batch_props.sh)
 
 
 
