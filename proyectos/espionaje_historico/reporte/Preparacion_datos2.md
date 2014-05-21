@@ -1,5 +1,4 @@
-##Fases de procesamiento  
-
+ 
 **Modelo de integración**  
 
 El procesamiento de información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó apegandose al modelo de carga por neo4j-shell que se simplifica en la siguiente:
@@ -20,35 +19,56 @@ En contra se tiene que no se permite la ejecución paralela de procesos de inser
 
 Neo4j organiza la informacion en base a nodos y arcos los caules, adicionalmente, pueden recibir la asignación de etiquetas (clases) y/o propiedades. Las etiquetas permiten organizar la informacion segmentando el grafo. Las propiedades, por su parte asignan informacion particular sobre nodos y arcos. Ademas del indice interno, es posible crear, conforma a las necesidades del usaio, indices sobre clases y propiedades.
 
-La secuencia de integración es comos e muestra
+La secuencia de integración aplicada consiste en:
 
-Se inetgran los nodos y su respectiva clave de diferenciacion. 
+Se integran los nodos y su respectiva clave de diferenciacion. 
 
-create (N002:agent{ cve: 'Khaprumama_Parvatkar' , name:'Khaprumama Parvatkar' });
+create (N423559:agent{ cve: 'Garrett_Birkhoff' , name:'Garrett Birkhoff' });
+create (N785292:agent{ cve: 'Philip_Hall' , name:'Philip Hall' });
 
-Un arco se crea en nodos previamente generados.
+Se integran arcos  en nodos previamente generados.
 
-Si en la construccion de un arco no existen  nodos Neo4j genera el nodo(s) y posteriormente el archo. Los identificadores de estos nuevos nodos se pueden conocer si se analizan los log de carga de informacion.
+MATCH (n:base {cve:'Garrett_Birkhoff'}), (m:base {cve:'Philip_Hall'}) create(n)-[:academicAdvisor]->(m);
 
-Para aprovechar la funcionalidad de Neo4j conviene   definir para cada nodo una propiedad denominada clave sobre la cual se construyan indices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
+Se integran etiquetas y propiedades.
 
-Los indices en los nodos favorecen  el proceso de integracion de arcos.
-La evidencia indica que  en la creacion de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construccion de un indice general y su utilizacion en el rpoceso hace que  la creacion de cada uno de los 50000 arcos se realice en 2 milisegundos.
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
 
-* Preparación de información. 
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.birthDate='19110119';
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.deathDate='19961122';
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.rdfschemacomment='Garrett Birkhoff January 19 1911 – November 22 1996 was an American mathematician. He is best known for his work in lattice theory. The mathematician George Birkhoff 1884–1944 was his father.';
+
+
+Es importante presentar dos acotaciones:
+
+En la construccion de un arco Neo4j genera el nodo(s) y posteriormente el archo. Si los nodos no existen Neo4j los crear y, los identificadores de estos nuevos nodos se conocer via consulta de nodos con la propiedad automatica id()..
+
+Para aprovechar la funcionalidad de Neo4j se convino definir para cada nodo una propiedad denominada clave sobre la cual se construyan indices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
+
+Los indices en los nodos favorecen el proceso de integracion de arcos, etiquetas y propiedades. La evidencia indica que  en la creacion de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construccion de un indice general y su utilizacion en el rpoceso hace que  la creacion de cada uno de los 50000 arcos se realice en 2 milisegundos.
+
+
+##Fases de procesamiento 
+
+Con base en lo señalado hasta el momento, resulta claro indicar que el procesamiento de datos se resume en transformar el contenido de las tabñas de las clases ontologicas de dbpedia CVS en un conjunto de instrucciones de integracion en Cypher para contruir la base de datos Neo4j. Hay tres grandes lineas de trabajo:  
+
+1. Preparación de información. 
  Los datos deben organizarse para facilitar su procesamiento. Dada la cantidad de campos involucrados y el tamaño de los archivos se consideró pertinente dejar las fuentes de información sin modificaciones sustantivas y  a partir de ellas extraer en archivos diversos conforme se necesite. 
   
-* Codificación en Cypher (lenguaje base de Neo4j).  
+2. Codificación en Cypher (lenguaje base de Neo4j).  
   En orden de integración en Neo4j, la información debe consistir en:
   Nodes. Formados por una clave y una etiqueta o nombre.
   Labels. Clases que permiten la agriupacion de la informacion para análsiis tematico.
   Relations. Son los arcos que enlazan a los nodos.
   Properties. Caracteristicas que pueden integrarse tanto a los Nodos como a las propiedades   
 
-* Carga de Base de datos. 
+3. Carga de Base de datos. 
   Para el presente se utiliza el proceso de inetgracion via Neo4j-shell via el volcado de instruccioes cypher en el interprete. Las opciones de integración a través de python con py2neo o neo4j-rest-client no se utilizaron ya que: 
   a) su operación carece de controles tipo roll-back ante fallas de integración. Es decir se corre el riesgo de integrar lotes parciales de información obligando a la revision de los log de proceso para determinar el avance de las cargas.  
   b) requiere que los servicios de la base de datos se encuentren activos en la carga lo cual puede resultar costoso en terminos de competencia por recursos disponibles y en consecuencia tiempo. Adicionalmente Py2neo y neo4j-rest-client son se efectuan en memoria dado que conceptualmente estan diseñados para la explotacion de información mas que para la carga de volumen. 
+
+A continuacion se muestran las fases de procesamiento aplicadas.
 
   
 ###Fase 0 homologación  
@@ -95,7 +115,7 @@ Se realizó la codificaciin de la información en cypher.
 
 ###Fase 8. Integracion de nodos a cypher. 
 
-El procesamiento de informacion se ajusto a las reglas de Neo4j para la integracion de informacion.
+El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente.
 
 
 
