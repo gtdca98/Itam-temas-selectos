@@ -117,5 +117,27 @@ Se realizó la codificaciin de la información en cypher.
 
 El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente.
 
+###Fase 9. Indexacion de los nodos creados
+
+###Fase 10. Generacion de etiquetas de los nodos base
+
+###Fase 11. Generacion de las etiquetas de los nodos complementarios
+
+###Fase 12. Integracion de etiquetas en la base de datos
+
+###Fase 13. Generación de indices adicionales con base en etiquetas
+
+###Fase 14. Integracion de arcos -relaciones- en base de datos.
+
+###Fase 15. Deteccion de propiedades.
+
+###Fase 16. Extraccionn de nformacion de propiedades.
+
+###Fase 17. Codificacion de Propiedades en Cypher.
+
+###Fase 18. Integracion de propiedades en base de datos.
+
+
+
 
 
