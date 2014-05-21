@@ -1,6 +1,8 @@
 ##Fases de procesamiento  
 
-El procesameinto de información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó apegandose al modelo de carga via neo4j-shell que se simplifica en la siguiente:
+**Modelo de integración**  
+
+El procesamiento de información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó apegandose al modelo de carga por neo4j-shell que se simplifica en la siguiente:
 
 cat insert.cql | neo4j-shell -path /path/to/db  > file.log
 
@@ -8,11 +10,30 @@ Generar archivos de comandos en lenguaje cypher que instruyan la creacion de ele
 
 Este modelo unicamente integra lotes cuando la totalidad de las instruciones se cumple exitosamente. En su defecto aplica roll-back dejando sin efecto cualquier cambio.
 
-Asi mismo el proceso puede realizarse sin la activacion del servicio de base de datos y reservandose la instancia en forma exclusiva.
+Debe destacarse que  la carga puede realizarse sin la activacion del servicio de base de datos y reservandose la instancia en forma exclusiva.
 
 En contra se tiene que no se permite la ejecución paralela de procesos de insersion. Esto se encuentra conpensado con velocidad - siempre y cuando se adopte el uso de indices -.
 
-(http://www.neo4j.org/develop/import) 
+(http://www.neo4j.org/develop/import)
+
+**Secuencia de integración**   
+
+Neo4j organiza la informacion en base a nodos y arcos los caules, adicionalmente, pueden recibir la asignación de etiquetas (clases) y/o propiedades. Las etiquetas permiten organizar la informacion segmentando el grafo. Las propiedades, por su parte asignan informacion particular sobre nodos y arcos. Ademas del indice interno, es posible crear, conforma a las necesidades del usaio, indices sobre clases y propiedades.
+
+La secuencia de integración es comos e muestra
+
+Se inetgran los nodos y su respectiva clave de diferenciacion. 
+
+create (N002:agent{ cve: 'Khaprumama_Parvatkar' , name:'Khaprumama Parvatkar' });
+
+Un arco se crea en nodos previamente generados.
+
+Si en la construccion de un arco no existen  nodos Neo4j genera el nodo(s) y posteriormente el archo. Los identificadores de estos nuevos nodos se pueden conocer si se analizan los log de carga de informacion.
+
+Para aprovechar la funcionalidad de Neo4j conviene   definir para cada nodo una propiedad denominada clave sobre la cual se construyan indices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
+
+Los indices en los nodos favorecen  el proceso de integracion de arcos.
+La evidencia indica que  en la creacion de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construccion de un indice general y su utilizacion en el rpoceso hace que  la creacion de cada uno de los 50000 arcos se realice en 2 milisegundos.
 
 * Preparación de información. 
  Los datos deben organizarse para facilitar su procesamiento. Dada la cantidad de campos involucrados y el tamaño de los archivos se consideró pertinente dejar las fuentes de información sin modificaciones sustantivas y  a partir de ellas extraer en archivos diversos conforme se necesite. 
@@ -70,25 +91,11 @@ B) nodos que no pertenecen a clases ontologicas Agent, Place y Event.
 
 ###Fase 7. Codificacion de nodos faltantes. 
 
-Se realizó la codificaciin de la informaciin en cypher .
+Se realizó la codificaciin de la información en cypher.
 
 ###Fase 8. Integracion de nodos a cypher. 
 
 El procesamiento de informacion se ajusto a las reglas de Neo4j para la integracion de informacion.
 
-Neo4j organiza la informacion en torno a nodos y arcos.
 
-De manera adicional se pueden anadir clases (labels) y propiedades.
-Las clases permiten organizar la informacion segmentando el grafo. Las propiedades, por su parte asignan informacion particular sobre nodos y arcos. 
-
-Ademas del indice interno, es posible Indexar sobre clases y propiedades.
-
-Un arco se crea en nodos previamente generados.
-
-Si en la construccion de un arco no existen  nodos Neo4j genera el nodo(s) y posteriormente el archo. Los identificadores de estos nuevos nodos se pueden conocer si se analizan los log de carga de informacion.
-
-Para aprovechar la funcionalidad de Neo4j conviene   definir para cada nodo una propiedad denominada clave sobre la cual se construyan indices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
-
-Los indices en los nodos favorecen  el proceso de integracion de arcos.
-La evidencia indica que  en la creacion de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construccion de un indice general y su utilizacion en el rpoceso hace que  la creacion de cada uno de los 50000 arcos se realice en 2 milisegundos.
 
