@@ -46,7 +46,7 @@ En la construccion de un arco Neo4j genera el nodo(s) y posteriormente el archo.
 
 Para aprovechar la funcionalidad de Neo4j se convino definir para cada nodo una propiedad denominada clave sobre la cual se construyan indices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
 
-Los indices en los nodos favorecen el proceso de integracion de arcos, etiquetas y propiedades. La evidencia indica que  en la creacion de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construccion de un indice general y su utilizacion en el rpoceso hace que  la creacion de cada uno de los 50000 arcos se realice en 2 milisegundos.
+Los indices en los nodos favorecen el proceso de integracion de arcos, etiquetas y propiedades. La evidencia indica que  en la creacion de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construccion de un indice general y su utilizacion en el proceso hace que la creacion de cada uno de los 50000 arcos se realice en 2 milisegundos promedio.
 
 
 ##Fases de procesamiento 
@@ -80,6 +80,13 @@ La generacion de nodos consitio en la extraccion del primer campo de cada archiv
 Se reconoce, que el listado de nodos base no agota la totalidad de los nodos extraibles en los archivos de las tres clases  ya que corresponden  a los sujetos (y algunos objetos) en las  relaciones ontologicas tipo sujeto - predicado - objeto. Por ello para la obtencion del listado completo de nodos es necesario extraer los arcos (s p o) y verificar entre los  objetos los nodos faltantes.
 
 Asi mismo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de 200 mil operaciones. De carga
+La máscara de la sintaxis de codificacion es:
+
+```
+create (N<ID>:<LABEL>{ cve: '<cve_Value>' , name:'<name_Value>' }); 
+```
+
+donde ID es un consecutivo en el lote generado, LABEL corresponde a alguna clase ontologica (agent, event o place), cve es el valor diferenciador del nodo, y name es la expresion coloquial del mismo.
 
 ###fase 2 Preparacion de nodos base para localizacion de faltantes.  
 Los listados de nodos base generados en la fase anterios se recodificaron para permitir su insersion en una tabla postgresql. Estos datos se utilzaran en la sexta fase.
@@ -100,7 +107,16 @@ Por su naturaleza este proceso se ejecuto en parallel.
 ###Fase 5 codificacion de arcos.   
 Una vez que la informacion de los arcos se extrajo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de maximo 200 mil operaciones.
 
-Asi mismo se genero informaciin para lam localizacion de los nodos (objeto) faltantes.
+La máscara de la sintaxis de codificacion es:
+
+```
+MATCH (n:base {cve:'<cve_Value_n>'}), (m:base {cve:'<cve_Value_m>'}) create(n)-[:<relation_expression>]->(m);
+
+```
+
+donde n y m son nodos, base es la clase general indexada, cve\_value es el valor diferenciador de nodos, y relation\_expresion es la expresion sintetica que representa el arco.  
+
+Asi mismo se genero informaciin para la localizacion de los nodos (objeto) faltantes.
 
 ###Fase 6. Identificaciin de nodos objeto faltantes. 
 
@@ -111,15 +127,49 @@ B) nodos que no pertenecen a clases ontologicas Agent, Place y Event.
 
 ###Fase 7. Codificacion de nodos faltantes. 
 
-Se realizó la codificaciin de la información en cypher.
+Se realizó la codificaciin de la información en cypher generando listados de instrucciones de integracion.
+La máscara de la sintaxis es:
+
+```
+create (N<ID>:<LABEL>{ cve: '<cve_Value>' , name:'<name_Value>' }); 
+```
+
+donde ID es un consecutivo en el lote generado, LABEL corresponde a la clase ontologica beyond, cve es el valor diferenciador del nodo, y name es la expresion coloquial del mismo.
+
 
 ###Fase 8. Integracion de nodos a cypher. 
 
 El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente.
+Los nodos corresponden tanto a las tres clases ontologicas seleccionadas (Agent, Event y Place) como a objetos ajenos mas allá de estas clases. En cifras este es el resumen de la carga:
+```  
+neo4j-shell -c "match n RETURN  labels(n)[0], count(*);" 
++-------------------------+
+| labels(n)[0] | count(*) |
++-------------------------+
+| "agent"      | 785884   |
+| "event"      | 36629    |
+| "beyond"     | 939905   |
+| "place"      | 637117   |
++-------------------------+
+```   
 
 ###Fase 9. Indexacion de los nodos creados
 
+La indexacion se aplicó directamente en la linea de comandos de Neo4j-Shell con la sintaxis:  
+``` 
+create index on :Label(cve);   
+```   
+
+donde Label corresponde a cada una de las clases ontologicas (agent, event, place y beyond).    
+
+Adicionalmente se creó la clase **base** para generar sobre la misma un indice de consulta general.    
+
+Este índice sobre **base** es fundamental en el desempeño de los procesos de carga posteriores. La experiencia nos mostró que la carga sin indices requiere mas de 2500 milisegundos por registro procesado, si se utilizan índices a nivel de clase ontológica el tiempo se reduce a un promedio de 25 milisegundos. Con el inice base se tiene mejor desempeño el promedio de carga se reduce a 2 milisegundos.
+
+
 ###Fase 10. Generacion de etiquetas de los nodos base
+
+
 
 ###Fase 11. Generacion de las etiquetas de los nodos complementarios
 
