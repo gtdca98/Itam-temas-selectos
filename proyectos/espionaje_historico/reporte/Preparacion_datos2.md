@@ -168,7 +168,11 @@ Este índice sobre **base** es fundamental en el desempeño de los procesos de c
 
 
 ###Fase 10. Generacion de etiquetas de los nodos base
+Como se indicó anteriormente, la base ontlogica esta organizada en un esquema que consta de diversas capas de clases. Las clases Agent, Place y Event se encuentran en la primera subdivisión de la gran clase Thing y, a su vez poseen ramificaciones de subclases.
 
+La información de estos atributos de clasificación ontológica se encuentra en el campo 22-rdf-syntax-ns  en cada archivos ontológicos. 
+
+La generacion de etiquetas se realizó unicamente hasta tercer nivel. [detalle] (Proceso_datos/ListadoEtiquetas.txt)
 
 
 ###Fase 11. Generacion de las etiquetas de los nodos complementarios
