@@ -31,10 +31,12 @@ Se integran arcos  en nodos previamente generados.
 
 MATCH (n:base {cve:'Garrett_Birkhoff'}), (m:base {cve:'Philip_Hall'}) create(n)-[:academicAdvisor]->(m);
 
-Se integran etiquetas y propiedades.
+Se integran etiquetas ...   
 
 match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
 match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
+
+y propiedades...   
 
 MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.birthDate='19110119';
 MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.deathDate='19961122';
@@ -73,9 +75,11 @@ A continuacion se muestran las fases de procesamiento aplicadas.
 
 
 ###Fase 0 homologación
+
 Los caracteres  delimitadores de campo en los archivos de las clases ontologicas se homologaron. La secuencia "," se tranformo en coma simple previa sustitucion de comas internas de los campos.   Asi mismo se suprimieron las terminaciones __[1-9] en todos los campos por referirse a la mismo nodo.
 
 ###Fase 1. Extracion y codificacion de nodos base.
+
 La generacion de nodos consitio en la extraccion del primer campo de cada archivo y su expresion amplia asignandoes a los valores unicos de esta lista la clase correspondiente. Este listado de nodos se considero la base (sujeto) de cada clase ontologica: agent , place y event.
 
 Se reconoce, que el listado de nodos base no agota la totalidad de los nodos extraibles en los archivos de las tres clases  ya que corresponden  a los sujetos (y algunos objetos) en las  relaciones ontologicas tipo sujeto - predicado - objeto. Por ello para la obtencion del listado completo de nodos es necesario extraer los arcos (s p o) y verificar entre los  objetos los nodos faltantes.
@@ -90,13 +94,16 @@ create (N<ID>:<LABEL>{ cve: '<cve_Value>' , name:'<name_Value>' });
 donde ID es un consecutivo en el lote generado, LABEL corresponde a alguna clase ontologica (agent, event o place), cve es el valor diferenciador del nodo, y name es la expresion coloquial del mismo.
 
 ###Fase 2 Preparacion de nodos base para localizacion de faltantes.
+
 Los listados de nodos base generados en la fase anterios se recodificaron para permitir su insersion en una tabla postgresql. Estos datos se utilzaran en la sexta fase.
 
 ###Fase 3 identificacion de arcos.
+
 Como senalamos al inicio de la seccion, las relaciones ontologicas o arcos se encuentran expresadas en los archivos dbpedia por medio de dos columnas donde una indica el tipo y la otra el valor. Dos columnas contiguas se consideran asociadas si su primer encabezado indica que se refieren al mismo elemento.
 En esta fase se analizan los encabezados de cada archivo y se determina cuales  pares de columnas que corresponden a arcos. Como resultado se obtienen listas de extraccion de informacion.
 
 ###Fase 4 extraccion de arcos.
+
 Con las listas generadas en la fase anterior,  se extraen las columas del archivo dbpedia que se refieren a cada arco en archivos individuale que contienen:
 
  sujeto, clase del sujeto , predicado, clase del objeto y objeto
@@ -106,6 +113,7 @@ Resulta importante senalar que durante el proceso se descartan registros de arco
 Por su naturaleza este proceso se ejecuto en parallel.
 
 ###Fase 5 codificacion de arcos.
+
 Una vez que la informacion de los arcos se extrajo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de maximo 200 mil operaciones.
 
 La máscara de la sintaxis de codificacion es:
@@ -169,14 +177,28 @@ Este índice sobre **base** es fundamental en el desempeño de los procesos de c
 
 
 ###Fase 10. Codificación de etiquetas de los nodos base
+
 Como se indicó anteriormente, la base ontlogica esta organizada en un esquema que consta de diversas capas de clases. Las clases Agent, Place y Event se encuentran en la primera subdivisión de la gran clase Thing y, a su vez poseen ramificaciones de subclases.
 
 La información de estos atributos de clasificación ontológica correspondientes a los sujetos se encuentra en el campo 22-rdf-syntax-ns  en cada archivo ontológicos.
 
 La generacion de etiquetas se realizó unicamente hasta tercer nivel tao como se aprecia en el siguiente datlle [detalle] (Proceso_datos/ListadoEtiquetas.txt) . 
 
+La máscara de la sintaxis es:
+
+```
+Match (n:Label { cve: <cve_value> }) set n:<Additional_Label>;
+```
+
+donde n es el nodo, Label es alguna de categoria fundamental base, agent, event, place sobre las cuales existe un indice. cve es el identificador de nodo y Additional_Label es la etiqueta que se adjunta al nodo.
+
+
+En el ejemplo que manejamos 
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
 
 ###Fase 11. Codificación  de las etiquetas de los nodos complementarios  
+
 Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontologica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificacion ontologica la cual es registrada en la base de datos Neo4j como etiqueta.
 
 Siguiendo el ejemplo de Garrett\_Birkhoff tenenos que en las columnas 5 y 6 se identifica el predicado academicAdvisor que apunta a dos objetos: Philip Hall y Ralph H. Fowler
@@ -193,11 +215,11 @@ Encabezado 2. "http://dbpedia.org/ontology/academicAdvisor","http://dbpedia.org/
 Encabezado 3. "XMLSchema#string","Person"
 Encabezado 4 ."http://www.w3.org/2001/XMLSchema#string","http://dbpedia.org/ontology/Person"
 
-En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico.
+En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico. La mascara utilizada es la misma que en la fase previa.
 
-###Fase 12. Integracion de etiquetas en la base de datos
+###Fase 12. Integracion de etiquetas en la base de datos.
 
-
+El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente. El procesamiento constó de 18 lotes con 3,254,137 etiquetas base y 254,235 extras
 
 ###Fase 13. Generación de indices adicionales con base en etiquetas.
 
@@ -206,17 +228,29 @@ Al igual que con los indices basicos se añadieron indices sobre las etiquetas i
 Al iagual que en la fase rpevia de ikndexacion, las instrucciones se registraron via neo4j-shell y se verificeo su terminacion exitosa compronado  el status ONLINE mediante schema.
 
 ###Fase 14. Integracion de arcos -relaciones- en base de datos.
+
 Este es uno de los procesos más demandantes en el proceso de contruccion de la base de datos Neo4j. La genracion de la relacion implica tres tareas: identificar los nodos dentro de la BD, crear la relacion y registrar.
 
 Los nodos se identifican utilizando la etiqueta indexada con la clave (cve).
 La ralacion en el caso que nos ocupa es indexada automaticamente por Neo4j. Los indices de usuario implican la creacion de una propiedad adicional sobre el arco, elemento que no fue considerado en el alcance delmpresente.
 El registro se logra al final del lote de carga con la instruccion commit siempre y cuando todos  los registros se procecen sin error.
 
-
 ###Fase 15. Deteccion de propiedades.
+
+Revisamos más arriba que las expresiones ontológicas  Sujeto - Propiedad -Valor (S -Pr -V) permiten agreagr  informacion adicional a los nodos. Las fechas de nacimiento, muerte, matrimonio; las coordenadas geográficas, los importes monetarios entre otros son atributos que pueden asociarse a los nodos.
+
+Estas expresiones se encuentran en columas únicas no pareadas como en el caso de S - P - O. Por lo que su identificacion busca el complemento de la identificacion  realizada en la Fase 3. En resumen, esta fase lee los encabezados de los archivos ontologicos seleccionados (Agent, Place y Event) y detecta que columnas no estan pareadas integrandolas a una lista de extraccion. 
 
 ###Fase 16. Extraccionn de nformacion de propiedades.
 
+En forma similar a la fase 4, se realiza la extraccion del sujeto (dueño de la propiedad, nombre de la propiedad, y valor de las misma.Desde luego,  durante el proceso se descartan registros de arcos con informacion incompleta.
+
+Por su naturaleza este proceso se ejecutó en parallel.
+
 ###Fase 17. Codificacion de Propiedades en Cypher.
 
-###Fase 18. Integracion de propiedades en base de datos. [codigo] (Proceso_datos/18_Proceso_batch_props.sh)
+
+
+###Fase 18. Integracion de propiedades en base de datos. 
+
+
