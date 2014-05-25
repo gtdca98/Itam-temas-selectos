@@ -110,7 +110,7 @@ Con las listas generadas en la fase anterior,  se extraen las columas del archiv
 
 Resulta importante senalar que durante el proceso se descartan registros de arcos con informacion incompleta.
 
-Por su naturaleza este proceso se ejecuto en parallel.
+Por su naturaleza este proceso se ejecuto en parallel y nohub
 
 ###Fase 5 codificacion de arcos.
 
@@ -126,6 +126,8 @@ MATCH (n:base {cve:'<cve_Value_n>'}), (m:base {cve:'<cve_Value_m>'}) create(n)-[
 donde n y m son nodos, base es la clase general indexada, cve\_value es el valor diferenciador de nodos, y relation\_expresion es la expresion sintetica que representa el arco.
 
 Asi mismo se genero informaciin para la localizacion de los nodos (objeto) faltantes.
+
+Dado el volumen de información a procesar se aplico parallel en nohub.
 
 ###Fase 6. Identificaciin de nodos objeto faltantes.
 
@@ -162,6 +164,8 @@ neo4j-shell -c "match n RETURN  labels(n)[0], count(*);"
 +-------------------------+
 ```
 
+Con la finalidad de proteger el proceso contra fallas de telecomunicaciones se realizó en background con nohub.
+
 ###Fase 9. Indexacion de los nodos creados
 
 La indexacion se aplicó directamente en la linea de comandos de Neo4j-Shell con la sintaxis:
@@ -197,6 +201,9 @@ En el ejemplo que manejamos
 match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
 match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
 
+finalmente debe indicarse que esta fase se llevo a cabo con parallel bajo nohub.
+
+
 ###Fase 11. Codificación  de las etiquetas de los nodos complementarios  
 
 Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontologica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificacion ontologica la cual es registrada en la base de datos Neo4j como etiqueta.
@@ -217,9 +224,11 @@ Encabezado 4 ."http://www.w3.org/2001/XMLSchema#string","http://dbpedia.org/onto
 
 En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico. La mascara utilizada es la misma que en la fase previa.
 
+La ejecución se llevo a cabo con parallel bajo nohub.
+
 ###Fase 12. Integracion de etiquetas en la base de datos.
 
-El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente. El procesamiento constó de 18 lotes con 3,254,137 etiquetas base y 254,235 extras
+El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente. El procesamiento constó de 18 lotes con 3,254,137 etiquetas base y 254,235 extras. Se realizó bajo nohub.
 
 ###Fase 13. Generación de indices adicionales con base en etiquetas.
 
@@ -235,6 +244,8 @@ Los nodos se identifican utilizando la etiqueta indexada con la clave (cve).
 La ralacion en el caso que nos ocupa es indexada automaticamente por Neo4j. Los indices de usuario implican la creacion de una propiedad adicional sobre el arco, elemento que no fue considerado en el alcance delmpresente.
 El registro se logra al final del lote de carga con la instruccion commit siempre y cuando todos  los registros se procecen sin error.
 
+En esta fase se protegió el proceso contra fallas de comunicación con nohub.
+
 ###Fase 15. Deteccion de propiedades.
 
 Revisamos más arriba que las expresiones ontológicas  Sujeto - Propiedad -Valor (S -Pr -V) permiten agreagr  informacion adicional a los nodos. Las fechas de nacimiento, muerte, matrimonio; las coordenadas geográficas, los importes monetarios entre otros son atributos que pueden asociarse a los nodos.
@@ -245,12 +256,23 @@ Estas expresiones se encuentran en columas únicas no pareadas como en el caso d
 
 En forma similar a la fase 4, se realiza la extraccion del sujeto (dueño de la propiedad, nombre de la propiedad, y valor de las misma.Desde luego,  durante el proceso se descartan registros de arcos con informacion incompleta.
 
-Por su naturaleza este proceso se ejecutó en parallel.
+Por su naturaleza este proceso se ejecutó en parallel y nohub.
 
 ###Fase 17. Codificacion de Propiedades en Cypher.
 
+Al igaul que en otras fases se procesan los lotes de información identificados y extraidos en las dos fases anteriores y se tranforman en instrucciones de integracion de información en cypher.
 
+La máscara de codificacion aplicada es: 
+
+```
+MATCH (n:base {cve:<cve_value>}) SET n.Property=<property_value>;
+```
+donde n es el nodo, base indica que se utiliza el indicce general base, cve_value es el identificador del nodo, Property es la expresion que describe la propiedad (eg DateOfBirth) y property es el valor particular de la misma.
+
+Por tratarse de un proceso intesso se uso parallel en combinacion con nohub.
 
 ###Fase 18. Integracion de propiedades en base de datos. 
+
+Como en todas las fases deintegración de datos, se aplico el modelo de volcado de instrucciones en neo4j-shell bajo nohub.
 
 
