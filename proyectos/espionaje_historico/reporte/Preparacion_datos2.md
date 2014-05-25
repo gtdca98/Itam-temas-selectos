@@ -168,17 +168,36 @@ Adicionalmente se creó la clase **base** para generar sobre la misma un indice 
 Este índice sobre **base** es fundamental en el desempeño de los procesos de carga posteriores. La experiencia nos mostró que la carga sin indices requiere mas de 2500 milisegundos por registro procesado, si se utilizan índices a nivel de clase ontológica el tiempo se reduce a un promedio de 25 milisegundos. Con el inice base se tiene mejor desempeño el promedio de carga se reduce a 2 milisegundos.
 
 
-###Fase 10. Generacion de etiquetas de los nodos base
+###Fase 10. Codificación de etiquetas de los nodos base
 Como se indicó anteriormente, la base ontlogica esta organizada en un esquema que consta de diversas capas de clases. Las clases Agent, Place y Event se encuentran en la primera subdivisión de la gran clase Thing y, a su vez poseen ramificaciones de subclases.
 
-La información de estos atributos de clasificación ontológica se encuentra en el campo 22-rdf-syntax-ns  en cada archivos ontológicos.
+La información de estos atributos de clasificación ontológica correspondientes a los sujetos se encuentra en el campo 22-rdf-syntax-ns  en cada archivo ontológicos.
 
-La generacion de etiquetas se realizó unicamente hasta tercer nivel. [detalle] (Proceso_datos/ListadoEtiquetas.txt)
+La generacion de etiquetas se realizó unicamente hasta tercer nivel tao como se aprecia en el siguiente datlle [detalle] (Proceso_datos/ListadoEtiquetas.txt) . 
 
 
-###Fase 11. Generacion de las etiquetas de los nodos complementarios
+###Fase 11. Codificación  de las etiquetas de los nodos complementarios  
+Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontologica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificacion ontologica la cual es registrada en la base de datos Neo4j como etiqueta.
+
+Siguiendo el ejemplo de Garrett\_Birkhoff tenenos que en las columnas 5 y 6 se identifica el predicado academicAdvisor que apunta a dos objetos: Philip Hall y Ralph H. Fowler
+
+Columna 5: {Philip Hall|Ralph H. Fowler}
+columna 6: {http://dbpedia.org/resource/Philip\_Hall|http://dbpedia.org/resource/Ralph\_H.\_Fowler}"
+
+La clase correspondinete a estos objetos se encuentra claramente señalada en  tercer y cuarto encabezado de las  columnas que identifican la relacion S - P - O.  
+
+Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontologica person.
+
+Encabezado 1. "academicAdvisor_label","academicAdvisor"
+Encabezado 2. "http://dbpedia.org/ontology/academicAdvisor","http://dbpedia.org/ontology/academicAdvisor"
+Encabezado 3. "XMLSchema#string","Person"
+Encabezado 4 ."http://www.w3.org/2001/XMLSchema#string","http://dbpedia.org/ontology/Person"
+
+En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico.
 
 ###Fase 12. Integracion de etiquetas en la base de datos
+
+
 
 ###Fase 13. Generación de indices adicionales con base en etiquetas.
 
