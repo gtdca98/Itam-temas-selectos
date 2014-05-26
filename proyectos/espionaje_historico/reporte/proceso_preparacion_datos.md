@@ -390,7 +390,7 @@ La clase correspondinete a estos objetos se encuentra claramente señalada en  t
 
 Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontologica person.   
                 
-| columna 5 |                                |  columna 6   |  
+|                |columna 5                                       |  columna 6   |  
 |---------------|:------------------------------------------------|:----------------------------------------------|:   
 | Encabezado 1. |  "academicAdvisor_label"   |                    "academicAdvisor"   |  
 | Encabezado 2. |  "http://dbpedia.org/ontology/academicAdvisor" | "http://dbpedia.org/ontology/academicAdvisor"  |   
