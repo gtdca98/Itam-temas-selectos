@@ -371,29 +371,30 @@ donde n es el nodo, Label es alguna de categoria fundamental base, agent, event,
 
 
 En el ejemplo que manejamos 
-match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
-match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;   
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;   
 
-finalmente debe indicarse que esta fase se llevo a cabo con parallel bajo nohub.
+finalmente debe indicarse que esta fase se llevo a cabo con parallel bajo nohub.   
 
 
 ###Fase 11. Codificación  de las etiquetas de los nodos complementarios  
 
-Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontologica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificacion ontologica la cual es registrada en la base de datos Neo4j como etiqueta.
+Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontologica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificacion ontologica la cual es registrada en la base de datos Neo4j como etiqueta.   
 
-Siguiendo el ejemplo de Garrett\_Birkhoff tenenos que en las columnas 5 y 6 se identifica el predicado academicAdvisor que apunta a dos objetos: Philip Hall y Ralph H. Fowler
+Siguiendo el ejemplo de Garrett\_Birkhoff tenenos que en las columnas 5 y 6 se identifica el predicado academicAdvisor que apunta a dos objetos: Philip Hall y Ralph H. Fowler    
 
 Columna 5: {Philip Hall|Ralph H. Fowler}
 columna 6: {http://dbpedia.org/resource/Philip\_Hall|http://dbpedia.org/resource/Ralph\_H.\_Fowler}"
 
 La clase correspondinete a estos objetos se encuentra claramente señalada en  tercer y cuarto encabezado de las  columnas que identifican la relacion S - P - O.  
 
-Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontologica person.
-
-Encabezado 1. "academicAdvisor_label","academicAdvisor"
-Encabezado 2. "http://dbpedia.org/ontology/academicAdvisor","http://dbpedia.org/ontology/academicAdvisor"
-Encabezado 3. "XMLSchema#string","Person"
-Encabezado 4 ."http://www.w3.org/2001/XMLSchema#string","http://dbpedia.org/ontology/Person"
+Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontologica person.   
+                
+                    columna 5                                   columna 6
+Encabezado 1. "academicAdvisor_label"                       "academicAdvisor"   
+Encabezado 2. "http://dbpedia.org/ontology/academicAdvisor" "http://dbpedia.org/ontology/academicAdvisor"   
+Encabezado 3. "XMLSchema#string"                            "Person"   
+Encabezado 4 ."http://www.w3.org/2001/XMLSchema#string"     "http://dbpedia.org/ontology/Person"   
 
 En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico. La mascara utilizada es la misma que en la fase previa.
 
