@@ -370,11 +370,12 @@ Match (n:Label { cve: <cve_value> }) set n:<Additional_Label>;
 donde n es el nodo, Label es alguna de categoria fundamental base, agent, event, place sobre las cuales existe un indice. cve es el identificador de nodo y Additional_Label es la etiqueta que se adjunta al nodo.
 
 
-En el ejemplo que manejamos 
+En el ejemplo que manejamos   
+
 match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;   
 match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;   
 
-finalmente debe indicarse que esta fase se llevo a cabo con parallel bajo nohub.   
+Finalmente, debe indicarse que esta fase se llevo a cabo con parallel bajo nohub.   
 
 
 ###Fase 11. Codificación  de las etiquetas de los nodos complementarios  
