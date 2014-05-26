@@ -135,14 +135,14 @@ Campo 5 (Objeto)
 {Philip Hall|Ralph H. Fowler},  
 
 Campo 6 (Objeto URI)   
-{http://dbpedia.org/resource/Philip_Hall|http://dbpedia.org/resource/Ralph_H._Fowler}   
+{http://dbpedia.org/resource/Philip\_Hall|http://dbpedia.org/resource/Ralph\_H._Fowler}   
    
 A partir de esto se genera dos expresiones en el grafo   
    
-Garrett_Birkhoff –[academicAdvisor] - Philip_Hall   
-Garrett_Birkhoff –[academicAdvisor] - Ralph_H._Fowler   
+Garrett\_Birkhoff –[academicAdvisor] - Philip\_Hall   
+Garrett\_Birkhoff –[academicAdvisor] - Ralph\_H.\_Fowler   
    
-Del mismo modo se asignan categorías ‘person’ a los nodos Philip_Hall y Ralph_H._Fowler   
+Del mismo modo se asignan categorías ‘person’ a los nodos Philip\_Hall y Ralph\_H.\_Fowler   
 
 
 *Sujeto – Propiedad – Valor*   
@@ -390,11 +390,13 @@ La clase correspondinete a estos objetos se encuentra claramente señalada en  t
 
 Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontologica person.   
                 
-                    columna 5                                   columna 6
-Encabezado 1. "academicAdvisor_label"                       "academicAdvisor"   
-Encabezado 2. "http://dbpedia.org/ontology/academicAdvisor" "http://dbpedia.org/ontology/academicAdvisor"   
-Encabezado 3. "XMLSchema#string"                            "Person"   
-Encabezado 4 ."http://www.w3.org/2001/XMLSchema#string"     "http://dbpedia.org/ontology/Person"   
+| columna 5 |                                |  columna 6   |  
+|---------------|:------------------------------------------------|:----------------------------------------------|:   
+| Encabezado 1. |  "academicAdvisor_label"   |                    "academicAdvisor"   |  
+| Encabezado 2. |  "http://dbpedia.org/ontology/academicAdvisor" | "http://dbpedia.org/ontology/academicAdvisor"  |   
+| Encabezado 3. |  "XMLSchema#string"                       |     "Person"   |  
+| Encabezado 4 .|  "http://www.w3.org/2001/XMLSchema#string"  |   "http://dbpedia.org/ontology/Person"   |  
+
 
 En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico. La mascara utilizada es la misma que en la fase previa.
 
