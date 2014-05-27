@@ -297,7 +297,7 @@ A continuacion se describe cada fases aplicadas.
 
 Los caracteres  delimitadores de campo en los archivos de las clases ontologicas se homologaron. La secuencia "," se tranformo en coma simple previa sustitucion de comas internas de los campos.   Asi mismo se suprimieron las terminaciones __[1-9] en todos los campos por referirse a la mismo nodo.
 
-###Fase 1. Extracion y codificacion de nodos base.
+###Fase 1. Extraccion y codificacion de nodos base.
 
 La generacion de nodos consitio en la extraccion del primer campo de cada archivo y su expresion amplia asignandoes a los valores unicos de esta lista la clase correspondiente. Este listado de nodos se considero la base (sujeto) de cada clase ontologica: agent , place y event.
 
@@ -312,16 +312,16 @@ create (N<ID>:<LABEL>{ cve: '<cve_Value>' , name:'<name_Value>' });
 
 donde ID es un consecutivo en el lote generado, LABEL corresponde a alguna clase ontologica (agent, event o place), cve es el valor diferenciador del nodo, y name es la expresion coloquial del mismo.
 
-###Fase 2 Preparacion de nodos base para localizacion de faltantes.
+###Fase 2. Preparacion de nodos base para localizacion de faltantes.
 
 Los listados de nodos base generados en la fase anterios se recodificaron para permitir su insersion en una tabla postgresql. Estos datos se utilzaran en la sexta fase.
 
-###Fase 3 identificacion de arcos.
+###Fase 3. Identificacion de arcos.
 
 Como senalamos al inicio de la seccion, las relaciones ontologicas o arcos se encuentran expresadas en los archivos dbpedia por medio de dos columnas donde una indica el tipo y la otra el valor. Dos columnas contiguas se consideran asociadas si su primer encabezado indica que se refieren al mismo elemento.
 En esta fase se analizan los encabezados de cada archivo y se determina cuales  pares de columnas que corresponden a arcos. Como resultado se obtienen listas de extraccion de informacion.
 
-###Fase 4 extraccion de arcos.
+###Fase 4. Extraccion de arcos.
 
 Con las listas generadas en la fase anterior,  se extraen las columas del archivo dbpedia que se refieren a cada arco en archivos individuale que contienen:
 
@@ -331,7 +331,7 @@ Resulta importante senalar que durante el proceso se descartan registros de arco
 
 Por su naturaleza este proceso se ejecuto en parallel y nohub
 
-###Fase 5 codificacion de arcos.
+###Fase 5. Codificacion de arcos.
 
 Una vez que la informacion de los arcos se extrajo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de maximo 200 mil operaciones.
 
