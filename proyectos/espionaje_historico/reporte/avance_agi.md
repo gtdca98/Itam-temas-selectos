@@ -72,8 +72,32 @@ P= <http://dbpedia.org/ontology/influencedBy>
 O= <http://dbpedia.org/resource/Heraclitus>   
 ```
 
-¿Cómo se va a manejar la información de `DBpedia`?
-Sin embargo como el análisis se realizará de manera local, en lugar de solicitar información al desarrollador o a tercero es importante la consideración de una base de datos capaz de lidiar con datos con estructura de Grafos. Dentro de las posibles soluciones al problema se encuentran Neo4j, Titan, OrientDB o ElasticSearch. Dentro de estas opciones, la base de datos más utilizada es [Neo4j](http://db-engines.com/en/ranking/graph+dbms). Seguida de Titan u OrientDB. Por otro lado ElasticSearch parece ser una base de datos que no parece haber sido desarrollada para tratar con datos de esta naturaleza. Dentro de las fortalezas de Neo4j sobre las demás es que su versión individual es de acceso libre, por otro lado es fácilmente escalable a través de la versión corporativa. Es una base de datos fácilmente manejable a través de Java. Se pueden crear índices tanto en nodos y propiedades como en los arcos mismos de la gráfica. De igual forma incluye un dashboard que puede ser consultado de manera local o vía remota en un explorador dónde se pueden realizar tareas de mantenimiento y/o consulta. Por último, `cypher` el lenguaje con el que se realizan consultas a la base es muy similar al SQL sin embargo es muy sencillo de aprender y hay tutoriales sobre éste en la página oficial. 
+¿Cómo se va a manejar la información de `DBpedia`? El análisis se realizará de manera local, en lugar de solicitar información al desarrollador o a tercero es importante la consideración de una base de datos capaz de lidiar con datos con estructura de Grafos. Dentro de las posibles soluciones al problema se encuentran Neo4j, Titan, OrientDB o ElasticSearch. Dentro de estas opciones, la base de datos más utilizada es [Neo4j](http://db-engines.com/en/ranking/graph+dbms) seguida de Titan u OrientDB. Por otro lado ElasticSearch parece ser una base de datos que no parece haber sido desarrollada para tratar con datos de esta naturaleza. Dentro de las fortalezas de Neo4j sobre las demás es que su versión individual es de acceso libre, por otro lado es fácilmente escalable a través de la versión corporativa. Es una base de datos fácilmente manejable a través de Java. Se pueden crear índices tanto en nodos y propiedades como en los arcos mismos de la gráfica. De igual forma incluye un dashboard que puede ser consultado de manera local o vía remota en un explorador dónde se pueden realizar tareas de mantenimiento y/o consulta. Por último, `cypher` el lenguaje con el que se realizan consultas a la base es muy similar al SQL sin embargo es muy sencillo de aprender y hay tutoriales sobre éste en la página oficial. 
+
+##Base de datos. Neo4j
+Los requerimientos de información para la integración de datos en Neo4j que debemos tomar en cuenta son:  
+
+*	Los nodos deben estar asociados a una clave única diferenciadora. Durante el proceso de carga Neo4j asigna un número de nodo (consecutivo irrepetible) a cada elemento que se integra con independencia que el valor asociado ya se encuentre registrado previamente. A partir de la versión 2.0 es posible asignar llaves propias de indización.
+*	Adicionalmente,  los nodos reciben la asignación de propiedades que a su vez son base  en la definición de consultas.
+*	Un conjunto de nodos previamente constituidos pueden asociarse a categorías que segmentan la información por tipo. Estas categorías también llegan a integrar  índices de consulta.
+*	Los arcos (dirigidos o no)– denominados relaciones en Neo4j – poseen: un identificador numérico, dado por el sistema, una etiqueta asociada que ‘verbaliza’ la relación  y de forma opcional reciben la asignación de propiedades del mismo modo que los nodos. 
+*	Todo elemento de carga debe efectuarse indicando inequívocamente el nodo al cual se asigna la propiedad, etiqueta o relación.
+
+
+**Formato de datos**    
+La información de `DBpedia` como hemos mencionado anteriormane es producto de un proyecto de extracción de contenido de Wikipedia. Sus fuentes se encuentran disponibles en dos formatos generales: Listado y Bases Ontológicas. 
+
+* *Listados.* Reflejan la relación ontológica (S- Pr -V o S-P-O). Constituidos por tripletas en diversos idiomas y segmentados por formatos de contenido (imágenes, textos, enlace..) 
+* *Bases ontológicas.* Conjuntos de información donde la relación muestra los Sujetos por renglones, los Predicados/Propiedades en los encabezados de las columnas y los Objetos/Valores en la intersección de ambos.  Los formatos disponibles están en inglés en CSV y JSON .
+
+Para la consulta de información, estos formatos están disponibles a diversos niveles de agregación. Las opciones de descarga van desde la versión ontologica completa  hasta la consulta de una subclase específica como lo es la etiqueta luchadores de sumo.  Para información detallada consúltese http://mappings.dbpedia.org/server/ontology/classes/ .
+
+En particular utilizamos la versión ontológica de `DBpedia` en Base CVS ya que, en comparación con las otras fuentes DBpedia, permite la generación de nodos y arcos en forma independiente conservando la integridad relacional sin altos requerimientos de procesamiento 
+
+El uso de listas se considero débil para la construcción de relaciones en `Neo4j`. La asociaion de tripletas pertenecientes a fuentes diversas se traduce en la identificación de claves de identidad homogéneas en Sujetos y Objetos.
+
+En cuanto al uso de base en formato JSON se consideró inviable dado que la construcción de bases de datos en `Neo4j` presenta problemas de desemeño en proporción directa al volumen de procesamiento. Esto debido a limitaciones técnicas de los equipos de cómputo. Además con regularidad se reconocen probelmas memoria en el procesaiento de datos en aplicaciones basadas en Java.   
+
 
 ## Preparación de los Datos
 
