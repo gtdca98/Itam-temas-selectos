@@ -227,7 +227,7 @@ Los indices en los nodos favorecen el proceso de integracion de arcos, etiquetas
 
 ##Fases de procesamiento
 
-Con base en lo señalado hasta el momento, resulta claro indicar que el procesamiento de datos se resume en transformar el contenido de las tabñas de las clases ontologicas de dbpedia CVS en un conjunto de instrucciones de integracion en Cypher para contruir la base de datos Neo4j. Hay tres grandes lineas de trabajo:
+Con base en lo señalado hasta el momento, resulta claro indicar que el procesamiento de datos se resume en transformar el contenido de las tabñas de las clases ontologicas de dbpedia CVS en un conjunto de instrucciones de integracion en Cypher para contruir la base de datos Neo4j. Hay tres grandes líneas de trabajo:
 
 1. Preparación de información.
  Los datos deben organizarse para facilitar su procesamiento. Dada la cantidad de campos involucrados y el tamaño de los archivos se consideró pertinente dejar las fuentes de información sin modificaciones sustantivas y  a partir de ellas extraer en archivos diversos conforme se necesite.
@@ -244,20 +244,23 @@ Con base en lo señalado hasta el momento, resulta claro indicar que el procesam
   a) su operación carece de controles tipo roll-back ante fallas de integración. Es decir se corre el riesgo de integrar lotes parciales de información obligando a la revision de los log de proceso para determinar el avance de las cargas.
   b) requiere que los servicios de la base de datos se encuentren activos en la carga lo cual puede resultar costoso en terminos de competencia por recursos disponibles y en consecuencia tiempo. Adicionalmente Py2neo y neo4j-rest-client son se efectuan en memoria dado que conceptualmente estan diseñados para la explotacion de información mas que para la carga de volumen.
 
+
 ### Diagrama ETL.  
 
 En terminos de ETL, las 18 fases del procesamiento de datos se distribuyen conforma la siguiente tabla:
 
 
 **Número de fase de procesamiento y ETL**  
-Elemento de Base Neo4j | Extracción | Transfromación   | Carga  |
------------|:---------------|:-----------|:-----------|
-Nodos  |  1  2  6 | 1  7 |  8  9  |   
-Etiquetas |    10  11  |    10  11  | 12  13  |   
-Aristas  |  3  4   |  5  |  14   |
-Propiedades  |  15  16   |   17  |  18  |
 
-A continuacion se muestran las fases de procesamiento aplicadas.
+Elemento de Base Neo4j  | Extracción | Transfromación   | Carga  |  
+------------------------|:---------------|:-----------|:-----------| 
+Nodos        |  1, 2 y 6   | 1 y 7      |  8 y 9  |    
+Etiquetas    |    10 y 11  |    10 y 11  | 12 y 13  |     
+Aristas      |  3 y 4      |  5        |  14   |  
+Propiedades  |  15 y 16    |   17       |  18  |  
+
+
+A continuacion se describe cada fases aplicadas.
 
 
 ###Fase 0 homologación
