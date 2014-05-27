@@ -98,6 +98,163 @@ El uso de listas se considero débil para la construcción de relaciones en `Neo
 
 En cuanto al uso de base en formato JSON se consideró inviable dado que la construcción de bases de datos en `Neo4j` presenta problemas de desemeño en proporción directa al volumen de procesamiento. Esto debido a limitaciones técnicas de los equipos de cómputo. Además con regularidad se reconocen probelmas memoria en el procesaiento de datos en aplicaciones basadas en Java.   
 
+## Fuente de datos utilizada
+Como se señaló, existen segmentos de la base ontológica de `DBpedia` a diversos niveles (clases) dependiendo del interés del usuario. 
+
+La clase general de la base ontológica es `Thing` y a ella pertenecen  clases  como `Activity`, `Agent`, `Event`, `Biomolecula`, `Anatomical Structure`, `Award`, `Device`, `Place`, `Polyhedron`, `Tropical Concept` etc. A su vez, cada una de estas puede estar subdividida en clases que permiten mayor detalle en el análisis. En total la base `Thing`  cuenta con 656 ramificaciones ontológicas.
+
+No todas las ramas fueron consideradas objeto de estudio del presente. Esto obedece tanto a criterios de relevancia como razones viabilidad del proyecto. 
+
+Por un lado se reconoce que `DBpedia` refleja el contenido de Wikipedia y ésta otorga peso a temáticas no propias del estudio tales como `Activity` cuyos contenidos se refieren exclusivamente a deportes y es redundante con la información que se localiza en la clase `Agent` subclase `SportLeague`.
+
+Por otro lado, el volumen de información es tal que supera las capacidades de procesamiento viable en un proyecto de medio año.
+
+Para los fines del presente se consideraron únicamente tres clases: **Agent**, **Event** y **Place** que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. Las fuentes de informacion se localizan [aqui](http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm).   
+
+**Fuentes  utilizadas**  
+
+
+Archivo     |      Tamaño    | Registros   | Campos *1*
+-----------|:---------------|:-----------|:-----------|
+Agent.csv  |  7,100,209,857 | 1,041,033  |  836 |   
+Event.csv  |    886,661,600 |    38,469  | 2,969  |   
+Place.csv  |  3,409,549,881 |   639,454  |  621   |
+ 
+*1 Los campos no muestran valor para la totalidad de los registros. * 
+ 
+**Estructura de archivos**  
+Abordemos ahora la estructura de los archivos, reconociendo en ellos los conceptos que repasamos anteriormente. Se acompaña un ejemplo de la clase ontológica Agent.
+
+Conservemos en mente dos ideas básicas 
+```
+1. En cada archivo se tienen  4 encabezados para cada campo.  
+   * Etiqueta de propiedad que equivale a nombre de campo  
+   * Expresión URI del primer encabezado  
+   * Tipo de variable 
+   * Expresion URI del tercer encabezado 
+```
+
+```
+2. Cada registro muestra en su primer columna el URI del Sujeto al cual se refiere el contenido de todo el renglón.  
+```
+
+**Identificación de contenidos**  
+Veamos como se muestran en los archivos planos CVS las expresiones **S-P-O** y **S-Pr-V** .
+
+*Sujeto – Predicado – Objeto*
+
+Cada  expresión ontológica  **Sujeto – Predicado – Objeto** se define en campos contiguos que se refieren al mismo campo.  La primera columna define la tipología del dato, la segunda el valor. Veamos el siguiente ejemplo:
+
+```
+Archivo Agent.csv
+```
+
+* Campos 5 (Encabezados)  
+(1) "academicAdvisor_label"  
+(2) "http://dbpedia.org/ontology/academicAdvisor"  
+(3) "XMLSchema#string"  
+(4) "http://www.w3.org/2001/XMLSchema#string"  
+
+* Campo 6 (Encabezados)  
+(1) "academicAdvisor"  
+(2) "http://dbpedia.org/ontology/academicAdvisor"  
+(3) "Person"  
+(4) "http://dbpedia.org/ontology/Person"  
+  
+
+El campo 5 indica que los valores asociados representan cadenas de texto –string-. Estos contenidos en el esquema se identifican con una clase de dato especifica: academicAdvisor. El campo 6 indica que los objetos referidos en la columna corresponden a la clase ontológica Person.  
+
+A nivel de registro se obtienen dos expresiones del mismo objeto: Valor y expresión URI.  
+
+* Campo 1 Sujeto   
+http://dbpedia.org/resource/Garrett_Birkhoff,  
+* Campo 5 (Objeto)   
+{Philip Hall|Ralph H. Fowler},  
+* Campo 6 (Objeto URI)   
+{http://dbpedia.org/resource/Philip\_Hall|http://dbpedia.org/resource/Ralph\_H._Fowler}   
+   
+A partir de esto se genera dos expresiones en el grafo   
+   
+* Garrett\_Birkhoff –[academicAdvisor] - Philip\_Hall   
+* Garrett\_Birkhoff –[academicAdvisor] - Ralph\_H.\_Fowler   
+   
+Del mismo modo se asignan categorías ‘person’ a los nodos Philip\_Hall y Ralph\_H.\_Fowler   
+
+*Sujeto – Propiedad – Valor*
+
+Por otro lado, las expresiones ontológicas **Sujeto – Propiedad – Valor** se indican en campos únicos donde el primer encabezado determina el nombre del campo. Ejemplos.
+
+* Campo 1 (Sujeto)
+"http://dbpedia.org/resource/Garrett_Birkhoff 
+* Campo 2 (encabezado 1) Propiedad
+"rdf-schema#label"
+* Campo 3 (encabezado 1) Propiedad 
+"rdf-schema#comment"
+* Campo 2 Valor
+Garrett Birkhoff
+* Campo 3 Valor 
+Birkhoff,Garrett Birkhoff January 19 1911 – November 22 1996 was an American mathematician. He is best known for his work in lattice theory. The mathematician George Birkhoff 1884–1944 was his father.
+
+Esta expresión ontológica se refleja en e grafo 
+a)	creando para el nodo Garrett_Birkhoff dos propiedades: Label y Comment y 
+b)	asignando sus valores correspondientes.
+
+Este resultado es verificable contra la página de Wikipedia [fuente original](http://en.wikipedia.org/wiki/Garrett_Birkhoff).
+
+
+**Modelo de integración**
+
+El procesamiento de información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó apegandose al modelo de carga por neo4j-shell que se simplifica en la siguiente:
+
+```{bash}
+cat insert.cql | neo4j-shell -path /path/to/db  > file.log
+```
+
+Generar archivos de comandos en lenguaje cypher que instruyan la creacion de elementos en la base de datos. Estas instrucciones se vuelcan en neo4j-shell y su resultado es colectado en archivos log.
+
+Este modelo unicamente integra lotes cuando la totalidad de las instruciones se cumple exitosamente. En su defecto aplica roll-back dejando sin efecto cualquier cambio.
+
+Debe destacarse que  la carga puede realizarse sin la activacion del servicio de base de datos y reservandose la instancia en forma exclusiva.
+
+En contra se tiene que no se permite la ejecución paralela de procesos de insersion. Esto se encuentra conpensado con velocidad, siempre y cuando se adopte el uso de indices. Para mayor información consultar la siguiente [liga](http://www.neo4j.org/develop/import)
+
+**Secuencia de integración**
+
+Neo4j organiza la informacion en base a nodos y arcos los caules, adicionalmente, pueden recibir la asignación de etiquetas (clases) y/o propiedades. Las etiquetas permiten organizar la informacion segmentando el grafo. Las propiedades, por su parte asignan informacion particular sobre nodos y arcos. Ademas del indice interno, es posible crear, conforma a las necesidades del usaio, indices sobre clases y propiedades.
+
+La secuencia de integración aplicada consiste en:
+
+Se integran los nodos y su respectiva clave de diferenciacion.
+```
+create (N423559:agent{ cve: 'Garrett_Birkhoff' , name:'Garrett Birkhoff' });
+create (N785292:agent{ cve: 'Philip_Hall' , name:'Philip Hall' });
+```
+
+Se integran arcos  en nodos previamente generados.
+```
+MATCH (n:base {cve:'Garrett_Birkhoff'}), (m:base {cve:'Philip_Hall'}) create(n)-[:academicAdvisor]->(m);
+```
+Se integran etiquetas ...   
+```
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:person;
+match (n:agent { cve: 'Garrett_Birkhoff' }) set n:scientist;
+```
+y propiedades...   
+
+```
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.birthDate='19110119';
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.deathDate='19961122';
+MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.rdfschemacomment='Garrett Birkhoff January 19 1911 – November 22 1996 was an American mathematician. He is best known for his work in lattice theory. The mathematician George Birkhoff 1884–1944 was his father.';
+```
+
+Es importante notar el siguiente par de observaciones.
+
+En la construccion de un arco `Neo4j` genera el nodo(s) y posteriormente el archo. Si los nodos no existen `Neo4j` los crear y, los identificadores de estos nuevos nodos se conocer via consulta de nodos con la propiedad automatica id().
+
+Para aprovechar la funcionalidad de `Neo4j` se convino definir para cada nodo una propiedad denominada clave sobre la cual se construyan índices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
+
+Los indices en los nodos favorecen el proceso de integracion de arcos, etiquetas y propiedades. La evidencia indica que en la creación de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construcción de un índice general y su utilización en el proceso hace que la creación de cada uno de los 50000 arcos se realice en 2 milisegundos promedio.
+
 
 ## Preparación de los Datos
 
