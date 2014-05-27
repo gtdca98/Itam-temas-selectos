@@ -44,10 +44,35 @@ Donde se lee que el individuo *i* tiene la propiedad *j* con el valor *k*. Sin e
 sujeto_1 ligado_a sujeto_2
 ```
 Donde de manera análoga se pueden establecer las relaciones entre los artículos de la enciclopedia. Por otro lado, un punto a favor del proyecto de `DBpedia` es la incorporación de los datos contenidos en los *infoboxes* en la construcción ontológica de las tuplas. 
+
+De esta manera tenemos que la información obtenida directamente del proyecto de `DBpedia` esta construida a partir de conceptos simples y sus unidades de información quedan estructuradas de la siguiente forma:
+* Cada elemento (Sujeto)  es diferenciable a través de su URI, y por él se puede identificar su fuente. El URI (Uniform Resource Identifier) está formado por la integración de dos elementos URL (Uniform Resource Locator) y URN (Uniform Resource Name)
+*  Existen datos – denominados Propiedades – y representan información que otorga atributos a los sujetos 
+* Se cuenta con elementos de análisis que reflejan la relación o enlace entre dos sujetos, estos se denominan  Predicados. 
+* Dadas estos elementos es posible identificar dos tipos de información ontológica fundamental
+
 ```
-Añadir desarrollo de los infoboxes y el OWL de DBpedia.
+a) Sujeto – Propiedad - Valor
+```
+Cada elemento de análisis esta clasificado en un árbol de categorías y dentro de la categoría posee propiedades que lo distinguen.
+
+```
+S= <http://dbpedia.org/resource/Alabama>   
+C= <http://dbpedia.org/ontology/areaTotal>      
+P= "1.35765E11"^^<http://www.w3.org/2001/XMLSchema#double>    
+```
+```
+b) Sujeto – Predicado – Objeto
+```
+Los sujetos tienen relaciones (actos) sobre Objetos los cuales corresponden a su vez a otros sujetos.
+
+```
+S= <http://dbpedia.org/resource/Aristotle>    
+P= <http://dbpedia.org/ontology/influencedBy>     
+O= <http://dbpedia.org/resource/Heraclitus>   
 ```
 
+¿Cómo se va a manejar la información de `DBpedia`?
 Sin embargo como el análisis se realizará de manera local, en lugar de solicitar información al desarrollador o a tercero es importante la consideración de una base de datos capaz de lidiar con datos con estructura de Grafos. Dentro de las posibles soluciones al problema se encuentran Neo4j, Titan, OrientDB o ElasticSearch. Dentro de estas opciones, la base de datos más utilizada es [Neo4j](http://db-engines.com/en/ranking/graph+dbms). Seguida de Titan u OrientDB. Por otro lado ElasticSearch parece ser una base de datos que no parece haber sido desarrollada para tratar con datos de esta naturaleza. Dentro de las fortalezas de Neo4j sobre las demás es que su versión individual es de acceso libre, por otro lado es fácilmente escalable a través de la versión corporativa. Es una base de datos fácilmente manejable a través de Java. Se pueden crear índices tanto en nodos y propiedades como en los arcos mismos de la gráfica. De igual forma incluye un dashboard que puede ser consultado de manera local o vía remota en un explorador dónde se pueden realizar tareas de mantenimiento y/o consulta. Por último, `cypher` el lenguaje con el que se realizan consultas a la base es muy similar al SQL sin embargo es muy sencillo de aprender y hay tutoriales sobre éste en la página oficial. 
 
 ## Preparación de los Datos
