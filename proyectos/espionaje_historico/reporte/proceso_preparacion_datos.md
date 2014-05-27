@@ -244,6 +244,19 @@ Con base en lo señalado hasta el momento, resulta claro indicar que el procesam
   a) su operación carece de controles tipo roll-back ante fallas de integración. Es decir se corre el riesgo de integrar lotes parciales de información obligando a la revision de los log de proceso para determinar el avance de las cargas.
   b) requiere que los servicios de la base de datos se encuentren activos en la carga lo cual puede resultar costoso en terminos de competencia por recursos disponibles y en consecuencia tiempo. Adicionalmente Py2neo y neo4j-rest-client son se efectuan en memoria dado que conceptualmente estan diseñados para la explotacion de información mas que para la carga de volumen.
 
+### Diagrama ETL.  
+
+En terminos de ETL, las 18 fases del procesamiento de datos se distribuyen conforma la siguiente tabla:
+
+
+**Número de fase de procesamiento y ETL**  
+Elemento de Base Neo4j | Extracción | Transfromación   | Carga  |
+-----------|:---------------|:-----------|:-----------|
+Nodos  |  1  2  6 | 1  7 |  8  9  |   
+Etiquetas |    10  11  |    10  11  | 12  13  |   
+Aristas  |  3  4   |  5  |  14   |
+Propiedades  |  15  16   |   17  |  18  |
+
 A continuacion se muestran las fases de procesamiento aplicadas.
 
 
@@ -452,4 +465,47 @@ Por tratarse de un proceso intesso se uso parallel en combinacion con nohub.
 
 Como en todas las fases deintegración de datos, se aplico el modelo de volcado de instrucciones en neo4j-shell bajo nohub.
 
+##Equipo:
 
+Para el rpocesamiento de informaciin se empleo una instancia de Amazon Web Service EC2 tipo M3xlarge con las siguientes caracteristicas:  
+
+4 Procesadores Intel Xeon E5­2670 (Sandy Bridge) de alta frecuencia*
+
+Almacenamiento 100gb y 15 gb RAM.
+
+Esta configuraciin responde tanto a las necesidades de procesamiento paralelo multi core en las fases de extraccion y tansformaciin de la base ontologica, como a la demanda de memoria durante la etapa de carga e indexado de informacion.
+
+Para la atencion de consultas de informacion se migró la base de datos neo4j a una instancia AWS EC2 M1large con 2 procesadores, 7.5 GB RAM y HD 60GB.
+
+##Software.  
+
+Ambas instancias se crearon con:  
+Sistema operativo ubuntu 12.04, 
+**Neo4j 2.0.3**
+Neo Technology Inc.   
+Neo4j The graph database, www.Neo4j.org  
+
+**Postgresql 9.3.4**  
+The PostgreSQL Global Development Group, www.postgresql.org  
+
+**GNU Parallel **  
+O. Tange (2011): GNU Parallel - The Command-Line Power Tool, ;login: The USENIX Magazine, February 2011:42-47  
+
+**Java 7.0** 
+java version "1.7.0_51"   
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)   
+Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)   
+
+
+
+17.                    18
+
+ 
+
+Aristas.   7327194.     816. Tipos
+
+Nodos     2403988.    
+
+Propiedades  9461826
+
+Etiquetas
