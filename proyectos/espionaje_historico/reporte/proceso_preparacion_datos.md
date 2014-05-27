@@ -500,15 +500,3 @@ Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)   
 
 
-
-17.                    18
-
- 
-
-Aristas.   7327194.     816. Tipos
-
-Nodos     2403988.    
-
-Propiedades  9461826
-
-Etiquetas
