@@ -499,7 +499,7 @@ Como en todas las fases deintegración de datos, se aplico el modelo de volcado 
 
 ###Resumen de carga de información 
 
-![hola]('Proceso_datos/Velocidad de carga de informacion Neo4j.png' )
+![.](Proceso_datos/Velocidad de carga de informacion Neo4j.png)
 
 
 
