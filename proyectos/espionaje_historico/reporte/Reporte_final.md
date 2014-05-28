@@ -84,7 +84,8 @@ Los requerimientos de información para la integración de datos en Neo4j que de
 *	Todo elemento de carga debe efectuarse indicando inequívocamente el nodo al cual se asigna la propiedad, etiqueta o relación.
 
 
-**Formato de datos**    
+##Formato de datos  
+
 La información de `DBpedia` como hemos mencionado anteriormente es producto de un proyecto de extracción de contenido de Wikipedia. Sus fuentes se encuentran disponibles en dos formatos generales: Listado y Bases Ontológicas. 
 
 * *Listados.* Reflejan la relación ontológica (S- Pr -V o S-P-O). Constituidos por tripletas en diversos idiomas y segmentados por formatos de contenido (imágenes, textos, enlaces, etcétera) 
@@ -533,6 +534,16 @@ O. Tange (2011): GNU Parallel - The Command-Line Power Tool, ;login: The USENIX 
 java version "1.7.0_51"   
 Java(TM) SE Runtime Environment (build 1.7.0_51-b13)   
 Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)   
+
+**bash cet sed awk grep**
+Practicamete todos los procesos de detección extraccion y codificación se realizaron con herramientas base del sistema. Los codigos correspondientes se encuentran en la sección Proceso_datos. 
+adicionalmente se generaron 3 herramientas de trabajo para el manejo de la base de datos:
+
+- DELDBNEO4j.sh   Elimina la carpeta contenedora de la base de datos
+
+- CREATE_NEO4J.sh Realiza el volcado de comandos en Neo4j-sell generando los elementos del grafo. Se utilizó en todos los procesos de carga. 
+
+- MNT_NEO4jDB.sh  Realiza un respaldo de la base de datos con timestamp y en caso de encontratse en ruta la carpeta graph.db la incorpora en la ruta de acceso para consultas.
 
 
 ## Preparación de los Datos. Versión Alterna.
