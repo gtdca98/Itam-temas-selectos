@@ -497,6 +497,12 @@ Por tratarse de un proceso intesso se usó parallel en combinacion con nohub.
 
 Como en todas las fases deintegración de datos, se aplico el modelo de volcado de instrucciones en neo4j-shell bajo nohub.
 
+###Resumen de carga de información 
+
+![hola](Proceso_datos/Velocidad de carga de informacion Neo4j.png' )
+
+
+
 ##Equipo:
 
 Para el rpocesamiento de información se empleó una instancia de Amazon Web Service EC2 tipo M3xlarge con las siguientes caracteristicas:  
