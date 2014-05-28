@@ -16,7 +16,7 @@ En este contexto surge la idea tanto de analizar información de manera gráfica
 ## Problema de Negocio
 El problema que se quiere atacar es el de buscar relaciones en la información de la enciclopedia que sirva para trazar patrones, predicciones o semejanza entre distintos objetos de estudio para un usuario. Es decir, dada la solicitud del usuario definida como un conjunto de temas, lo que se quiere es proveer de una visualización que permita trazar relaciones entre los distintos temas. Para esto se utilizará la Wikipedia completa y se aprovechará la estructura que presentan los documentos de la enciclopedia para encontrar dichas relaciones. 
 
-En este sentido será necesario realizar un análisis semantico del contenido de cada documento de *Wikipedia* para poder determinar propiedades útiles de cada uno. La relación establecida a través de los hipervínculos de las páginas *web* de los temas serán útiles para poder trazar las relaciones entre temas de manera que queden expresadas en un grafo, para posteriormente pasar a un análisis propio de Aprendizaje Automático para poder realizar las estimaciones apropiadas y obtener un subgrafo que permita al usuario entender mejor su conjunto de temas.
+En este sentido será necesario realizar un análisis semántico del contenido de cada documento de *Wikipedia* para poder determinar propiedades útiles de cada uno. La relación establecida a través de los hipervínculos de las páginas *web* de los temas serán útiles para poder trazar las relaciones entre temas de manera que queden expresadas en un grafo, para posteriormente pasar a un análisis propio de Aprendizaje Automático para poder realizar las estimaciones apropiadas y obtener un subgrafo que permita al usuario entender mejor su conjunto de temas.
 
 El proyecto consiste en tres grandes fases. 
   * Obtención y transformación de los datos.
@@ -27,10 +27,10 @@ Por simplicidad y dado el trabajo y esfuerzo que se ha recibido el proyecto de *
 
 En un siguiente paso se ha determinado que la base de datos mas adecuada para poder albergar la información de dicha fuente será `Neo4j`. Dicha base de datos orientada a gráficas la cual posee tanto una estructura como un lenguaje de consultas que resultan ser mas adecuados a los propósitos de este proyecto.
 
-Para la exploración y visualización se consideraron diversas herramientas que en un principio prometían ser capaces de conectarse a la base de datos. Al final utilizamos como motor de análisis el paquete estadístico `R`, en particular la biblioteca `igraph` diseñada para el análisis de redes. Para el despliegue de gráfos resultó atractiva su conectividad con la librería de javascript `d3.js`. Otro factor que afectó la decisión por optar por `R` fue la librería  `shiny` que permite desplegar una interfaz web interactiva con la cual se pueden manipular los datos y desplegar reportes.
+Para la exploración y visualización se consideraron diversas herramientas que en un principio prometían ser capaces de conectarse a la base de datos. Al final utilizamos como motor de análisis el paquete estadístico `R`, en particular la biblioteca `igraph` diseñada para el análisis de redes. Para el despliegue de grafos resultó atractiva su conectividad con la librería de JavaScript `d3.js`. Otro factor que afectó la decisión por optar por `R` fue la librería  `shiny` que permite desplegar una interfaz web interactiva con la cual se pueden manipular los datos y desplegar reportes.
 
 ## Fuentes de Datos
-Como se ha mencionado previamente la información originalmente se pretendía descargar de los repositorios de *Wikipedia*. Los cuales se distribuyen en *dumps*. Estos archivos previamente se encontraban en formato sql. Sin embargo a partir del 2005 fueron reestructarados para manejarse en XML's. En términos globales la información vigente contenida en los *dumps* de *Wikipedia* febrero de 2013 consistía en alrededor de 40 GBs de memoria, sin incluir información de usuarios e histórico de charlas. La historia completa pesaba alrededor de 10 Tb de información. Dichos archivos están disponibles en formato .bz2 debido a que es el formato mas estable y fácil de verificar su integridad en las transacciones. 
+Como se ha mencionado previamente la información originalmente se pretendía descargar de los repositorios de *Wikipedia*. Los cuales se distribuyen en *dumps*. Estos archivos previamente se encontraban en formato sql. Sin embargo a partir del 2005 fueron reestructurados para manejarse en XML's. En términos globales la información vigente contenida en los *dumps* de *Wikipedia* febrero de 2013 consistía en alrededor de 40 GBs de memoria, sin incluir información de usuarios e histórico de charlas. La historia completa pesaba alrededor de 10 Tb de información. Dichos archivos están disponibles en formato .bz2 debido a que es el formato mas estable y fácil de verificar su integridad en las transacciones. 
 
 Sin embargo existen ya varios proyectos que han trabajado con la información de *Wikipedia*. Esto es para poder brindar estructura a información que naturalmente no es estructurada. Dichos proyectos se basan principalmente en técnicas de procesamiento de lenguaje natural, NLP por sus siglas en inglés. Dentro de estos proyectos destacan `Freebase`, `Yago` y `DBpedia`. Las diferencias radican en los objetivos, fuentes y esquemas con los que trabaja cada uno de estos dos proyectos. En particular `Freebase` destaca por utilizar información de otras fuentes de tal forma que puedan complementar lo que se logra extraer de los archivos de *Wikipedia*. Sin embargo el proyecto de `DBpedia` es un proyecto que recibe apoyo económico de varias organizaciones y `Freebase` es un proyecto financiado por *Google*. Esto hace mas atractivo utilizar la base de datos de `DBpedia` pues principalmente su desarrollo corre gracias a *software* abierto. Por ejemplo, los datos de `Freebase` se guardan en un repositorio privado mientras que los datos de `DBpedia` se encuentran en repositorios de terceros. De manera equivalente el lenguaje utilizado para poder explotar de manera directa los datos es a través de un *endpoint* de SPARQL en cuanto a `DBpedia` y a través del API MQL propio del equipo de desarrollo de `Freebase`. 
 
@@ -85,18 +85,18 @@ Los requerimientos de información para la integración de datos en Neo4j que de
 
 
 **Formato de datos**    
-La información de `DBpedia` como hemos mencionado anteriormane es producto de un proyecto de extracción de contenido de Wikipedia. Sus fuentes se encuentran disponibles en dos formatos generales: Listado y Bases Ontológicas. 
+La información de `DBpedia` como hemos mencionado anteriormente es producto de un proyecto de extracción de contenido de Wikipedia. Sus fuentes se encuentran disponibles en dos formatos generales: Listado y Bases Ontológicas. 
 
 * *Listados.* Reflejan la relación ontológica (S- Pr -V o S-P-O). Constituidos por tripletas en diversos idiomas y segmentados por formatos de contenido (imágenes, textos, enlace..) 
 * *Bases ontológicas.* Conjuntos de información donde la relación muestra los Sujetos por renglones, los Predicados/Propiedades en los encabezados de las columnas y los Objetos/Valores en la intersección de ambos.  Los formatos disponibles están en inglés en CSV y JSON .
 
-Para la consulta de información, estos formatos están disponibles a diversos niveles de agregación. Las opciones de descarga van desde la versión ontologica completa  hasta la consulta de una subclase específica como lo es la etiqueta luchadores de sumo.  Para información detallada consúltese http://mappings.dbpedia.org/server/ontology/classes/ .
+Para la consulta de información, estos formatos están disponibles a diversos niveles de agregación. Las opciones de descarga van desde la versión ontológica completa  hasta la consulta de una subclase específica como lo es la etiqueta luchadores de sumo.  Para información detallada consúltese http://mappings.dbpedia.org/server/ontology/classes/ .
 
 En particular utilizamos la versión ontológica de `DBpedia` en Base CVS ya que, en comparación con las otras fuentes DBpedia, permite la generación de nodos y arcos en forma independiente conservando la integridad relacional sin altos requerimientos de procesamiento 
 
-El uso de listas se considero débil para la construcción de relaciones en `Neo4j`. La asociaion de tripletas pertenecientes a fuentes diversas se traduce en la identificación de claves de identidad homogéneas en Sujetos y Objetos.
+El uso de listas se considero débil para la construcción de relaciones en `Neo4j`. La asociación de tripletas pertenecientes a fuentes diversas se traduce en la identificación de claves de identidad homogéneas en Sujetos y Objetos.
 
-En cuanto al uso de base en formato JSON se consideró inviable dado que la construcción de bases de datos en `Neo4j` presenta problemas de desemeño en proporción directa al volumen de procesamiento. Esto debido a limitaciones técnicas de los equipos de cómputo. Además con regularidad se reconocen probelmas memoria en el procesaiento de datos en aplicaciones basadas en Java.   
+En cuanto al uso de base en formato JSON se consideró inviable dado que la construcción de bases de datos en `Neo4j` presenta problemas de desempeño en proporción directa al volumen de procesamiento. Esto debido a limitaciones técnicas de los equipos de cómputo. Además con regularidad se reconocen problemas memoria en el procesamiento de datos en aplicaciones basadas en Java.   
 
 ## Fuente de datos utilizada
 Como se señaló, existen segmentos de la base ontológica de `DBpedia` a diversos niveles (clases) dependiendo del interés del usuario. 
@@ -109,7 +109,7 @@ Por un lado se reconoce que `DBpedia` refleja el contenido de Wikipedia y ésta 
 
 Por otro lado, el volumen de información es tal que supera las capacidades de procesamiento viable en un proyecto de medio año.
 
-Para los fines del presente se consideraron únicamente tres clases: **Agent**, **Event** y **Place** que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. Las fuentes de informacion se localizan [aqui](http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm).   
+Para los fines del presente se consideraron únicamente tres clases: **Agent**, **Event** y **Place** que a su vez se subdividen en 245, 36 y 131 subclases respectivamente. Las fuentes de información se localizan [aquí](http://web.informatik.uni-mannheim.de/DBpediaAsTables/DBpediaClasses.htm).   
 
 **Fuentes  utilizadas**  
 
@@ -131,7 +131,7 @@ Conservemos en mente dos ideas básicas
    * Etiqueta de propiedad que equivale a nombre de campo  
    * Expresión URI del primer encabezado  
    * Tipo de variable 
-   * Expresion URI del tercer encabezado 
+   * Expresión URI del tercer encabezado 
 ```
 
 ```
@@ -204,27 +204,27 @@ Este resultado es verificable contra la página de Wikipedia [fuente original](h
 
 **Modelo de integración**
 
-El procesamiento de información de los archivos ontologicos descargados desde los servidores de DBpedia se efectuó apegandose al modelo de carga por neo4j-shell que se simplifica en la siguiente:
+El procesamiento de información de los archivos ontológicos descargados desde los servidores de DBpedia se efectuó apegándose al modelo de carga por neo4j-shell que se simplifica en la siguiente:
 
 ```{bash}
 cat insert.cql | neo4j-shell -path /path/to/db  > file.log
 ```
 
-Generar archivos de comandos en lenguaje cypher que instruyan la creacion de elementos en la base de datos. Estas instrucciones se vuelcan en neo4j-shell y su resultado es colectado en archivos log.
+Generar archivos de comandos en lenguaje cypher que instruyan la creación de elementos en la base de datos. Estas instrucciones se vuelcan en neo4j-shell y su resultado es colectado en archivos log.
 
-Este modelo unicamente integra lotes cuando la totalidad de las instruciones se cumple exitosamente. En su defecto aplica roll-back dejando sin efecto cualquier cambio.
+Este modelo únicamente integra lotes cuando la totalidad de las instrucciones se cumple exitosamente. En su defecto aplica roll-back dejando sin efecto cualquier cambio.
 
-Debe destacarse que  la carga puede realizarse sin la activacion del servicio de base de datos y reservandose la instancia en forma exclusiva.
+Debe destacarse que  la carga puede realizarse sin la activación del servicio de base de datos y reservándose la instancia en forma exclusiva.
 
-En contra se tiene que no se permite la ejecución paralela de procesos de insersion. Esto se encuentra conpensado con velocidad, siempre y cuando se adopte el uso de indices. Para mayor información consultar la siguiente [liga](http://www.neo4j.org/develop/import)
+En contra se tiene que no se permite la ejecución paralela de procesos de inserción. Esto se encuentra compensado con velocidad, siempre y cuando se adopte el uso de índices. Para mayor información consultar la siguiente [liga](http://www.neo4j.org/develop/import)
 
 **Secuencia de integración**
 
-Neo4j organiza la informacion en base a nodos y arcos los caules, adicionalmente, pueden recibir la asignación de etiquetas (clases) y/o propiedades. Las etiquetas permiten organizar la informacion segmentando el grafo. Las propiedades, por su parte asignan informacion particular sobre nodos y arcos. Ademas del indice interno, es posible crear, conforma a las necesidades del usaio, indices sobre clases y propiedades.
+Neo4j organiza la información en base a nodos y arcos los cuales, adicionalmente, pueden recibir la asignación de etiquetas (clases) y/o propiedades. Las etiquetas permiten organizar la información segmentando el grafo. Las propiedades, por su parte asignan información particular sobre nodos y arcos. Además del índice interno, es posible crear, conforma a las necesidades del usuario, índices sobre clases y propiedades.
 
 La secuencia de integración aplicada consiste en:
 
-Se integran los nodos y su respectiva clave de diferenciacion.
+Se integran los nodos y su respectiva clave de diferenciación.
 ```
 create (N423559:agent{ cve: 'Garrett_Birkhoff' , name:'Garrett Birkhoff' });
 create (N785292:agent{ cve: 'Philip_Hall' , name:'Philip Hall' });
@@ -249,15 +249,15 @@ MATCH (n:agent {cve:'Garrett_Birkhoff'}) SET n.rdfschemacomment='Garrett Birkhof
 
 Es importante notar el siguiente par de observaciones.
 
-En la construccion de un arco `Neo4j` genera el nodo(s) y posteriormente el archo. Si los nodos no existen `Neo4j` los crear y, los identificadores de estos nuevos nodos se conocer via consulta de nodos con la propiedad automatica id().
+En la construcción de un arco `Neo4j` genera el nodo(s) y posteriormente el arco. Si los nodos no existen `Neo4j` los crear y, los identificadores de estos nuevos nodos se conocer vía consulta de nodos con la propiedad automática id().
 
-Para aprovechar la funcionalidad de `Neo4j` se convino definir para cada nodo una propiedad denominada clave sobre la cual se construyan índices de consulta basicos de informacion. La unicidad de la clave queda entonces controlada en la generacion de datos.
+Para aprovechar la funcionalidad de `Neo4j` se convino definir para cada nodo una propiedad denominada clave sobre la cual se construyan índices de consulta básicos de información. La unicidad de la clave queda entonces controlada en la generación de datos.
 
-Los indices en los nodos favorecen el proceso de integracion de arcos, etiquetas y propiedades. La evidencia indica que en la creación de arcos sin indices en 50,000 nodos toma 250 milisegundos cada uno. La construcción de un índice general y su utilización en el proceso hace que la creación de cada uno de los 50000 arcos se realice en 2 milisegundos promedio.
+Los índices en los nodos favorecen el proceso de integración de arcos, etiquetas y propiedades. La evidencia indica que en la creación de arcos sin índices en 50,000 nodos toma 250 milisegundos cada uno. La construcción de un índice general y su utilización en el proceso hace que la creación de cada uno de los 50000 arcos se realice en 2 milisegundos promedio.
 
 ##Fases de procesamiento. Carga de datos.
 
-Con base en lo señalado hasta el momento, resulta claro indicar que el procesamiento de datos se resume en transformar el contenido de las tabñas de las clases ontologicas de dbpedia CVS en un conjunto de instrucciones de integracion en Cypher para contruir la base de datos Neo4j. Hay tres grandes líneas de trabajo:
+Con base en lo señalado hasta el momento, resulta claro indicar que el procesamiento de datos se resume en transformar el contenido de las tablas de las clases ontológicas de DBpedia CVS en un conjunto de instrucciones de integración en Cypher para construir la base de datos Neo4j. Hay tres grandes líneas de trabajo:
 
 1. Preparación de información.
  Los datos deben organizarse para facilitar su procesamiento. Dada la cantidad de campos involucrados y el tamaño de los archivos se consideró pertinente dejar las fuentes de información sin modificaciones sustantivas y  a partir de ellas extraer en archivos diversos conforme se necesite.
@@ -265,24 +265,24 @@ Con base en lo señalado hasta el momento, resulta claro indicar que el procesam
 2. Codificación en Cypher (lenguaje base de Neo4j).
   En orden de integración en Neo4j, la información debe consistir en:
   Nodes. Formados por una clave y una etiqueta o nombre.
-  Labels. Clases que permiten la agriupacion de la informacion para análsiis tematico.
+  Labels. Clases que permiten la agrupación de la información para análisis temático.
   Relations. Son los arcos que enlazan a los nodos.
-  Properties. Caracteristicas que pueden integrarse tanto a los Nodos como a las propiedades
+  Properties. Características que pueden integrarse tanto a los Nodos como a las propiedades
 
 3. Carga de Base de datos.
-  Para el presente se utiliza el proceso de inetgracion via Neo4j-shell via el volcado de instruccioes cypher en el interprete. Las opciones de integración a través de python con py2neo o neo4j-rest-client no se utilizaron ya que:
-  a) su operación carece de controles tipo roll-back ante fallas de integración. Es decir se corre el riesgo de integrar lotes parciales de información obligando a la revision de los log de proceso para determinar el avance de las cargas.
-  b) requiere que los servicios de la base de datos se encuentren activos en la carga lo cual puede resultar costoso en terminos de competencia por recursos disponibles y en consecuencia tiempo. Adicionalmente Py2neo y neo4j-rest-client son se efectuan en memoria dado que conceptualmente estan diseñados para la explotacion de información mas que para la carga de volumen.
+  Para el presente se utiliza el proceso de integración vía Neo4j-shell vía el volcado de instrucciones cypher en el interprete. Las opciones de integración a través de python con py2neo o neo4j-rest-client no se utilizaron ya que:
+  a) su operación carece de controles tipo roll-back ante fallas de integración. Es decir se corre el riesgo de integrar lotes parciales de información obligando a la revisión de los log de proceso para determinar el avance de las cargas.
+  b) requiere que los servicios de la base de datos se encuentren activos en la carga lo cual puede resultar costoso en términos de competencia por recursos disponibles y en consecuencia tiempo. Adicionalmente Py2neo y neo4j-rest-client son se efectúan en memoria dado que conceptualmente están diseñados para la explotación de información mas que para la carga de volumen.
 
 
 ### Diagrama ETL.  
 
-En terminos de ETL, las 18 fases del procesamiento de datos se distribuyen conforma la siguiente tabla:
+En términos de ETL, las 18 fases del procesamiento de datos se distribuyen conforma la siguiente tabla:
 
 
 **Número de fase de procesamiento y ETL**  
 
-Elemento de Base Neo4j  | Extracción | Transfromación   | Carga  |  
+Elemento de Base Neo4j  | Extracción | Transformación   | Carga  |  
 ------------------------|:---------------|:-----------|:-----------| 
 Nodos        |  1, 2 y 6   | 1 y 7      |  8 y 9  |    
 Etiquetas    |    10 y 11  |    10 y 11  | 12 y 13  |     
@@ -290,87 +290,87 @@ Aristas      |  3 y 4      |  5        |  14   |
 Propiedades  |  15 y 16    |   17       |  18  |  
 
 
-A continuacion se describe cada fases aplicadas.
+A continuación se describe cada fases aplicadas.
 
 
 ###Fase 0 homologación
 
-Los caracteres  delimitadores de campo en los archivos de las clases ontologicas se homologaron. La secuencia "," se tranformo en coma simple previa sustitucion de comas internas de los campos.   Asi mismo se suprimieron las terminaciones __[1-9] en todos los campos por referirse a la mismo nodo.
+Los caracteres  delimitadores de campo en los archivos de las clases ontológicas se homologaron. La secuencia "," se transformó en coma simple previa sustitución de comas internas de los campos.   Asimismo se suprimieron las terminaciones __[1-9] en todos los campos por referirse a la mismo nodo.
 
-###Fase 1. Extraccion y codificacion de nodos base.
+###Fase 1. Extracción y codificación de nodos base.
 
-La generacion de nodos consitio en la extraccion del primer campo de cada archivo y su expresion amplia asignandoes a los valores unicos de esta lista la clase correspondiente. Este listado de nodos se considero la base (sujeto) de cada clase ontologica: agent , place y event.
+La generación de nodos consistió en la extracción del primer campo de cada archivo y su expresión amplia asignándoles a los valores únicos de esta lista la clase correspondiente. Este listado de nodos se considero la base (sujeto) de cada clase ontológica: agent , place y event.
 
-Se reconoce, que el listado de nodos base no agota la totalidad de los nodos extraibles en los archivos de las tres clases  ya que corresponden  a los sujetos (y algunos objetos) en las  relaciones ontologicas tipo sujeto - predicado - objeto. Por ello para la obtencion del listado completo de nodos es necesario extraer los arcos (s p o) y verificar entre los  objetos los nodos faltantes.
+Se reconoce, que el listado de nodos base no agota la totalidad de los nodos extraíbles en los archivos de las tres clases  ya que corresponden  a los sujetos (y algunos objetos) en las  relaciones ontológicas tipo sujeto - predicado - objeto. Por ello para la obtención del listado completo de nodos es necesario extraer los arcos (s p o) y verificar entre los  objetos los nodos faltantes.
 
-Asi mismo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de 200 mil operaciones. De carga
-La máscara de la sintaxis de codificacion es:
+Asimismo se realizo su codificación en cypher para carga en la base Neo4j en lotes de 200 mil operaciones. De carga
+La máscara de la sintaxis de codificación es:
 
 ```
 create (N<ID>:<LABEL>{ cve: '<cve_Value>' , name:'<name_Value>' });
 ```
 
-donde ID es un consecutivo en el lote generado, LABEL corresponde a alguna clase ontologica (agent, event o place), cve es el valor diferenciador del nodo, y name es la expresion coloquial del mismo.
+donde ID es un consecutivo en el lote generado, LABEL corresponde a alguna clase ontológica (agent, event o place), cve es el valor diferenciador del nodo, y name es la expresión coloquial del mismo.
 
-###Fase 2. Preparacion de nodos base para localizacion de faltantes.
+###Fase 2. Preparación de nodos base para localización de faltantes.
 
-Los listados de nodos base generados en la fase anterios se recodificaron para permitir su insersion en una tabla postgresql. Estos datos se utilzaran en la sexta fase.
+Los listados de nodos base generados en la fase anterior se recodificaron para permitir su inserción en una tabla postgresql. Estos datos se utilizarán en la sexta fase.
 
-###Fase 3. Identificacion de arcos.
+###Fase 3. Identificación de arcos.
 
-Como senalamos al inicio de la seccion, las relaciones ontologicas o arcos se encuentran expresadas en los archivos dbpedia por medio de dos columnas donde una indica el tipo y la otra el valor. Dos columnas contiguas se consideran asociadas si su primer encabezado indica que se refieren al mismo elemento.
-En esta fase se analizan los encabezados de cada archivo y se determina cuales  pares de columnas que corresponden a arcos. Como resultado se obtienen listas de extraccion de informacion.
+Como señalamos al inicio de la sección, las relaciones ontológicas o arcos se encuentran expresadas en los archivos DBpedia por medio de dos columnas donde una indica el tipo y la otra el valor. Dos columnas contiguas se consideran asociadas si su primer encabezado indica que se refieren al mismo elemento.
+En esta fase se analizan los encabezados de cada archivo y se determina cuales  pares de columnas que corresponden a arcos. Como resultado se obtienen listas de extracción de información.
 
-###Fase 4. Extraccion de arcos.
+###Fase 4. Extracción de arcos.
 
-Con las listas generadas en la fase anterior,  se extraen las columas del archivo dbpedia que se refieren a cada arco en archivos individuale que contienen:
+Con las listas generadas en la fase anterior,  se extraen las columnas del archivo DBpedia que se refieren a cada arco en archivos individuales que contienen:
 
  sujeto, clase del sujeto , predicado, clase del objeto y objeto
 
-Resulta importante senalar que durante el proceso se descartan registros de arcos con informacion incompleta.
+Resulta importante señalar que durante el proceso se descartan registros de arcos con información incompleta.
 
 Por su naturaleza este proceso se ejecuto en parallel y nohub
 
-###Fase 5. Codificacion de arcos.
+###Fase 5. Codificación de arcos.
 
-Una vez que la informacion de los arcos se extrajo se realizo su codificacion en cypher para carga en la base Neo4j en lotes de maximo 200 mil operaciones.
+Una vez que la información de los arcos se extrajo se realizo su codificación en cypher para carga en la base Neo4j en lotes de máximo 200 mil operaciones.
 
-La máscara de la sintaxis de codificacion es:
+La máscara de la sintaxis de codificación es:
 
 ```
 MATCH (n:base {cve:'<cve_Value_n>'}), (m:base {cve:'<cve_Value_m>'}) create(n)-[:<relation_expression>]->(m);
 
 ```
 
-donde n y m son nodos, base es la clase general indexada, cve\_value es el valor diferenciador de nodos, y relation\_expresion es la expresion sintetica que representa el arco.
+donde n y m son nodos, base es la clase general indexada, cve\_value es el valor diferenciador de nodos, y relation\_expresión es la expresión sintética que representa el arco.
 
-Asi mismo se genero informaciin para la localizacion de los nodos (objeto) faltantes.
+Asimismo se genero información para la localización de los nodos (objeto) faltantes.
 
 Dado el volumen de información a procesar se aplico parallel en nohub.
 
-###Fase 6. Identificaciin de nodos objeto faltantes.
+###Fase 6. Identificación de nodos objeto faltantes.
 
-Utilizando postgresql se realizó un cruce de informacion Entre los de los nodos base (fase 2)  y los arcos  (fase 5).
+Utilizando postgresql se realizó un cruce de información Entre los de los nodos base (fase 2)  y los arcos  (fase 5).
 Este proceso arrojo dos tipos de nodos faltantes:
 A) nodos base no codificados (fase1) por carecer de valor en el campo label
-B) nodos que no pertenecen a clases ontologicas Agent, Place y Event.
+B) nodos que no pertenecen a clases ontológicas Agent, Place y Event.
 
-###Fase 7. Codificacion de nodos faltantes.
+###Fase 7. Codificación de nodos faltantes.
 
-Se realizó la codificaciin de la información en cypher generando listados de instrucciones de integracion.
+Se realizó la codificación de la información en cypher generando listados de instrucciones de integración.
 La máscara de la sintaxis es:
 
 ```
 create (N<ID>:<LABEL>{ cve: '<cve_Value>' , name:'<name_Value>' });
 ```
 
-donde ID es un consecutivo en el lote generado, LABEL corresponde a la clase ontologica beyond, cve es el valor diferenciador del nodo, y name es la expresion coloquial del mismo.
+donde ID es un consecutivo en el lote generado, LABEL corresponde a la clase ontológica beyond, cve es el valor diferenciador del nodo, y name es la expresión coloquial del mismo.
 
 
-###Fase 8. Integracion de nodos a cypher.
+###Fase 8. Integración de nodos a cypher.
 
-El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente.
-Los nodos corresponden tanto a las tres clases ontologicas seleccionadas (Agent, Event y Place) como a objetos ajenos mas allá de estas clases. En cifras este es el resumen de la carga:
+El procesamiento de información se ajusto al modelo de carga por neo4j-shell revisado anteriormente.
+Los nodos corresponden tanto a las tres clases ontológicas seleccionadas (Agent, Event y Place) como a objetos ajenos mas allá de estas clases. En cifras este es el resumen de la carga:
 ```
 neo4j-shell -c "match n RETURN  labels(n)[0], count(*);"
 +-------------------------+
@@ -385,27 +385,27 @@ neo4j-shell -c "match n RETURN  labels(n)[0], count(*);"
 
 Con la finalidad de proteger el proceso contra fallas de telecomunicaciones se realizó en background con nohub.
 
-###Fase 9. Indexacion de los nodos creados
+###Fase 9. Indexación de los nodos creados
 
-La indexacion se aplicó directamente en la linea de comandos de Neo4j-Shell con la sintaxis:
+La indexación se aplicó directamente en la línea de comandos de Neo4j-Shell con la sintaxis:
 ```
 create index on :Label(cve);
 ```
 
-donde Label corresponde a cada una de las clases ontologicas (agent, event, place y beyond).
+donde Label corresponde a cada una de las clases ontológicas (agent, event, place y beyond).
 
-Adicionalmente se creó la clase **base** para generar sobre la misma un indice de consulta general.
+Adicionalmente se creó la clase **base** para generar sobre la misma un índice de consulta general.
 
-Este índice sobre **base** es fundamental en el desempeño de los procesos de carga posteriores. La experiencia nos mostró que la carga sin indices requiere mas de 2500 milisegundos por registro procesado, si se utilizan índices a nivel de clase ontológica el tiempo se reduce a un promedio de 25 milisegundos. Con el inice base se tiene mejor desempeño el promedio de carga se reduce a 2 milisegundos.
+Este índice sobre **base** es fundamental en el desempeño de los procesos de carga posteriores. La experiencia nos mostró que la carga sin índices requiere mas de 2500 milisegundos por registro procesado, si se utilizan índices a nivel de clase ontológica el tiempo se reduce a un promedio de 25 milisegundos. Con el índice base se tiene mejor desempeño el promedio de carga se reduce a 2 milisegundos.
 
 
 ###Fase 10. Codificación de etiquetas de los nodos base
 
-Como se indicó anteriormente, la base ontlogica esta organizada en un esquema que consta de diversas capas de clases. Las clases Agent, Place y Event se encuentran en la primera subdivisión de la gran clase Thing y, a su vez poseen ramificaciones de subclases.
+Como se indicó anteriormente, la base ontológica esta organizada en un esquema que consta de diversas capas de clases. Las clases Agent, Place y Event se encuentran en la primera subdivisión de la gran clase Thing y, a su vez poseen ramificaciones de subclases.
 
 La información de estos atributos de clasificación ontológica correspondientes a los sujetos se encuentra en el campo 22-rdf-syntax-ns  en cada archivo ontológicos.
 
-La generacion de etiquetas se realizó unicamente hasta tercer nivel tao como se aprecia en el siguiente datlle [detalle] (Proceso_datos/ListadoEtiquetas.txt) . 
+La generación de etiquetas se realizó únicamente hasta tercer nivel tao como se aprecia en el siguiente detalle [detalle] (Proceso_datos/ListadoEtiquetas.txt) . 
 
 La máscara de la sintaxis es:
 
@@ -413,7 +413,7 @@ La máscara de la sintaxis es:
 Match (n:Label { cve: <cve_value> }) set n:<Additional_Label>;
 ```
 
-donde n es el nodo, Label es alguna de categoria fundamental base, agent, event, place sobre las cuales existe un indice. cve es el identificador de nodo y Additional_Label es la etiqueta que se adjunta al nodo.
+donde n es el nodo, Label es alguna de categoría fundamental base, agent, event, place sobre las cuales existe un índice. cve es el identificador de nodo y Additional_Label es la etiqueta que se adjunta al nodo.
 
 
 En el ejemplo que manejamos   
@@ -426,16 +426,16 @@ Finalmente, debe indicarse que esta fase se llevo a cabo con parallel bajo nohub
 
 ###Fase 11. Codificación  de las etiquetas de los nodos complementarios  
 
-Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontologica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificacion ontologica la cual es registrada en la base de datos Neo4j como etiqueta.   
+Como se señaló en la fase 6, se identificaron nodos "faltantes" correspondientes a objetos en la relación ontológica sujeto- predicado - objeto. Así mismo sabemos que los objetos corresponden a su vez a alguna clasificación ontológica la cual es registrada en la base de datos Neo4j como etiqueta.   
 
-Siguiendo el ejemplo de Garrett\_Birkhoff tenenos que en las columnas 5 y 6 se identifica el predicado academicAdvisor que apunta a dos objetos: Philip Hall y Ralph H. Fowler    
+Siguiendo el ejemplo de Garrett\_Birkhoff tenemos que en las columnas 5 y 6 se identifica el predicado academicAdvisor que apunta a dos objetos: Philip Hall y Ralph H. Fowler    
 
 Columna 5: {Philip Hall|Ralph H. Fowler}
 columna 6: {http://dbpedia.org/resource/Philip\_Hall|http://dbpedia.org/resource/Ralph\_H.\_Fowler}"
 
-La clase correspondinete a estos objetos se encuentra claramente señalada en  tercer y cuarto encabezado de las  columnas que identifican la relacion S - P - O.  
+La clase correspondiente a estos objetos se encuentra claramente señalada en  tercer y cuarto encabezado de las  columnas que identifican la relación S - P - O.  
 
-Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontologica person.   
+Revisando  encontramos que todas los objetos localizados bajo el predicado academicAdvisor son de la subclase ontológica person.   
                 
 |                |columna 5                                       |  columna 6   |  
 |---------------|:------------------------------------------------|:----------------------------------------------|:   
@@ -445,70 +445,70 @@ Revisando  encontramos que todas los objetos localizados bajo el predicado acade
 | Encabezado 4 .|  "http://www.w3.org/2001/XMLSchema#string"  |   "http://dbpedia.org/ontology/Person"   |  
 
 
-En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el terner nivel ontologico. La mascara utilizada es la misma que en la fase previa.
+En esta fase, se codifican las etiquetas de los nodos complementarios que correspondan a clases hasta el tercer nivel ontológico. La mascara utilizada es la misma que en la fase previa.
 
 La ejecución se llevo a cabo con parallel bajo nohub.
 
-###Fase 12. Integracion de etiquetas en la base de datos.
+###Fase 12. Integración de etiquetas en la base de datos.
 
-El procesamiento de informacion se ajusto al modelo de carga por neo4j-shell revisado anteriormente. El procesamiento constó de 18 lotes con 3,254,137 etiquetas base y 254,235 extras. Se realizó bajo nohub.
+El procesamiento de información se ajusto al modelo de carga por neo4j-shell revisado anteriormente. El procesamiento constó de 18 lotes con 3,254,137 etiquetas base y 254,235 extras. Se realizó bajo nohub.
 
-###Fase 13. Generación de indices adicionales con base en etiquetas.
+###Fase 13. Generación de índices adicionales con base en etiquetas.
 
-Al igual que con los indices basicos se añadieron indices sobre las etiquetas integradas en conbinacion con el valos cve y name El valor de estos indices se encuentra en ls resolucion de consultas a la base de datos en las cuales se busque realizar un filtrado a partir de valores incompletos.
+Al igual que con los índices básicos se añadieron índices sobre las etiquetas integradas en combinación con el valor cve y name. El valor de estos índices se encuentra en la resolución de consultas a la base de datos en las cuales se busque realizar un filtrado a partir de valores incompletos.
 
-Al iagual que en la fase rpevia de ikndexacion, las instrucciones se registraron via neo4j-shell y se verificeo su terminacion exitosa compronado  el status ONLINE mediante schema.
+Al igual que en la fase previa de indexación, las instrucciones se registraron vía neo4j-shell y se verifico su terminación exitosa comprobando  el status ONLINE mediante schema.
 
-###Fase 14. Integracion de arcos -relaciones- en base de datos.
+###Fase 14. Integración de arcos -relaciones- en base de datos.
 
-Este es uno de los procesos más demandantes en el proceso de contruccion de la base de datos Neo4j. La genracion de la relacion implica tres tareas: identificar los nodos dentro de la BD, crear la relacion y registrar.
+Este es uno de los procesos más demandantes en el proceso de construcción de la base de datos Neo4j. La generación de la relación implica tres tareas: identificar los nodos dentro de la BD, crear la relación y registrar.
 
 Los nodos se identifican utilizando la etiqueta indexada con la clave (cve).
-La ralacion en el caso que nos ocupa es indexada automaticamente por Neo4j. Los indices de usuario implican la creacion de una propiedad adicional sobre el arco, elemento que no fue considerado en el alcance delmpresente.
+La relación en el caso que nos ocupa es indexada automáticamente por Neo4j. Los índices de usuario implican la creación de una propiedad adicional sobre el arco, elemento que no fue considerado en el alcance del presente.
 El registro se logra al final del lote de carga con la instruccion commit siempre y cuando todos  los registros se procecen sin error.
 
 En esta fase se protegió el proceso contra fallas de comunicación con nohub.
 
 ###Fase 15. Deteccion de propiedades.
 
-Revisamos más arriba que las expresiones ontológicas  Sujeto - Propiedad -Valor (S -Pr -V) permiten agreagr  informacion adicional a los nodos. Las fechas de nacimiento, muerte, matrimonio; las coordenadas geográficas, los importes monetarios entre otros son atributos que pueden asociarse a los nodos.
+Revisamos más arriba que las expresiones ontológicas  Sujeto - Propiedad -Valor (S -Pr -V) permiten agreagr  información adicional a los nodos. Las fechas de nacimiento, muerte, matrimonio; las coordenadas geográficas, los importes monetarios entre otros son atributos que pueden asociarse a los nodos.
 
-Estas expresiones se encuentran en columas únicas no pareadas como en el caso de S - P - O. Por lo que su identificacion busca el complemento de la identificacion  realizada en la Fase 3. En resumen, esta fase lee los encabezados de los archivos ontologicos seleccionados (Agent, Place y Event) y detecta que columnas no estan pareadas integrandolas a una lista de extraccion. 
+Estas expresiones se encuentran en columnas únicas no pareadas como en el caso de S - P - O. Por lo que su identificacion busca el complemento de la identificacion  realizada en la Fase 3. En resumen, esta fase lee los encabezados de los archivos ontológicos seleccionados (Agent, Place y Event) y detecta que columnas no están pareadas integrandolas a una lista de extracción. 
 
 ###Fase 16. Extraccionn de nformacion de propiedades.
 
-En forma similar a la fase 4, se realiza la extraccion del sujeto (dueño de la propiedad, nombre de la propiedad, y valor de las misma.Desde luego,  durante el proceso se descartan registros de arcos con informacion incompleta.
+En forma similar a la fase 4, se realiza la extracción del sujeto (dueño de la propiedad, nombre de la propiedad, y valor de las misma.Desde luego,  durante el proceso se descartan registros de arcos con información incompleta.
 
 Por su naturaleza este proceso se ejecutó en parallel y nohub.
 
-###Fase 17. Codificacion de Propiedades en Cypher.
+###Fase 17. Codificación de Propiedades en Cypher.
 
-Al igaul que en otras fases se procesan los lotes de información identificados y extraidos en las dos fases anteriores y se tranforman en instrucciones de integracion de información en cypher.
+Al igaul que en otras fases se procesan los lotes de información identificados y extraidos en las dos fases anteriores y se tranforman en instrucciones de integración de información en cypher.
 
-La máscara de codificacion aplicada es: 
+La máscara de codificación aplicada es: 
 
 ```
 MATCH (n:base {cve:<cve_value>}) SET n.Property=<property_value>;
 ```
-donde n es el nodo, base indica que se utiliza el indicce general base, cve_value es el identificador del nodo, Property es la expresion que describe la propiedad (eg DateOfBirth) y property es el valor particular de la misma.
+donde n es el nodo, base indica que se utiliza el indicce general base, cve_value es el identificador del nodo, Property es la expresión que describe la propiedad (eg DateOfBirth) y property es el valor particular de la misma.
 
 Por tratarse de un proceso intesso se uso parallel en combinacion con nohub.
 
-###Fase 18. Integracion de propiedades en base de datos. 
+###Fase 18. Integración de propiedades en base de datos. 
 
 Como en todas las fases deintegración de datos, se aplico el modelo de volcado de instrucciones en neo4j-shell bajo nohub.
 
 ##Equipo:
 
-Para el rpocesamiento de informaciin se empleo una instancia de Amazon Web Service EC2 tipo M3xlarge con las siguientes caracteristicas:  
+Para el rpocesamiento de información se empleo una instancia de Amazon Web Service EC2 tipo M3xlarge con las siguientes caracteristicas:  
 
 4 Procesadores Intel Xeon E5­2670 (Sandy Bridge) de alta frecuencia*
 
 Almacenamiento 100gb y 15 gb RAM.
 
-Esta configuraciin responde tanto a las necesidades de procesamiento paralelo multi core en las fases de extraccion y tansformaciin de la base ontologica, como a la demanda de memoria durante la etapa de carga e indexado de informacion.
+Esta configuraciin responde tanto a las necesidades de procesamiento paralelo multi core en las fases de extracción y tansformaciin de la base ontológica, como a la demanda de memoria durante la etapa de carga e indexado de información.
 
-Para la atencion de consultas de informacion se migró la base de datos neo4j a una instancia AWS EC2 M1large con 2 procesadores, 7.5 GB RAM y HD 60GB.
+Para la atencion de consultas de información se migró la base de datos neo4j a una instancia AWS EC2 M1large con 2 procesadores, 7.5 GB RAM y HD 60GB.
 
 ##Software.  
 
@@ -574,7 +574,7 @@ while n < N:
     results = batch.submit()
 ```
 
-También a principios de Abril la opción de cargar información via shell empezaba a demostrar un gran alcance. Eventualmente dicha opción se convirtió la alternativa que mejor representaba los objetivos del proyecto y se puso en producción en un servidor de Amazon. La carga con `py2neo` fue un ambiente de prueba en efecto y un respaldo para trabajar de manera local en métodos de minería de gráficas y visualización.
+También a principios de Abril la opción de cargar información vía shell empezaba a demostrar un gran alcance. Eventualmente dicha opción se convirtió la alternativa que mejor representaba los objetivos del proyecto y se puso en producción en un servidor de Amazon. La carga con `py2neo` fue un ambiente de prueba en efecto y un respaldo para trabajar de manera local en métodos de minería de gráficas y visualización.
 
 ## Construcción del Modelo
 
@@ -613,7 +613,7 @@ En la etapa de despliegue del modelo resultó evidente que dentro de `R` se podi
 - `bitops`, `RCurl`, `RJSONIO`: permiten enviar consultas en `cypher` a un servidor de EC2 donde están cargados los datos de DBpedia en una base de datos de Neo4j
 - `plyr`, `doMC`: permiten implementar en paralelo procesos como la emisión de consultas y manipulaciones de datos.
 - `igraph`: repertorio de algoritmos para analizar redes 
-- `d3Network`: cuenta con cinco métodos para hacer gráficas de redes en D3 sin código javascript. 
+- `d3Network`: cuenta con cinco métodos para hacer gráficas de redes en D3 sin código JavaScript. 
 - `shiny`: crea una interfaz web interactiva para hacer consultas y visualizar resultados.
  
 
@@ -634,3 +634,4 @@ Una vez completado el paso anterior se puede ejecutar la aplicación dentro de `
 library(shiny)
 runApp(EspHistApp)
 ```
+
