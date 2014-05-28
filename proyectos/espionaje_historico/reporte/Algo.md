@@ -1,6 +1,6 @@
 A manera de .... algo
 
-Inicialmente le proyecto Espionaje Histórico se planteó como objetivo realizar un procesameinto de lenguaje en la base de información de Wikipedia y a partir de ello representar por medio de grafos los vinculos entre diversos personajes en la historia.
+Inicialmente le proyecto Espionaje Histórico se planteó como objetivo realizar un procesamiento de lenguaje en la base de información de Wikipedia y a partir de ello representar por medio de grafos los vinculos entre diversos personajes en la historia.
 
 Sabemos que la representación grafica de la información provee una visión distinta a la que se tiene al realizar una lectura de un texto o analizar un tabulado de datos, o  una grafica tradicional de dos o tres entradas (dependiendo el numero de ejes) donde se representan relaciones entre diversas variables.
 
