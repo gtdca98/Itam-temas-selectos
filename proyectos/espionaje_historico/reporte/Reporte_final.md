@@ -545,6 +545,40 @@ adicionalmente se generaron 3 herramientas de trabajo para el manejo de la base 
 
 - MNT_NEO4jDB.sh  Realiza un respaldo de la base de datos con timestamp y en caso de encontratse en ruta la carpeta graph.db la incorpora en la ruta de acceso para consultas.
 
+**Servicios Neo4j**
+
+Una vez que el equipo donde reside la base de datos se encendido se ppueden realizar las siguientes acciones para controlar los servicios de neo4j desde el prompt del sistema (terminal)
+
+Neo4j status indica el estado del servicio 
+Neo4j start / restart  inicia / reinicia el servicio
+Neo4j stop   detiene el servicio  (esto debe hacerse antes de apagar el equipo. Asegura el correcto cerrado de la base de datos)
+neo4j console  Inicia el servicio a manera de consola (no regresa al promt hasta que se termina)
+
+Si el servico es local en el explarador de internet se escribe http://localhost:7474/ 
+Si el servicio es remoto el equipo donde reside la base de datos debe permitir acceso por los puertos 7474, 7473, 1337
+en el explorador se debe indicar XXX.XXX.XXX.XXX:7474.
+
+Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clásica) 
+
+
+
+neo4j-shell Interfaz de acceso a base de daos  en consola de comandos  con las siguientes opciones
+
+ -host      Domain name or IP of host to connect to (default: localhost)
+ -port      Port of host to connect to (default: 1337)
+ -name      RMI name, i.e. rmi://<host>:<port>/<name> (default: shell)
+ -pid       Process ID to connect to
+ -c         Command line to execute. After executing it the shell exits
+ -file      File containing commands to execute, or '-' to read from stdin. After executing it the shell exits
+ -readonly  Connect in readonly mode (only for connecting with -path)
+ -path      Points to a neo4j db path so that a local server can be started there
+ -config    Points to a config file when starting a local server
+
+Si el servicio esta activo no es necesario indicar  -host -port  -name -pid -path -config.
+
+
+
+
 
 ## Preparación de los Datos. Versión Alterna.
 
@@ -638,7 +672,9 @@ La aplicación de `shiny` determina la organización del código. Esta se divide
 - `ui.r` es el que ejecuta la interfaz gráfica 
 - `server.r` escucha a la interfaz y ejecuta los pasos de procesamiento y análisis de datos. 
 
-Para lanzar la aplicación es necesario que la instancia EC2 con Neo4j esté prendida. Una vez prendida, se obtiene su dirección IP de alguno de los integrantes del equipo y se modifica la línea 12 de `server.r`, ingresando dicho dato: 
+Estos programas deben encontarse dentro de una carpeta denomiinada "EspHistApp"
+
+Para lanzar la aplicación es necesario que la instancia EC2 con Neo4j esté activa con servicios de Neo4j. Una vez prendida, se obtiene su dirección IP de alguno de los integrantes del equipo y se modifica la línea 12 de `server.r`, ingresando dicho dato: 
 
 ```
 neo_remote <- 'http://X.X.X.X:7474/db/data/cypher'
@@ -648,6 +684,6 @@ Una vez completado el paso anterior se puede ejecutar la aplicación dentro de `
 
 ```
 library(shiny)
-runApp(EspHistApp)
+runApp("EspHistApp")
 ```
 
