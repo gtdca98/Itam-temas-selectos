@@ -545,6 +545,8 @@ adicionalmente se generaron 3 herramientas de trabajo para el manejo de la base 
 
 - MNT_NEO4jDB.sh  Realiza un respaldo de la base de datos con timestamp y en caso de encontratse en ruta la carpeta graph.db la incorpora en la ruta de acceso para consultas.
 
+##Consulta de informacion
+
 **Servicios Neo4j**
 
 Una vez que el equipo donde reside la base de datos se encendido se ppueden realizar las siguientes acciones para controlar los servicios de neo4j desde el prompt del sistema (terminal)
@@ -563,7 +565,8 @@ Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clá
 Se debe resaltar que los servicos en el explorador responden lento en comparación con neo4-shell.
 
 
-neo4j-shell Interfaz de acceso a base de daos  en consola de comandos  con las siguientes opciones
+**neo4j-shell**
+Interfaz de acceso a base de daos  en consola de comandos  con las siguientes opciones
 
  -host      Domain name or IP of host to connect to (default: localhost)
  -port      Port of host to connect to (default: 1337)
@@ -577,7 +580,9 @@ neo4j-shell Interfaz de acceso a base de daos  en consola de comandos  con las s
 
 Si el servicio esta activo no es necesario indicar  -host -port  -name -pid -path -config.
 
+La consulta se lleva acabo por medio de comandos escritos en cypher. La velocidad de respuesta es ágil siempre y ciando se base en llaves indizadas.
 
+(Imagenes/Neo4j-shell_Terminal.png) 
 
 
 
