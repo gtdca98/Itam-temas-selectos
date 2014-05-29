@@ -7,3 +7,7 @@ echo la base de datos actual se respaldo en $res
 ## copia la carpeta graph.db de base de datos a la ruta de neo4j
 cp -r graph.db  /var/lib/neo4j/data/
 echo "Carpeta graph.db en ruta, verifique ..."
+<<<<<<< HEAD
+=======
+
+>>>>>>> df0b647a2dd2fc893a112418761b06794a139eed

@@ -8,4 +8,7 @@ ls Edges*txs* | awk '{printf "%s%s%s%s%s%s\n%s\n", "bash CREATE_NEO4J.sh " , $1 
 ## ejecuta proceso de carga
 nohup bash ProcB_Edges.sh > carga.out &
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> df0b647a2dd2fc893a112418761b06794a139eed

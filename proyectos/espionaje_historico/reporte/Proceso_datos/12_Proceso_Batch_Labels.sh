@@ -22,4 +22,7 @@
  bash CREATE_NEO4J.sh label_BasPlace.txsae > Pe_Lab_load.out
  bash CREATE_NEO4J.sh label_BasPlace.txsaf > Pf_Lab_load.out
  bash CREATE_NEO4J.sh label_BasPlace.txsag > Pg_Lab_load.out
+<<<<<<< HEAD
 
+=======
+>>>>>>> df0b647a2dd2fc893a112418761b06794a139eed

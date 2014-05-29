@@ -27,4 +27,7 @@ sleep 10
 
 bash CREATE_NEO4J.sh  IndexLabel.sql >  idx_lab.out
 echo Proceso terminado
+<<<<<<< HEAD
 
+=======
+>>>>>>> df0b647a2dd2fc893a112418761b06794a139eed

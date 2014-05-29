@@ -15,3 +15,8 @@ mv Place.csv PlaceOrig.csv
 cat AgentOrig.csv | sed 's/[()]//g'| awk -F"\",\"" -v OFS="," '{for (i=1; i<=NF; ++i) gsub(",","",$i)}1'| sed 's/__[1-9],/,/g' > Agent.csv
 cat EventOrig.csv | sed 's/[()]//g'| awk -F"\",\"" -v OFS="," '{for (i=1; i<=NF; ++i) gsub(",","",$i)}1'| sed 's/__[1-9],/,/g' > Event.csv
 cat PlaceOrig.csv | sed 's/[()]//g'| awk -F"\",\"" -v OFS="," '{for (i=1; i<=NF; ++i) gsub(",","",$i)}1'| sed 's/__[1-9],/,/g' > Place.csv
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> df0b647a2dd2fc893a112418761b06794a139eed

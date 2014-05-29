@@ -16,4 +16,7 @@ echo Archivos generados...
 wc -l ListREL$Archivo_p.txt >> bitacora.txt
 tail -1 bitacora.txt
 echo
+<<<<<<< HEAD
 
+=======
+>>>>>>> df0b647a2dd2fc893a112418761b06794a139eed
