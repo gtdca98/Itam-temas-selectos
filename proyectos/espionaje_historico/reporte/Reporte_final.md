@@ -729,13 +729,13 @@ Una de las motivaciones al realizar este trabajo se centraba en la posibilidad d
 
 Reconocemos que el proceso no fue sencillo, las herramientas técnicas están en ajuste continuo. Sirva de ejemplo que hace apenas cinco meses, al iniciar el trabajo la versión de Neo4j estable era la 2.0.0, hoy ya es 2.0.3!. 
 
-Bajo esta dinámica, mucha de la información disponible en internet hace referencia a "instrucciones clasicas" sobre la manera de extraer información de neo4j en cypher cuando incluso no existían indíces creados por el usuario. Para evitar conlicto y caer en el desánimo porque un 'código no funciona' es importante verificar cuál es la versión de Neo4j que se consideró al momento de formularlo. Resulta de gran apoyo tener a la mano la guía rápida  Neo4j Cypher Refcard 2.1.0 http://docs.neo4j.org/refcard/2.1.0/ .
+Bajo esta dinámica, mucha de la información disponible en internet hace referencia a "instrucciones clasicas" sobre la manera de extraer información de neo4j en cypher cuando incluso no existían indíces creados por el usuario. Para evitar caer en el desánimo porque un 'código no funciona', es importante verificar cuál es la versión de Neo4j a la que se refiere. Resulta de gran apoyo tener a la mano la guía rápida actualizada  Neo4j Cypher Refcard http://docs.neo4j.org/refcard/2.1.0/ .
 
-Valga la pena insistir en el uso de índices. Las consultas se benefician cuando se poseen índices sobre el campo de busqueda. Si se posee el indice este debe referenciarse claramente indicando la etiqueta y el campo índice asi como la información especifica que se quiere recuperar. 
+Valga la pena insistir en el uso de índices. Las consultas se benefician cuando se poseen índices sobre el campo de búsqueda. Si se posee el indice, debe referenciarse claramente indicando la etiqueta y el campo  asi como la información especifica que se quiere recuperar. 
 
-Ejemplo: *Match (n:base) where n.cve='John_Lennon' return n.nombre, n.commentarios;*  resolvera correctamente si existe un índice con :base(cve) recuperando unicamente los dos valores de interés nombre y comentarios.
+Ejemplo: *Match (n:base) where n.cve='John_Lennon' return n.nombre, n.commentarios;*  resolverá correctamente si existe un índice con :base(cve) recuperando unicamente los dos valores de interés nombre y comentarios.
 
-La visualización de la información es en si mismo un tema complejo. Neo4j se especializa en la BASE DE DATOS y posee elementos de visualización novedosos que se pueden explotar satisfactoriamente por medio de herramientas en java.
+La visualización de la información es en si misma un tema complejo. Neo4j se especializa en la BASE DE DATOS y posee elementos de visualización novedosos, aunque limitados, que se pueden explotar satisfactoriamente por medio de herramientas en java. 
 
 Neo4j no posee la fuerza para realizar análisis de grafos tal como lo hacen otros programas: Gephi, Graphiz, Cytoscape, R y python por mencionar algunos. Actualmente la mayoría de estas aplicaciones deben resolver problemas de acceso a la base de datos de Neo4j. Como solucion particular, desarrollamos un procedimiento de consulta de información basado en R -Shiny - D3  que además de recuperar información directamente de la base de datos, realiza un análisis y procduce un grafo. Esta maqueta puede escalarse para integrar visualizaciones más elaboradas dependiendo de las necesidades particulares. 
 
