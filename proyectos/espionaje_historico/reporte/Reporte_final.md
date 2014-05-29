@@ -562,19 +562,15 @@ en el explorador se debe indicar XXX.XXX.XXX.XXX:7474.
 
 Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clásica)  
 
-![.](Imagenes/neo4j_Browser2.png  =250x)  
 
-![.](Imagenes/Neo4j_Console.png =250x)  
+![.](Imagenes/neo4j_Browser2.png)  
 
-![.](Imagenes/Neo4j_Console.png)  
+En webadmin se muestran opciones para conocer de manera rápida el estado que tiene la base de datos, numero de nodos, aristas, propiedades, etiquetas, asi como una grafica de avance temporal de la misma. 
 
 ![.](Imagenes/Neo4j_Console.png)  
 
 
 Se debe resaltar que los servicos en el explorador responden lento en comparación con neo4-shell.
-
-
-
 
 
 
