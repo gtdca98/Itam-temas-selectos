@@ -569,7 +569,7 @@ Asi mismo se pueden aplicar consultas por medio de comandos en cypher. A manera 
 ![.](Imagenes/Browser.png)  
 
 
-En webadmin se muestran opciones para conocer de manera rápida el estado que tiene la base de datos, numero de nodos, aristas, propiedades, etiquetas, asi como una grafica de avance temporal de la misma., Por medio de Console es posible ejecutar comandos en cypher como en neo4j-shell, en el databrowser se pueden visualizar los resultados en formato grafo  o tabular.
+En webadmin se muestran diversas opciones. *Dashboard* para conocer de manera rápida el estado que tiene la base de datos, número de nodos, aristas, propiedades, etiquetas, así como una grafica de avance temporal de la misma. Por medio de *Console* es posible ejecutar comandos en cypher como en neo4j-shell. En  *Databrowser* se pueden visualizar los resultados en formato gràfico o tabular.
 
 
 ![.](Imagenes/Neo4j_Webadmim.png)  
@@ -707,3 +707,4 @@ library(shiny)
 runApp("EspHistApp")
 ```
 
+![.](Imagenes/Despliegue.png)  
