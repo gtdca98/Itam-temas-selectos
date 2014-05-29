@@ -562,12 +562,17 @@ en el explorador se debe indicar XXX.XXX.XXX.XXX:7474.
 
 Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clásica)  
 
+En Browser es posible reisar los objetos que se han creado tales cmo etiquetas, propiedades y relaciones. Da objeto al ser consultado con el mouse regresa por default un maximo de 25 nodos relacionados y no más de 100 relaciones. Esto puede ajustarse indicandolo al sistema.
 
-![.](Imagenes/neo4j_Browser2.png)  
+Asi mismo se pueden aplicar consultas por medio de comandos en cypher. A manera de ejemplo se muesra la siguiente imagen
 
-En webadmin se muestran opciones para conocer de manera rápida el estado que tiene la base de datos, numero de nodos, aristas, propiedades, etiquetas, asi como una grafica de avance temporal de la misma. 
+![.](Imagenes/Browser.png)  
 
-![.](Imagenes/Neo4j_Console.png)  
+
+En webadmin se muestran opciones para conocer de manera rápida el estado que tiene la base de datos, numero de nodos, aristas, propiedades, etiquetas, asi como una grafica de avance temporal de la misma., Por medio de Console es posible ejecutar comandos en cypher como en neo4j-shell, en el databrowser se pueden visualizar los resultados en formato grafo  o tabular.
+
+
+![.](Imagenes/Neo4j_Webadmim.png)  
 
 
 Se debe resaltar que los servicos en el explorador responden lento en comparación con neo4-shell.
