@@ -560,6 +560,7 @@ en el explorador se debe indicar XXX.XXX.XXX.XXX:7474.
 
 Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clásica) 
 
+Se debe resaltar que los servicos en el explorador responden lento en comparación con neo4-shell.
 
 
 neo4j-shell Interfaz de acceso a base de daos  en consola de comandos  con las siguientes opciones
