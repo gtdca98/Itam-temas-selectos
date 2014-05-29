@@ -560,13 +560,15 @@ Si el servico es local en el explarador de internet se escribe http://localhost:
 Si el servicio es remoto el equipo donde reside la base de datos debe permitir acceso por los puertos 7474, 7473, 1337
 en el explorador se debe indicar XXX.XXX.XXX.XXX:7474.
 
-Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clásica) 
-![.]((Imagenes/neo4j_Browser2.png  =250x)  
-![.]((Imagenes/Neo4j_Console.png =250x)  
-![.]((Imagenes/Neo4j_Console.png)  
-![.]((Imagenes/Neo4j_Console.png)  
+Vía Inernet se tienen dos opciones de acceso: Browser y Webadmin (interfaz clásica)  
 
-![.](Proceso_datos/Velocidad de carga de informacion Neo4j.png)  
+![.](Imagenes/neo4j_Browser2.png  =250x)  
+
+![.](Imagenes/Neo4j_Console.png =250x)  
+
+![.](Imagenes/Neo4j_Console.png)  
+
+![.](Imagenes/Neo4j_Console.png)  
 
 
 Se debe resaltar que los servicos en el explorador responden lento en comparación con neo4-shell.
@@ -593,7 +595,7 @@ Si el servicio esta activo no es necesario indicar  -host -port  -name -pid -pat
 
 La consulta se lleva acabo por medio de comandos escritos en cypher. La velocidad de respuesta es ágil siempre y ciando se base en llaves indizadas.
 
-![.]((Imagenes/Neo4j-shell_Terminal.png)   
+![.](Imagenes/Neo4j-shell_Terminal.png)   
 
 
 
